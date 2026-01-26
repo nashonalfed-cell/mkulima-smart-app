@@ -13,14 +13,10 @@
     <!-- Button ya kubadilisha lugha -->
     <button onclick="switchLanguage()">SW / EN</button>
 
-    <h2 id="cropTitle">Chagua Zao:</h2>
-
-    <select id="cropSelect" onchange="updateCrop()">
-        <option value="mahindi">Mahindi / Maize</option>
-        <option value="mpunga">Mpunga / Rice</option>
-        <option value="maharage">Maharage / Beans</option>
-        <option value="mihogo">Mihogo / Cassava</option>
-    </select>
+    <!-- Input ya zao la mtumiaji -->
+    <h2 id="cropTitle">Ingiza Zao Lako:</h2>
+    <input type="text" id="userCrop" placeholder="Andika jina la zao hapa">
+    <button onclick="generateData()">Generate Data</button>
 
     <div class="card">
         <p id="planting"></p>
@@ -33,5 +29,6 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
