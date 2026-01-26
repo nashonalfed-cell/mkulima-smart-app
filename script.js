@@ -1,134 +1,73 @@
-let language = "sw";
-let tips = [];
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <title>Mkulima Smart AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-// Sample core JSON for basic info
-const coreData = {
-    "maize": {
-        sw: {
-            planting: "🌱 Msimu: Machi – Mei",
-            fertilizer: "🧪 Mbolea: DAP / UREA",
-            schedule: "📅 Umwagiliaji: Kila baada ya siku 7–10",
-            harvest: "🌾 Kuvuna: Baada ya miezi 3–4",
-            challenges: "⚠️ Magonjwa, udongo mbovu",
-            benefits_food: "🍽 Lishe, protini",
-            benefits_market: "💰 Faida ya kuuza"
-        },
-        en: {
-            planting: "🌱 Season: March – May",
-            fertilizer: "🧪 Fertilizer: DAP / UREA",
-            schedule: "📅 Irrigation: Every 7–10 days",
-            harvest: "🌾 Harvest: After 3–4 months",
-            challenges: "⚠️ Diseases, poor soil",
-            benefits_food: "🍽 Nutrition, protein",
-            benefits_market: "💰 Profit from selling"
-        }
-    }
-};
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// Load home page carousel images
-const homeImages = [
-    "https://images.unsplash.com/photo-1592928309940-1e0a8f4f38d3",
-    "https://images.unsplash.com/photo-1576832001194-d23e2f32438a",
-    "https://images.unsplash.com/photo-1587304659952-90171f545b77"
-];
+<div class="container my-4">
 
-function initCarousel() {
-    const inner = document.getElementById("carouselInner");
-    homeImages.forEach((url, idx) => {
-        const div = document.createElement("div");
-        div.className = "carousel-item" + (idx===0?" active":"");
-        div.innerHTML = `<img src="${url}" class="d-block w-100" alt="Crop">`;
-        inner.appendChild(div);
-    });
-}
+    <h1 class="text-center mb-3">🌾 Mkulima Smart AI</h1>
+    <p class="text-center text-muted">
+        Msaidizi wa kilimo kwa sauti na maandishi (AI-style)
+    </p>
 
-window.onload = function(){
-    initCarousel();
-}
+    <!-- Language -->
+    <div class="text-end mb-3">
+        <button class="btn btn-outline-success btn-sm" onclick="switchLanguage()">
+            SW / EN
+        </button>
+    </div>
 
-// Generate Crop Info
-async function generateData(){
-    const cropName = document.getElementById("userCrop").value.trim().toLowerCase();
-    if(!cropName){ alert("Tafadhali andika jina la zao"); return;}
+    <!-- Search -->
+    <div class="text-center mb-4">
+        <input type="text" id="userCrop" class="form-control w-50 d-inline"
+               placeholder="Andika jina la zao (mf: maize, rice, tomato)">
+        <button class="btn btn-success ms-2" onclick="generateData()">Tafuta</button>
+    </div>
 
-    const card = document.getElementById("cropCard");
-    card.style.display = "block";
+    <!-- Crop Card -->
+    <div class="card p-4" id="cropCard" style="display:none;">
+        <h3 id="cropTitle" class="text-center mb-3"></h3>
 
-    document.getElementById("cropTitle").innerText = cropName.charAt(0).toUpperCase() + cropName.slice(1);
+        <div class="text-center mb-3">
+            <div id="loadingSpinner" class="spinner-border text-success" role="status"></div>
+            <img id="cropImage" class="img-fluid rounded mt-3" style="display:none;">
+        </div>
 
-    const spinner = document.getElementById("loadingSpinner");
-    const img = document.getElementById("cropImage");
-    spinner.style.display = "block";
-    img.style.display = "none";
+        <p id="wikiInfo"></p>
 
-    // Fetch Wikipedia summary
-    let wikiInfo = "";
-    try {
-        const wikiRes = await fetch(`https://${language==='sw'?'sw':'en'}.wikipedia.org/api/rest_v1/page/summary/${cropName}`);
-        const wikiData = await wikiRes.json();
-        wikiInfo = wikiData.extract || "Hakuna maelezo kutoka Wikipedia";
-    } catch(err){
-        wikiInfo = "Info haikuweza kupatikana mtandaoni";
-    }
+        <hr>
 
-    // Fetch Unsplash image
-    let imageUrl = `https://images.unsplash.com/photo-1592928309940-1e0a8f4f38d3`; // default
-    try {
-        const unsplashRes = await fetch(`https://source.unsplash.com/600x400/?${cropName}`);
-        imageUrl = unsplashRes.url;
-    } catch(err){
-        imageUrl = imageUrl;
-    }
+        <!-- AI Assistant -->
+        <h4>🤖 Mkulima AI – Uliza Swali</h4>
+        <input type="text" id="aiQuestion" class="form-control mb-2"
+               placeholder="Mf: Nitapanda lini? Ni mbolea gani?">
 
-    // Update card with coreData if exists
-    const cropData = coreData[cropName] ? coreData[cropName][language] : {
-        planting: "🌱 Season info not available",
-        fertilizer: "🧪 Fertilizer info not available",
-        schedule: "📅 Irrigation info not available",
-        harvest: "🌾 Harvest info not available",
-        challenges: "⚠️ Challenges info not available",
-        benefits_food: "🍽 Nutrition info not available",
-        benefits_market: "💰 Market info not available"
-    };
+        <div class="d-flex gap-2 mb-2">
+            <button class="btn btn-success" onclick="askAI()">Uliza AI</button>
+            <button class="btn btn-outline-success" onclick="startVoice()">🎤 Sauti</button>
+            <button class="btn btn-outline-secondary" onclick="toggleVoiceAnswer()">
+                🔊 Jibu kwa sauti: <span id="voiceStatus">OFF</span>
+            </button>
+        </div>
 
-    document.getElementById("planting").innerText = cropData.planting;
-    document.getElementById("fertilizer").innerText = cropData.fertilizer;
-    document.getElementById("schedule").innerText = cropData.schedule;
-    document.getElementById("harvest").innerText = cropData.harvest;
-    document.getElementById("challenges").innerText = cropData.challenges;
-    document.getElementById("benefits_food").innerText = cropData.benefits_food + "\nWikipedia info: " + wikiInfo;
-    document.getElementById("benefits_market").innerText = cropData.benefits_market;
+        <div class="bg-light p-3 rounded" id="aiAnswer" style="display:none;">
+            <strong>Jibu la AI:</strong>
+            <p id="aiText" class="mb-0"></p>
+        </div>
+    </div>
 
-    img.src = imageUrl;
-    spinner.style.display = "none";
-    img.style.display = "block";
+</div>
 
-    loadTips();
-}
-
-// User tips
-function saveUserTip(){
-    const tip = document.getElementById("userTip").value.trim();
-    if(!tip) return;
-    tips.push(tip);
-    document.getElementById("userTip").value = "";
-    loadTips();
-}
-
-function loadTips(){
-    const list = document.getElementById("tipsList");
-    list.innerHTML = "";
-    tips.forEach(t => {
-        const li = document.createElement("li");
-        li.innerText = t;
-        list.appendChild(li);
-    });
-}
-
-// Language switch
-function switchLanguage(){
-    language = (language==='sw'?'en':'sw');
-    generateData();
-}
+<script src="script.js"></script>
+</body>
+</html>
 
 
