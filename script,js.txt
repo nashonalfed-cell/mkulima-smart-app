@@ -1,24 +1,94 @@
 let language = "sw";
 
-function loadContent() {
+const crops = {
+    mahindi: {
+        sw: {
+            planting: "🌱 Msimu wa kupanda: Machi – Mei",
+            fertilizer: "🧪 Mbolea: DAP kupanda, UREA kukua",
+            schedule: "📅 Umwagiliaji: Kila baada ya siku 7–10",
+            harvest: "🌾 Kuvuna: Baada ya miezi 3–4"
+        },
+        en: {
+            planting: "🌱 Planting season: March – May",
+            fertilizer: "🧪 Fertilizer: DAP at planting, UREA for growth",
+            schedule: "📅 Irrigation: Every 7–10 days",
+            harvest: "🌾 Harvest: After 3–4 months"
+        }
+    },
+    mpunga: {
+        sw: {
+            planting: "🌱 Msimu wa kupanda: Juni – Julai",
+            fertilizer: "🧪 Mbolea: NPK kupanda, UREA kukua",
+            schedule: "📅 Umwagiliaji: Kila baada ya siku 5–7",
+            harvest: "🌾 Kuvuna: Baada ya miezi 4–5"
+        },
+        en: {
+            planting: "🌱 Planting season: June – July",
+            fertilizer: "🧪 Fertilizer: NPK at planting, UREA for growth",
+            schedule: "📅 Irrigation: Every 5–7 days",
+            harvest: "🌾 Harvest: After 4–5 months"
+        }
+    },
+    maharage: {
+        sw: {
+            planting: "🌱 Msimu wa kupanda: Mei – Juni",
+            fertilizer: "🧪 Mbolea: DAP kupanda, UREA kukua",
+            schedule: "📅 Umwagiliaji: Kila baada ya siku 6–8",
+            harvest: "🌾 Kuvuna: Baada ya miezi 2–3"
+        },
+        en: {
+            planting: "🌱 Planting season: May – June",
+            fertilizer: "🧪 Fertilizer: DAP at planting, UREA for growth",
+            schedule: "📅 Irrigation: Every 6–8 days",
+            harvest: "🌾 Harvest: After 2–3 months"
+        }
+    },
+    mihogo: {
+        sw: {
+            planting: "🌱 Msimu wa kupanda: Machi – Aprili",
+            fertilizer: "🧪 Mbolea: NPK kupanda, compost",
+            schedule: "📅 Umwagiliaji: Kila baada ya siku 10",
+            harvest: "🌾 Kuvuna: Baada ya miezi 9–12"
+        },
+        en: {
+            planting: "🌱 Planting season: March – April",
+            fertilizer: "🧪 Fertilizer: NPK at planting, compost",
+            schedule: "📅 Irrigation: Every 10 days",
+            harvest: "🌾 Harvest: After 9–12 months"
+        }
+    }
+};
+
+// Function za kubadilisha lugha
+function loadContent(selectedCrop) {
+    const crop = crops[selectedCrop];
     if (language === "sw") {
-        document.getElementById("title").innerText = "Mkulima Smart App";
-        document.getElementById("planting").innerText = "🌱 Msimu wa kupanda: Machi – Mei";
-        document.getElementById("fertilizer").innerText = "🧪 Mbolea: DAP kupanda, UREA kukua";
-        document.getElementById("schedule").innerText = "📅 Umwagiliaji: Kila baada ya siku 7–10";
-        document.getElementById("harvest").innerText = "🌾 Kuvuna: Baada ya miezi 3–4";
+        document.getElementById("planting").innerText = crop.sw.planting;
+        document.getElementById("fertilizer").innerText = crop.sw.fertilizer;
+        document.getElementById("schedule").innerText = crop.sw.schedule;
+        document.getElementById("harvest").innerText = crop.sw.harvest;
     } else {
-        document.getElementById("title").innerText = "Smart Farmer App";
-        document.getElementById("planting").innerText = "🌱 Planting season: March – May";
-        document.getElementById("fertilizer").innerText = "🧪 Fertilizer: DAP at planting, UREA for growth";
-        document.getElementById("schedule").innerText = "📅 Irrigation: Every 7–10 days";
-        document.getElementById("harvest").innerText = "🌾 Harvest: After 3–4 months";
+        document.getElementById("planting").innerText = crop.en.planting;
+        document.getElementById("fertilizer").innerText = crop.en.fertilizer;
+        document.getElementById("schedule").innerText = crop.en.schedule;
+        document.getElementById("harvest").innerText = crop.en.harvest;
     }
 }
 
-function switchLanguage() {
-    language = (language === "sw") ? "en" : "sw";
-    loadContent();
+// Function ya kubadilisha zao
+function updateCrop() {
+    const selectedCrop = document.getElementById("cropSelect").value;
+    loadContent(selectedCrop);
 }
 
-loadContent();
+// Function ya kubadilisha lugha
+function switchLanguage() {
+    language = (language === "sw") ? "en" : "sw";
+    updateCrop(); // Refresh content
+}
+
+// Load default crop
+window.onload = function() {
+    updateCrop();
+}
+
