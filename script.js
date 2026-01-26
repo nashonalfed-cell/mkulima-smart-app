@@ -1,73 +1,132 @@
-<!DOCTYPE html>
-<html lang="sw">
-<head>
-    <meta charset="UTF-8">
-    <title>Mkulima Smart AI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+let language = "sw";
+let voiceAnswerEnabled = false;
+let currentCrop = "";
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* =========================
+   SEARCH + DATA FETCH
+========================= */
+async function generateData() {
+    const crop = document.getElementById("userCrop").value.trim();
+    if (!crop) {
+        alert("Andika jina la zao");
+        return;
+    }
 
-<div class="container my-4">
+    currentCrop = crop.toLowerCase();
 
-    <h1 class="text-center mb-3">🌾 Mkulima Smart AI</h1>
-    <p class="text-center text-muted">
-        Msaidizi wa kilimo kwa sauti na maandishi (AI-style)
-    </p>
+    document.getElementById("cropCard").style.display = "block";
+    document.getElementById("cropTitle").innerText =
+        crop.charAt(0).toUpperCase() + crop.slice(1);
 
-    <!-- Language -->
-    <div class="text-end mb-3">
-        <button class="btn btn-outline-success btn-sm" onclick="switchLanguage()">
-            SW / EN
-        </button>
-    </div>
+    document.getElementById("loadingSpinner").style.display = "inline-block";
+    document.getElementById("cropImage").style.display = "none";
+    document.getElementById("wikiInfo").innerText = "";
 
-    <!-- Search -->
-    <div class="text-center mb-4">
-        <input type="text" id="userCrop" class="form-control w-50 d-inline"
-               placeholder="Andika jina la zao (mf: maize, rice, tomato)">
-        <button class="btn btn-success ms-2" onclick="generateData()">Tafuta</button>
-    </div>
+    /* Wikipedia */
+    try {
+        const wikiURL = `https://en.wikipedia.org/api/rest_v1/page/summary/${currentCrop}`;
+        const res = await fetch(wikiURL);
+        const data = await res.json();
+        document.getElementById("wikiInfo").innerText =
+            data.extract || "Hakuna maelezo ya kutosha kutoka Wikipedia.";
+    } catch {
+        document.getElementById("wikiInfo").innerText =
+            "Imeshindikana kupata taarifa mtandaoni.";
+    }
 
-    <!-- Crop Card -->
-    <div class="card p-4" id="cropCard" style="display:none;">
-        <h3 id="cropTitle" class="text-center mb-3"></h3>
+    /* Image */
+    const img = document.getElementById("cropImage");
+    img.src = `https://source.unsplash.com/800x500/?${currentCrop},crop,agriculture`;
+    img.onload = () => {
+        document.getElementById("loadingSpinner").style.display = "none";
+        img.style.display = "block";
+    };
+}
 
-        <div class="text-center mb-3">
-            <div id="loadingSpinner" class="spinner-border text-success" role="status"></div>
-            <img id="cropImage" class="img-fluid rounded mt-3" style="display:none;">
-        </div>
+/* =========================
+   AI QUESTION LOGIC
+========================= */
+function askAI() {
+    const q = document.getElementById("aiQuestion").value.toLowerCase();
+    if (!q) return;
 
-        <p id="wikiInfo"></p>
+    let answer = "";
 
-        <hr>
+    if (q.includes("kupanda") || q.includes("msimu")) {
+        answer = `Zao la ${currentCrop} hupandwa mwanzoni mwa mvua. Hakikisha ardhi imeandaliwa vizuri.`;
+    } else if (q.includes("mbolea")) {
+        answer = `Kwa ${currentCrop}, tumia DAP wakati wa kupanda na UREA wakati wa ukuaji.`;
+    } else if (q.includes("magonjwa") || q.includes("wadudu")) {
+        answer = `${currentCrop} huathiriwa na magonjwa na wadudu. Tumia mbegu bora na dawa zinazofaa.`;
+    } else if (q.includes("kuvuna")) {
+        answer = `${currentCrop} huvunwa baada ya miezi 3–6 kulingana na aina na mazingira.`;
+    } else if (q.includes("faida") || q.includes("soko")) {
+        answer = `${currentCrop} lina soko zuri na linaweza kuleta faida ikiwa utatumia mbinu sahihi.`;
+    } else {
+        answer = `Kwa ${currentCrop}, zingatia maandalizi ya shamba, mbegu bora, umwagiliaji na usimamizi mzuri.`;
+    }
 
-        <!-- AI Assistant -->
-        <h4>🤖 Mkulima AI – Uliza Swali</h4>
-        <input type="text" id="aiQuestion" class="form-control mb-2"
-               placeholder="Mf: Nitapanda lini? Ni mbolea gani?">
+    document.getElementById("aiAnswer").style.display = "block";
+    typeEffect(document.getElementById("aiText"), answer);
 
-        <div class="d-flex gap-2 mb-2">
-            <button class="btn btn-success" onclick="askAI()">Uliza AI</button>
-            <button class="btn btn-outline-success" onclick="startVoice()">🎤 Sauti</button>
-            <button class="btn btn-outline-secondary" onclick="toggleVoiceAnswer()">
-                🔊 Jibu kwa sauti: <span id="voiceStatus">OFF</span>
-            </button>
-        </div>
+    if (voiceAnswerEnabled) speak(answer);
+}
 
-        <div class="bg-light p-3 rounded" id="aiAnswer" style="display:none;">
-            <strong>Jibu la AI:</strong>
-            <p id="aiText" class="mb-0"></p>
-        </div>
-    </div>
+/* =========================
+   TYPE EFFECT
+========================= */
+function typeEffect(el, text) {
+    el.innerText = "";
+    let i = 0;
+    const t = setInterval(() => {
+        el.innerText += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(t);
+    }, 20);
+}
 
-</div>
+/* =========================
+   VOICE INPUT
+========================= */
+function startVoice() {
+    if (!("webkitSpeechRecognition" in window)) {
+        alert("Browser yako hai-support sauti");
+        return;
+    }
 
-<script src="script.js"></script>
-</body>
-</html>
+    const rec = new webkitSpeechRecognition();
+    rec.lang = language === "sw" ? "sw-TZ" : "en-US";
+
+    rec.onresult = e => {
+        document.getElementById("aiQuestion").value =
+            e.results[0][0].transcript;
+        askAI();
+    };
+
+    rec.start();
+}
+
+/* =========================
+   VOICE OUTPUT
+========================= */
+function speak(text) {
+    const s = new SpeechSynthesisUtterance(text);
+    s.lang = language === "sw" ? "sw-TZ" : "en-US";
+    window.speechSynthesis.speak(s);
+}
+
+function toggleVoiceAnswer() {
+    voiceAnswerEnabled = !voiceAnswerEnabled;
+    document.getElementById("voiceStatus").innerText =
+        voiceAnswerEnabled ? "ON" : "OFF";
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+function switchLanguage() {
+    language = language === "sw" ? "en" : "sw";
+    alert(language === "sw" ? "Kiswahili kimewashwa" : "English enabled");
+}
 
 
