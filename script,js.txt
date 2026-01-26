@@ -1,0 +1,24 @@
+let language = "sw";
+
+function loadContent() {
+    if (language === "sw") {
+        document.getElementById("title").innerText = "Mkulima Smart App";
+        document.getElementById("planting").innerText = "🌱 Msimu wa kupanda: Machi – Mei";
+        document.getElementById("fertilizer").innerText = "🧪 Mbolea: DAP kupanda, UREA kukua";
+        document.getElementById("schedule").innerText = "📅 Umwagiliaji: Kila baada ya siku 7–10";
+        document.getElementById("harvest").innerText = "🌾 Kuvuna: Baada ya miezi 3–4";
+    } else {
+        document.getElementById("title").innerText = "Smart Farmer App";
+        document.getElementById("planting").innerText = "🌱 Planting season: March – May";
+        document.getElementById("fertilizer").innerText = "🧪 Fertilizer: DAP at planting, UREA for growth";
+        document.getElementById("schedule").innerText = "📅 Irrigation: Every 7–10 days";
+        document.getElementById("harvest").innerText = "🌾 Harvest: After 3–4 months";
+    }
+}
+
+function switchLanguage() {
+    language = (language === "sw") ? "en" : "sw";
+    loadContent();
+}
+
+loadContent();
