@@ -1,0 +1,48 @@
+{
+  "maize": {
+    "sw": {
+      "planting": "🌱 Msimu wa kupanda: Machi – Mei",
+      "fertilizer": "🧪 Mbolea: DAP / UREA",
+      "schedule": "📅 Umwagiliaji: Kila baada ya siku 7–10",
+      "harvest": "🌾 Kuvuna: Baada ya miezi 3–4",
+      "challenges": "⚠️ Magonjwa, udongo mbovu",
+      "benefits_food": "🍽️ Lishe, protini",
+      "benefits_market": "💰 Faida ya kuuza",
+      "image": "https://i.imgur.com/maize.jpg"
+    },
+    "en": {
+      "planting": "🌱 Planting season: March – May",
+      "fertilizer": "🧪 Fertilizer: DAP / UREA",
+      "schedule": "📅 Irrigation: Every 7–10 days",
+      "harvest": "🌾 Harvest: After 3–4 months",
+      "challenges": "⚠️ Diseases, poor soil",
+      "benefits_food": "🍽️ Nutrition, protein",
+      "benefits_market": "💰 Profit from selling",
+      "image": "https://i.imgur.com/maize.jpg"
+    }
+  },
+  "tomato": {
+    "sw": {
+      "planting": "🌱 Msimu wa kupanda: Februari – Aprili",
+      "fertilizer": "🧪 Mbolea: Compost / NPK",
+      "schedule": "📅 Umwagiliaji: Kila baada ya siku 2–3",
+      "harvest": "🌾 Kuvuna: Baada ya miezi 2–3",
+      "challenges": "⚠️ Vimelea, udongo mbovu",
+      "benefits_food": "🍅 Lishe, vitamini C",
+      "benefits_market": "💰 Faida ya kuuza",
+      "image": "https://i.imgur.com/tomato.jpg"
+    },
+    "en": {
+      "planting": "🌱 Planting season: February – April",
+      "fertilizer": "🧪 Fertilizer: Compost / NPK",
+      "schedule": "📅 Irrigation: Every 2–3 days",
+      "harvest": "🌾 Harvest: After 2–3 months",
+      "challenges": "⚠️ Pests, poor soil",
+      "benefits_food": "🍅 Nutrition, vitamin C",
+      "benefits_market": "💰 Profit from selling",
+      "image": "https://i.imgur.com/tomato.jpg"
+    }
+  }
+}
+
+
