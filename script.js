@@ -1,48 +1,75 @@
 let language = "sw";
+let cropsData = {};
 
-// Default generic data kwa zao lolote
-const defaultData = {
-    sw: {
-        planting: "🌱 Msimu wa kupanda: Machi – Mei",
-        fertilizer: "🧪 Mbolea: NPK / Compost",
-        schedule: "📅 Umwagiliaji: Kila baada ya siku 7–10",
-        harvest: "🌾 Kuvuna: Baada ya miezi 3–4"
-    },
-    en: {
-        planting: "🌱 Planting season: March – May",
-        fertilizer: "🧪 Fertilizer: NPK / Compost",
-        schedule: "📅 Irrigation: Every 7–10 days",
-        harvest: "🌾 Harvest: After 3–4 months"
-    }
-};
+// Load crops.json
+fetch('crops.json')
+    .then(response => response.json())
+    .then(data => {
+        cropsData = data;
+    });
 
-// Function ya ku-display data ya zao la mtumiaji
 function generateData() {
-    const cropName = document.getElementById("userCrop").value.trim();
+    const cropName = document.getElementById("userCrop").value.trim().toLowerCase();
     if (cropName === "") {
         alert("Tafadhali andika jina la zao");
         return;
     }
 
-    // Badilisha title
-    document.getElementById("cropTitle").innerText = `Zao: ${cropName}`;
+    const crop = cropsData[cropName] || null;
+    const card = document.getElementById("cropCard");
+    card.style.display = "block";
 
-    // Weka default data (baadaye unaweza add logic maalumu kwa crops)
-    if (language === "sw") {
-        document.getElementById("planting").innerText = defaultData.sw.planting;
-        document.getElementById("fertilizer").innerText = defaultData.sw.fertilizer;
-        document.getElementById("schedule").innerText = defaultData.sw.schedule;
-        document.getElementById("harvest").innerText = defaultData.sw.harvest;
+    document.getElementById("cropTitle").innerText = `Zao: ${cropName.charAt(0).toUpperCase() + cropName.slice(1)}`;
+
+    if (crop) {
+        // Data from JSON
+        const data = crop[language];
+        document.getElementById("planting").innerText = data.planting;
+        document.getElementById("fertilizer").innerText = data.fertilizer;
+        document.getElementById("schedule").innerText = data.schedule;
+        document.getElementById("harvest").innerText = data.harvest;
+        document.getElementById("challenges").innerText = data.challenges;
+        document.getElementById("benefits_food").innerText = data.benefits_food;
+        document.getElementById("benefits_market").innerText = data.benefits_market;
+        document.getElementById("cropImage").src = data.image;
     } else {
-        document.getElementById("planting").innerText = defaultData.en.planting;
-        document.getElementById("fertilizer").innerText = defaultData.en.fertilizer;
-        document.getElementById("schedule").innerText = defaultData.en.schedule;
-        document.getElementById("harvest").innerText = defaultData.en.harvest;
+        // Generic default data
+        const defaultData = {
+            sw: {
+                planting: "🌱 Msimu wa kupanda: Machi – Mei",
+                fertilizer: "🧪 Mbolea: NPK / Compost",
+                schedule: "📅 Umwagiliaji: Kila baada ya siku 7–10",
+                harvest: "🌾 Kuvuna: Baada ya miezi 3–4",
+                challenges: "⚠️ Changamoto: udongo, magonjwa",
+                benefits_food: "🍽️ Lishe",
+                benefits_market: "💰 Faida ya kuuza",
+                image: "https://i.imgur.com/maize.jpg"
+            },
+            en: {
+                planting: "🌱 Planting season: March – May",
+                fertilizer: "🧪 Fertilizer: NPK / Compost",
+                schedule: "📅 Irrigation: Every 7–10 days",
+                harvest: "🌾 Harvest: After 3–4 months",
+                challenges: "⚠️ Challenges: soil, diseases",
+                benefits_food: "🍽️ Nutrition",
+                benefits_market: "💰 Profit",
+                image: "https://i.imgur.com/maize.jpg"
+            }
+        };
+
+        const data = defaultData[language];
+        document.getElementById("planting").innerText = data.planting;
+        document.getElementById("fertilizer").innerText = data.fertilizer;
+        document.getElementById("schedule").innerText = data.schedule;
+        document.getElementById("harvest").innerText = data.harvest;
+        document.getElementById("challenges").innerText = data.challenges;
+        document.getElementById("benefits_food").innerText = data.benefits_food;
+        document.getElementById("benefits_market").innerText = data.benefits_market;
+        document.getElementById("cropImage").src = data.image;
     }
 }
 
-// Kubadilisha lugha
 function switchLanguage() {
     language = (language === "sw") ? "en" : "sw";
-    generateData(); // Refresh data
+    generateData();
 }

@@ -14,21 +14,24 @@
     <button onclick="switchLanguage()">SW / EN</button>
 
     <!-- Input ya zao la mtumiaji -->
-    <h2 id="cropTitle">Ingiza Zao Lako:</h2>
+    <h2>Ingiza Zao Lako:</h2>
     <input type="text" id="userCrop" placeholder="Andika jina la zao hapa">
-    <button onclick="generateData()">Generate Data</button>
+    <button onclick="generateData()">Onyesha Data</button>
 
-    <div class="card">
+    <!-- Card za crop info -->
+    <div class="card" id="cropCard" style="display:none;">
+        <h3 id="cropTitle"></h3>
+        <img id="cropImage" src="" alt="Crop Image">
         <p id="planting"></p>
         <p id="fertilizer"></p>
         <p id="schedule"></p>
         <p id="harvest"></p>
+        <p id="challenges"></p>
+        <p id="benefits_food"></p>
+        <p id="benefits_market"></p>
     </div>
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
