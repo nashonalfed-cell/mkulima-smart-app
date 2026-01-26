@@ -13,7 +13,14 @@
     <!-- Button ya kubadilisha lugha -->
     <button onclick="switchLanguage()">SW / EN</button>
 
-    <h2 id="cropTitle">Zao: Mahindi</h2>
+    <h2 id="cropTitle">Chagua Zao:</h2>
+
+    <select id="cropSelect" onchange="updateCrop()">
+        <option value="mahindi">Mahindi / Maize</option>
+        <option value="mpunga">Mpunga / Rice</option>
+        <option value="maharage">Maharage / Beans</option>
+        <option value="mihogo">Mihogo / Cassava</option>
+    </select>
 
     <div class="card">
         <p id="planting"></p>
@@ -26,3 +33,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+
