@@ -1,24 +1,33 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f0f8ff;
+    background: #f4f9f4;
+    font-family: Arial, sans-serif;
 }
 
 h1 {
     color: #2e7d32;
-    text-shadow: 1px 1px #a5d6a7;
+    font-weight: bold;
 }
 
 .card {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border-radius: 15px;
-    padding: 20px;
-}
-
-textarea {
-    resize: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 #cropImage {
-    max-height: 300px;
+    max-height: 320px;
 }
+
+button {
+    border-radius: 25px;
+}
+
+#aiAnswer {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 
