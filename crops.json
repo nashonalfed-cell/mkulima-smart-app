@@ -1,47 +1,15 @@
 {
   "maize": {
-    "sw": {
-      "planting": "🌱 Msimu wa kupanda: Machi – Mei",
-      "fertilizer": "🧪 Mbolea: Tumia DAP wakati wa kupanda na UREA wakati wa kukuzia.",
-      "schedule": "📅 Umwagiliaji: Mahindi yanahitaji maji mengi wakati wa kutoa mbelewele.",
-      "harvest": "🌾 Kuvuna: Baada ya miezi 3–4 kulingana na mbegu.",
-      "challenges": "⚠️ Jihadharini na viwavi jeshi na magonjwa ya majani.",
-      "benefits_food": "🍽️ Lishe: Chakula kikuu cha wanga.",
-      "benefits_market": "💰 Soko: Kuna soko pana ndani na nje ya nchi.",
-      "image": "https://loremflickr.com/800/500/maize,agriculture"
-    },
-    "en": {
-      "planting": "🌱 Planting season: March – May",
-      "fertilizer": "🧪 Fertilizer: Use DAP during planting and UREA for top-dressing.",
-      "schedule": "📅 Irrigation: Maize needs plenty of water during the tasseling stage.",
-      "harvest": "🌾 Harvest: After 3–4 months depending on the variety.",
-      "challenges": "⚠️ Watch out for fall armyworms and leaf diseases.",
-      "benefits_food": "🍽️ Nutrition: A major source of carbohydrates.",
-      "benefits_market": "💰 Market: Large demand locally and internationally.",
-      "image": "https://loremflickr.com/800/500/maize,agriculture"
-    }
+    "sw": { "planting": "🌱 Panda mwezi Machi", "fertilizer": "🧪 Tumia DAP na UREA", "harvest": "🌾 Vuna baada ya miezi 4" }
   },
   "tomato": {
-    "sw": {
-      "planting": "🌱 Msimu wa kupanda: Februari – Aprili (Vuli/Masika).",
-      "fertilizer": "🧪 Mbolea: Tumia mbolea ya asili (Compost) au NPK.",
-      "schedule": "📅 Umwagiliaji: Nyanya zinahitaji maji mara 2-3 kwa wiki.",
-      "harvest": "🌾 Kuvuna: Baada ya siku 75 hadi 90 tangu kupandikiza.",
-      "challenges": "⚠️ Zuia magonjwa ya kukungu (Blight) na wadudu kama kanitangaze.",
-      "benefits_food": "🍅 Lishe: Chanzo kizuri cha Vitamini C na Lycopene.",
-      "benefits_market": "💰 Soko: Inauzika kwa haraka kwenye masoko ya mjini.",
-      "image": "https://loremflickr.com/800/500/tomato,agriculture"
-    },
-    "en": {
-      "planting": "🌱 Planting season: February – April.",
-      "fertilizer": "🧪 Fertilizer: Use compost or NPK fertilizer.",
-      "schedule": "📅 Irrigation: Tomatoes need watering 2-3 times per week.",
-      "harvest": "🌾 Harvest: After 75 to 90 days from transplanting.",
-      "challenges": "⚠️ Prevent Blight diseases and pests like Tuta Absoluta.",
-      "benefits_food": "🍅 Nutrition: Rich in Vitamin C and Lycopene.",
-      "benefits_market": "💰 Market: High demand in local and urban markets.",
-      "image": "https://loremflickr.com/800/500/tomato,agriculture"
-    }
+    "sw": { "planting": "🌱 Panda kwenye kitalu kwanza", "fertilizer": "🧪 Tumia mbolea ya samadi", "harvest": "🍅 Vuna baada ya miezi 3" }
+  },
+  "rice": {
+    "sw": { "planting": "🌱 Panda kwenye maji mengi", "fertilizer": "🧪 Tumia mbolea ya kukuzia", "harvest": "🌾 Vuna baada ya miezi 5" }
+  },
+  "coffee": {
+    "sw": { "planting": "🌱 Panda miche umbali wa mita 3", "fertilizer": "🧪 Tumia NPK", "harvest": "☕ Vuna baada ya miaka 2-3" }
   }
 }
 
