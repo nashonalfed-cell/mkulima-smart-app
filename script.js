@@ -2,21 +2,22 @@ let language = "sw";
 let currentCrop = "";
 let cropsDataDB = {};
 
-// Kamusi ya kutafsiri majina ya Kiswahili kwenda Kiingereza
+// Kamusi ya kutambua majina ya Kiswahili
 const cropAlias = {
     "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
     "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
     "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
 };
 
+// Pakia JSON yako
 fetch('crops.json')
     .then(res => res.json())
     .then(data => { cropsDataDB = data; })
-    .catch(e => console.error("Database haipatikani"));
+    .catch(e => console.log("Database ya JSON haijapatikana."));
 
 async function generateData() {
     let input = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!input) return alert("Andika jina la zao!");
+    if (!input) return;
 
     if (cropAlias[input]) input = cropAlias[input];
     currentCrop = input;
@@ -27,15 +28,15 @@ async function generateData() {
     const img = document.getElementById("cropImage");
     img.src = `https://loremflickr.com/800/500/${input},agriculture,crop`;
 
-    const titleText = document.getElementById("cropTitle");
-    const infoText = document.getElementById("wikiInfo");
-    titleText.innerText = input;
-
-    const local = cropsDataDB[input] ? cropsDataDB[input][language] : null;
-    if (local) {
-        infoText.innerText = `${local.planting}. ${local.fertilizer}.`;
-    } else {
-        infoText.innerText = "Zao limepatikana! Unaweza kuanza kuuliza maswali hapa chini.";
+    document.getElementById("cropTitle").innerText = input;
+    
+    // Pata maelezo mafupi ya awali kutoka Wikipedia
+    try {
+        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${input}`);
+        const data = await res.json();
+        document.getElementById("wikiInfo").innerText = data.extract || "Zao limepatikana. Uliza AI maelezo ya kitaalamu.";
+    } catch {
+        document.getElementById("wikiInfo").innerText = "Tayari kutoa ushauri. Uliza swali hapa chini.";
     }
 
     img.onload = () => {
@@ -44,76 +45,62 @@ async function generateData() {
     };
 }
 
-// ========================= SEHEMU YA KUCHATI NA AI =========================
-function askAI() {
+async function askAI() {
     const question = document.getElementById("aiQuestion").value.trim().toLowerCase();
-    const aiAnswerBox = document.getElementById("aiAnswer");
     const aiText = document.getElementById("aiText");
-    
-    if (!question) return;
-    if (!currentCrop) {
-        aiAnswerBox.style.display = "block";
-        aiText.innerText = "Tafadhali chagua zao kwanza ili nikupe ushauri sahihi.";
-        return;
-    }
+    const aiAnswerBox = document.getElementById("aiAnswer");
 
-    const info = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
-    let response = "";
+    if (!question || !currentCrop) return;
 
-    // Mfumo wa AI kuchambua swali (Chatbot Logic)
-    if (question.includes("habari") || question.includes("mambo")) {
-        response = "Habari mkulima! Mimi ni AI yako. Unauliza nini kuhusu " + currentCrop + "?";
-    } else if (question.includes("mbolea") || question.includes("chakula")) {
-        response = info ? info.fertilizer : "Kwa ujumla, " + currentCrop + " inahitaji mbolea ya asili au NPK kulingana na udongo.";
-    } else if (question.includes("panda") || question.includes("wakati")) {
-        response = info ? info.planting : "Upandaji unategemea msimu wa mvua katika eneo lako.";
-    } else if (question.includes("vuna") || question.includes("muda gani")) {
-        response = info ? info.harvest : "Zao hili huchukua muda kulingana na mbegu uliyotumia.";
-    } else if (question.includes("soko") || question.includes("bei")) {
-        response = "Soko la " + currentCrop + " ni zuri kwa sasa. Nakushauri uwasiliane na vyama vya ushirika.";
-    } else if (question.includes("wadudu") || question.includes("ugonjwa")) {
-        response = "Inabidi uwe makini na mabadiliko ya majani. Ukiona madoa, tumia dawa inayopendekezwa na wataalamu.";
-    } else {
-        response = "Swali zuri! Kuhusu " + currentCrop + ", mimi ninaweza kukusaidia kuhusu mbolea, upandaji, na uvunaji. Unaweza kuuliza kwa sauti pia!";
-    }
-
-    // Onyesha Jibu kwa staili ya kuchati
     aiAnswerBox.style.display = "block";
-    aiText.innerText = "🤖 AI: " + response;
-    
-    // AI kusema kwa sauti
-    speak(response);
-    
-    // Safisha sanduku la swali
-    document.getElementById("aiQuestion").value = "";
+    aiText.innerHTML = "<em>AI inatafuta majibu ya uhakika...</em>";
+
+    // 1. DATA KUTOKA KWENYE JSON YAKO (MAARIFA YAKO)
+    const local = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
+    let localResponse = "";
+    if (local) {
+        if (question.includes("mbolea")) localResponse = local.fertilizer;
+        else if (question.includes("panda")) localResponse = local.planting;
+        else if (question.includes("vuna")) localResponse = local.harvest;
+    }
+
+    // 2. DATA KUTOKA MTANDAONI (MAARIFA YA DUNIA)
+    let webResponse = "";
+    try {
+        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+farming+tips&format=json&no_html=1`);
+        const data = await res.json();
+        webResponse = data.AbstractText || "";
+    } catch (e) { console.log("Web search failed"); }
+
+    // 3. KUUNGANISHA (HYBRID)
+    let combined = "";
+    if (localResponse) {
+        combined += `<b>📍 Ushauri wa Database:</b> ${localResponse}<br><br>`;
+    }
+    if (webResponse) {
+        combined += `<b>🌍 Maelezo ya Ziada (Mtandao):</b> ${webResponse}`;
+    } else if (!localResponse) {
+        combined = "Samahani, sijaweza kupata maelezo ya kina kwa sasa. Jaribu kuuliza kwa neno lingine.";
+    }
+
+    aiText.innerHTML = combined;
+    speak(localResponse || webResponse);
 }
 
-// Uwezo wa AI Kusema kwa Sauti
 function speak(text) {
     if ('speechSynthesis' in window) {
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'sw-TZ'; // Lugha ya Kiswahili
-        synth.speak(utterance);
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'sw-TZ';
+        window.speechSynthesis.speak(msg);
     }
 }
 
-// Uwezo wa Mkulima kuongea na App
 function startVoice() {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'sw-TZ';
-    
-    recognition.onstart = () => {
-        document.getElementById("aiQuestion").placeholder = "Ninasikiliza...";
+    recognition.onresult = (e) => {
+        document.getElementById("aiQuestion").value = e.results[0][0].transcript;
+        askAI();
     };
-
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("aiQuestion").value = transcript;
-        document.getElementById("aiQuestion").placeholder = "Uliza kuhusu mbolea...";
-        askAI(); // Inatuma swali moja kwa moja baada ya kuongea
-    };
-    
     recognition.start();
 }
-
