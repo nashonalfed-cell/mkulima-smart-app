@@ -9,63 +9,54 @@ async function generateData() {
         return;
     }
 
-    // Onyesha Loading na ficha matokeo ya zamani
     spinner.style.display = 'block';
     card.style.display = 'none';
 
     try {
-        // 1. Jaribu kusoma crops.json
+        // 1. Fetch kutoka crops.json (Inafanya kazi GitHub Pages)
         const response = await fetch('crops.json');
         
         if (!response.ok) {
-            throw new Error("Imeshindwa kupata faili la crops.json");
+            throw new Error("Imeshindwa kupata crops.json");
         }
 
         const localData = await response.json();
 
-        // 2. Angalia kama zao lipo kwenye JSON
+        // 2. Search Logic kwa mazao yote
         if (localData[userInput]) {
             const data = localData[userInput].sw;
             renderResults(userInput, data, "Database ya Mkulima Smart");
         } else {
-            // 3. Kama halipo kwenye JSON, tafuta Wikipedia (AI Mode)
+            // 3. AI Mode: Kama halipo kwenye JSON, piga hodi Wikipedia
             const wikiUrl = `https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(userInput)}`;
             const wikiRes = await fetch(wikiUrl);
             
             if (wikiRes.ok) {
                 const wikiData = await wikiRes.json();
                 const aiData = {
-                    planting: wikiData.extract,
-                    fertilizer: "Maelezo ya mbolea hayajapatikana moja kwa moja. Tafadhali wasiliana na bwana shamba.",
-                    harvest: "Angalia maelezo ya Wikipedia hapo juu kwa ukomavu."
+                    planting: wikiData.extract || "Maelezo ya upandaji hayajapatikana.",
+                    fertilizer: "Wasiliana na bwana shamba kwa ushauri wa mbolea.",
+                    harvest: "Angalia maelezo ya Wikipedia hapo juu."
                 };
                 renderResults(userInput, aiData, "Maelezo kutoka AI (Wikipedia)");
             } else {
-                alert("Zao halijapatikana. Jaribu: maize, tomato, au beans.");
+                alert("Zao hili halijapatikana. Jaribu: Maize, Tomato, au Beans.");
             }
         }
     } catch (error) {
-        console.error("Error detail:", error);
-        alert("Hitilafu: Hakikisha unatumia 'Live Server' kufungua app yako na faili linaitwa crops.json.");
+        console.error("Error:", error);
+        alert("Kuna hitilafu ya kufungua data. Hakikisha crops.json ipo GitHub.");
     } finally {
-        // Zima spinner mwisho wa kila kitu
         spinner.style.display = 'none';
     }
 }
 
-// Function ya kuonyesha data kwenye Screen
 function renderResults(title, content, source) {
     const card = document.getElementById('cropCard');
-    const titleEl = document.getElementById('cropTitle');
-    const infoEl = document.getElementById('wikiInfo');
-    const imgEl = document.getElementById('cropImage');
-    const videoArea = document.getElementById('videoArea');
-
-    // Jaza data
-    titleEl.innerText = `${title.toUpperCase()} - (${source})`;
-    imgEl.src = `https://loremflickr.com/800/600/${title},agriculture/all`;
+    document.getElementById('cropTitle').innerText = `${title.toUpperCase()} (${source})`;
+    document.getElementById('cropImage').src = `https://loremflickr.com/800/600/${title},agriculture`;
     
-    infoEl.innerHTML = `
+    document.getElementById('wikiInfo').innerHTML = `
         <div class="mt-3">
             <p><strong>🌱 Upandaji:</strong><br>${content.planting}</p>
             <p><strong>🧪 Mbolea:</strong><br>${content.fertilizer}</p>
@@ -73,11 +64,10 @@ function renderResults(title, content, source) {
         </div>
     `;
 
-    videoArea.innerHTML = `
+    document.getElementById('videoArea').innerHTML = `
         <a href="https://www.youtube.com/results?search_query=kilimo+cha+${title}" target="_blank" class="video-btn">
             📺 Tazama Video za ${title}
         </a>`;
 
-    // Onyesha kadi ya matokeo
     card.style.display = 'flex';
 }
