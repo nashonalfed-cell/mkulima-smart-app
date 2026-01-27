@@ -69,13 +69,13 @@
     "sw": { "planting": "🌱 Panda punje moja moja kwa nafasi ya 10cm.", "fertilizer": "🧪 Inahitaji mbolea ya naitrojeni mwanzoni.", "harvest": "🧄 Hukomaa baada ya miezi 4-6." }
   },
   "ginger": {
-    "sw": { "planting": "🌱 Panda vipande vya tangawizi vyenye macho.", "fertilizer": "🧪 Inahitaji samadi nyingi na unyevu.", "harvest": "🫚 Huvunwa baada ya miezi 9." }
+    "sw": { "planting": "🌱 Panda vipande vya tangawizi vyenye macho.", "fertilizer": "🧪 Inahitaji samadi nyingi na unyevu.", "harvest": "🫫 Huvunwa baada ya miezi 9." }
   },
   "carrot": {
     "sw": { "planting": "🌱 Panda mbegu moja kwa moja kwenye udongo mwororo.", "fertilizer": "🧪 Inahitaji mbolea ya potasiamu kwa ajili ya mzizi.", "harvest": "🥕 Huvunwa baada ya miezi 2-3." }
   },
   "spinach": {
-    "sw": { "planting": "🌱 Panda kwa nafasi ya 30cm kati ya mistari.", "fertilizer": "🧪 Inahitaji naitrojeni kwa ajili ya maji meusi.", "harvest": "🍃 Huvunwa baada ya wiki 6-8." }
+    "sw": { "planting": "🌱 Panda kwa nafasi ya 30cm kati ya mistari.", "fertilizer": "🧪 Inahitaji naitrojeni kwa ajili ya majani meusi.", "harvest": "🍃 Huvunwa baada ya wiki 6-8." }
   },
   "pigeon pea": {
     "sw": { "planting": "🌱 Panda kwa nafasi pana, hustahimili ukame sana.", "fertilizer": "🧪 Haihitaji mbolea nyingi, huongeza rutuba.", "harvest": "🫛 Huvunwa baada ya miezi 6-9." }
@@ -98,7 +98,7 @@
   "cocoa": {
     "sw": { "planting": "🌱 Panda chini ya vivuli vya miti mikubwa.", "fertilizer": "🧪 Inahitaji mbolea ya potasiamu na fosfeti.", "harvest": "🍫 Huvunwa baada ya miaka 3-5." }
   },
-  "clove": {
+  "cloves": {
     "sw": { "planting": "🌱 Panda miche kwenye mashimo makubwa, maeneo ya pwani.", "fertilizer": "🧪 Tumia samadi na mbolea za madini.", "harvest": "🌿 Huvunwa kabla maua hayajafunguka." }
   },
   "vanilla": {
@@ -148,7 +148,17 @@
   },
   "lentils": {
     "sw": { "planting": "🌱 Panda kwenye udongo usiotuamisha maji.", "fertilizer": "🧪 Haihitaji mbolea nyingi, huongeza naitrojeni.", "harvest": "🫛 Hukomaa baada ya siku 80-110." }
+  },
+  "teak": {
+    "sw": { "planting": "🌱 Panda miche ya mti wa mbao (Mteke) kwa nafasi ya 3m x 3m.", "fertilizer": "🧪 Inahitaji udongo wenye madini ya kutosha, samadi husaidia mwanzoni.", "harvest": "🪵 Huvunwa kwa mbao baada ya miaka 15-20." }
+  },
+  "eucalyptus": {
+    "sw": { "planting": "🌱 Panda miche ya mkaratusi kwenye maeneo yasiyo na vyanzo vya maji karibu.", "fertilizer": "🧪 Inastahimili udongo duni, haihitaji mbolea nyingi.", "harvest": "🪵 Huvunwa kwa ajili ya nguzo baada ya miaka 5-8." }
+  },
+  "pine": {
+    "sw": { "planting": "🌱 Panda miche ya mmsunobari kwenye maeneo ya mwinuko na baridi.", "fertilizer": "🧪 Inahitaji udongo wenye asidi kiasi.", "harvest": "🪵 Huvunwa kwa mbao baada ya miaka 12-15." }
+  },
+  "bamboo": {
+    "sw": { "planting": "🌱 Panda mianzi kando ya mito au maeneo yenye unyevu.", "fertilizer": "🧪 Tumia mbolea ya naitrojeni kuharakisha ukuaji.", "harvest": "🎋 Huvunwa baada ya miaka 3-5." }
   }
 }
-
-
