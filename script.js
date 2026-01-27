@@ -2,42 +2,68 @@ let language = "sw";
 let currentCrop = "";
 let cropsDataDB = {};
 
-// Kamusi ya kutambua majina ya Kiswahili
 const cropAlias = {
     "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
     "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
-    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
+    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine",
+    "parachichi": "avocado", "tikiti": "watermelon"
 };
 
-// Pakia JSON yako
 fetch('crops.json')
     .then(res => res.json())
     .then(data => { cropsDataDB = data; })
-    .catch(e => console.log("Database ya JSON haijapatikana."));
+    .catch(e => console.log("Database ya ndani haijapatikana."));
 
 async function generateData() {
-    let input = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!input) return;
+    let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
+    if (!userInput) return alert("Andika jina la zao!");
 
-    if (cropAlias[input]) input = cropAlias[input];
-    currentCrop = input;
+    let searchName = cropAlias[userInput] || userInput;
+    currentCrop = searchName;
 
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
 
     const img = document.getElementById("cropImage");
-    img.src = `https://loremflickr.com/800/500/${input},agriculture,crop`;
+    img.src = `https://loremflickr.com/800/500/${searchName},agriculture,plant`;
 
-    document.getElementById("cropTitle").innerText = input;
-    
-    // Pata maelezo mafupi ya awali kutoka Wikipedia
-    try {
-        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${input}`);
-        const data = await res.json();
-        document.getElementById("wikiInfo").innerText = data.extract || "Zao limepatikana. Uliza AI maelezo ya kitaalamu.";
-    } catch {
-        document.getElementById("wikiInfo").innerText = "Tayari kutoa ushauri. Uliza swali hapa chini.";
+    const titleText = document.getElementById("cropTitle");
+    const infoText = document.getElementById("wikiInfo");
+    titleText.innerText = userInput;
+
+    // --- HATUA YA KUCHUKUA MAELEZO MENGI ---
+    let fullReport = "";
+
+    // 1. Chukua data ya ndani (JSON)
+    const local = cropsDataDB[searchName] ? cropsDataDB[searchName][language] : null;
+    if (local) {
+        fullReport += `<h5>📍 Mwongozo wa Haraka:</h5><ul>
+            <li><b>Upandaji:</b> ${local.planting}</li>
+            <li><b>Mbolea:</b> ${local.fertilizer}</li>
+            <li><b>Uvunaji:</b> ${local.harvest}</li>
+        </ul><hr>`;
     }
+
+    // 2. Chukua maelezo marefu mtandaoni (Wikipedia Deep Search)
+    try {
+        // Tunatafuta Wikipedia ya Kiswahili
+        const wikiUrl = `https://sw.wikipedia.org/api/rest_v1/page/summary/${userInput}`;
+        const res = await fetch(wikiUrl);
+        const data = await res.json();
+        
+        if (data.extract) {
+            fullReport += `<h5>🌍 Maelezo ya Kina:</h5><p>${data.extract}</p>`;
+        } else {
+            // Ikiwa ya Kiswahili haipo, jaribu ya Kiingereza na utafsiri ndani ya app
+            const engRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${searchName}`);
+            const engData = await engRes.json();
+            fullReport += `<h5>🌍 Maelezo ya Kina (Kiingereza):</h5><p>${engData.extract}</p>`;
+        }
+    } catch (e) {
+        fullReport += "<p>Maelezo ya ziada yanatafutwa...</p>";
+    }
+
+    infoText.innerHTML = fullReport;
 
     img.onload = () => {
         document.getElementById("loadingSpinner").style.display = "none";
@@ -45,6 +71,7 @@ async function generateData() {
     };
 }
 
+// SEHEMU YA CHAT (Inabaki kusaidia mkulima anapohitaji kuuliza zaidi)
 async function askAI() {
     const question = document.getElementById("aiQuestion").value.trim().toLowerCase();
     const aiText = document.getElementById("aiText");
@@ -53,46 +80,18 @@ async function askAI() {
     if (!question || !currentCrop) return;
 
     aiAnswerBox.style.display = "block";
-    aiText.innerHTML = "<em>AI inatafuta majibu ya uhakika...</em>";
+    aiText.innerHTML = "<em>AI inachambua swali lako...</em>";
 
-    // 1. DATA KUTOKA KWENYE JSON YAKO (MAARIFA YAKO)
-    const local = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
-    let localResponse = "";
-    if (local) {
-        if (question.includes("mbolea")) localResponse = local.fertilizer;
-        else if (question.includes("panda")) localResponse = local.planting;
-        else if (question.includes("vuna")) localResponse = local.harvest;
-    }
-
-    // 2. DATA KUTOKA MTANDAONI (MAARIFA YA DUNIA)
-    let webResponse = "";
+    let response = "";
     try {
-        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+farming+tips&format=json&no_html=1`);
+        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+agriculture+tips&format=json&no_html=1`);
         const data = await res.json();
-        webResponse = data.AbstractText || "";
-    } catch (e) { console.log("Web search failed"); }
-
-    // 3. KUUNGANISHA (HYBRID)
-    let combined = "";
-    if (localResponse) {
-        combined += `<b>📍 Ushauri wa Database:</b> ${localResponse}<br><br>`;
-    }
-    if (webResponse) {
-        combined += `<b>🌍 Maelezo ya Ziada (Mtandao):</b> ${webResponse}`;
-    } else if (!localResponse) {
-        combined = "Samahani, sijaweza kupata maelezo ya kina kwa sasa. Jaribu kuuliza kwa neno lingine.";
+        response = data.AbstractText || "Sikuweza kupata jibu mahususi mtandaoni, lakini nakushauri uzingatie kanuni bora za kilimo kulingana na maelezo niliyokupa hapo juu.";
+    } catch (e) {
+        response = "Samahani, muunganisho wa mtandao umekwama.";
     }
 
-    aiText.innerHTML = combined;
-    speak(localResponse || webResponse);
-}
-
-function speak(text) {
-    if ('speechSynthesis' in window) {
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'sw-TZ';
-        window.speechSynthesis.speak(msg);
-    }
+    aiText.innerHTML = `<b>🤖 Jibu:</b> ${response}`;
 }
 
 function startVoice() {
