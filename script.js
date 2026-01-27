@@ -2,22 +2,11 @@ let language = "sw";
 let currentCrop = "";
 let cropsDataDB = {};
 
-// Kamusi ya kutafsiri majina ya Kiswahili kwenda Kiingereza (ili app ielewe)
+// Kamusi ya kutafsiri majina ya Kiswahili kwenda Kiingereza
 const cropAlias = {
-    "mahindi": "maize", "mpunga": "rice", "mchele": "rice", "maharage": "beans",
-    "nyanya": "tomato", "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava",
-    "viazi vitamu": "sweet potato", "viazi mviringo": "potato", "alizeti": "sunflower",
-    "karanga": "groundnut", "kahawa": "coffee", "chai": "tea", "pamba": "cotton",
-    "korosho": "cashew", "ndizi": "banana", "nanasi": "pineapple", "embe": "mango",
-    "chungwa": "orange", "tikiti": "watermelon", "tikiti maji": "watermelon",
-    "tango": "cucumber", "pilipili": "pepper", "vitunguu saumu": "garlic",
-    "tangawizi": "ginger", "karoti": "carrot", "mchicha": "spinach", "kunde": "pigeon pea",
-    "soya": "soya", "ngano": "wheat", "ulezi": "millet", "mtama": "sorghum",
-    "kakao": "cocoa", "karafuu": "cloves", "vanila": "vanilla", "parachichi": "avocado",
-    "papai": "papaya", "passion": "passion fruit", "zabibu": "grape", "strowberi": "strawberry",
-    "epo": "apple", "pera": "guava", "nazi": "coconut", "mchikichi": "oil palm",
-    "mkonge": "sisal", "tumbaku": "tobacco", "miwa": "sugar cane", "mabamia": "okra",
-    "biringanya": "eggplant", "dengu": "lentils"
+    "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
+    "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
+    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
 };
 
 fetch('crops.json')
@@ -29,16 +18,12 @@ async function generateData() {
     let input = document.getElementById("userCrop").value.trim().toLowerCase();
     if (!input) return alert("Andika jina la zao!");
 
-    // ANGALIA KAMA NI KISWAHILI: Kama jina lipo kwenye cropAlias, badilisha kuwa Kiingereza
-    if (cropAlias[input]) {
-        input = cropAlias[input];
-    }
-
+    if (cropAlias[input]) input = cropAlias[input];
     currentCrop = input;
+
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
 
-    // Picha inatafutwa kwa jina la Kiingereza (Inapata matokeo mengi zaidi)
     const img = document.getElementById("cropImage");
     img.src = `https://loremflickr.com/800/500/${input},agriculture,crop`;
 
@@ -47,18 +32,10 @@ async function generateData() {
     titleText.innerText = input;
 
     const local = cropsDataDB[input] ? cropsDataDB[input][language] : null;
-
     if (local) {
-        infoText.innerText = `${local.planting}. ${local.fertilizer}. ${local.harvest}`;
+        infoText.innerText = `${local.planting}. ${local.fertilizer}.`;
     } else {
-        // Ikitafuta Wikipedia, inatumia neno asilia la mtumiaji
-        try {
-            const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${input}`);
-            const data = await res.json();
-            infoText.innerText = data.extract || "Maelezo yanakuja hivi punde.";
-        } catch {
-            infoText.innerText = "Zao halijapatikana.";
-        }
+        infoText.innerText = "Zao limepatikana! Unaweza kuanza kuuliza maswali hapa chini.";
     }
 
     img.onload = () => {
@@ -67,23 +44,76 @@ async function generateData() {
     };
 }
 
+// ========================= SEHEMU YA KUCHATI NA AI =========================
 function askAI() {
-    const question = document.getElementById("aiQuestion").value.toLowerCase();
-    const info = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
-    let answer = "";
-
+    const question = document.getElementById("aiQuestion").value.trim().toLowerCase();
+    const aiAnswerBox = document.getElementById("aiAnswer");
+    const aiText = document.getElementById("aiText");
+    
+    if (!question) return;
     if (!currentCrop) {
-        answer = "Tafadhali tafuta zao kwanza.";
-    } else if (!info) {
-        answer = `Bado sina data ya kitaalamu ya ${currentCrop}.`;
-    } else {
-        if (question.includes("mbolea")) answer = info.fertilizer;
-        else if (question.includes("panda") || question.includes("msimu")) answer = info.planting;
-        else if (question.includes("vuna")) answer = info.harvest;
-        else answer = `Kuhusu ${currentCrop}, naweza kukupa ushauri wa mbolea, upandaji na uvunaji.`;
+        aiAnswerBox.style.display = "block";
+        aiText.innerText = "Tafadhali chagua zao kwanza ili nikupe ushauri sahihi.";
+        return;
     }
 
-    document.getElementById("aiAnswer").style.display = "block";
-    document.getElementById("aiText").innerText = answer;
+    const info = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
+    let response = "";
+
+    // Mfumo wa AI kuchambua swali (Chatbot Logic)
+    if (question.includes("habari") || question.includes("mambo")) {
+        response = "Habari mkulima! Mimi ni AI yako. Unauliza nini kuhusu " + currentCrop + "?";
+    } else if (question.includes("mbolea") || question.includes("chakula")) {
+        response = info ? info.fertilizer : "Kwa ujumla, " + currentCrop + " inahitaji mbolea ya asili au NPK kulingana na udongo.";
+    } else if (question.includes("panda") || question.includes("wakati")) {
+        response = info ? info.planting : "Upandaji unategemea msimu wa mvua katika eneo lako.";
+    } else if (question.includes("vuna") || question.includes("muda gani")) {
+        response = info ? info.harvest : "Zao hili huchukua muda kulingana na mbegu uliyotumia.";
+    } else if (question.includes("soko") || question.includes("bei")) {
+        response = "Soko la " + currentCrop + " ni zuri kwa sasa. Nakushauri uwasiliane na vyama vya ushirika.";
+    } else if (question.includes("wadudu") || question.includes("ugonjwa")) {
+        response = "Inabidi uwe makini na mabadiliko ya majani. Ukiona madoa, tumia dawa inayopendekezwa na wataalamu.";
+    } else {
+        response = "Swali zuri! Kuhusu " + currentCrop + ", mimi ninaweza kukusaidia kuhusu mbolea, upandaji, na uvunaji. Unaweza kuuliza kwa sauti pia!";
+    }
+
+    // Onyesha Jibu kwa staili ya kuchati
+    aiAnswerBox.style.display = "block";
+    aiText.innerText = "🤖 AI: " + response;
+    
+    // AI kusema kwa sauti
+    speak(response);
+    
+    // Safisha sanduku la swali
+    document.getElementById("aiQuestion").value = "";
+}
+
+// Uwezo wa AI Kusema kwa Sauti
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'sw-TZ'; // Lugha ya Kiswahili
+        synth.speak(utterance);
+    }
+}
+
+// Uwezo wa Mkulima kuongea na App
+function startVoice() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'sw-TZ';
+    
+    recognition.onstart = () => {
+        document.getElementById("aiQuestion").placeholder = "Ninasikiliza...";
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("aiQuestion").value = transcript;
+        document.getElementById("aiQuestion").placeholder = "Uliza kuhusu mbolea...";
+        askAI(); // Inatuma swali moja kwa moja baada ya kuongea
+    };
+    
+    recognition.start();
 }
 
