@@ -2,77 +2,77 @@ let language = "sw";
 let currentCrop = "";
 let cropsDataDB = {};
 
-// Pakia Data ya JSON (Database yako ya mazao)
+// Pakia Database
 fetch('crops.json')
     .then(res => res.json())
-    .then(data => { 
-        cropsDataDB = data; 
-        console.log("Database imepakiwa!");
-    })
-    .catch(e => console.error("Database haijapatikana"));
+    .then(data => { cropsDataDB = data; })
+    .catch(e => console.error("Database haipatikani"));
 
 async function generateData() {
     const input = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!input) return alert("Tafadhali andika jina la zao!");
+    if (!input) return alert("Andika jina la zao!");
 
     currentCrop = input;
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
 
-    // --- SEHEMU YA PICHA ---
-    // Inachukua picha moja kwa moja kulingana na jina la zao (mfano: "maize" au "pineapple")
+    // Picha ya Zao
     const img = document.getElementById("cropImage");
-    // Tunatumia maneno "agriculture" na "plant" kusaidia AI kupata picha sahihi ya shambani
     img.src = `https://loremflickr.com/800/500/${input},agriculture,crop`;
 
     const titleText = document.getElementById("cropTitle");
     const infoText = document.getElementById("wikiInfo");
-
     titleText.innerText = input;
 
-    // Angalia kama zao lipo kwenye crops.json yako
     const local = cropsDataDB[input] ? cropsDataDB[input][language] : null;
 
     if (local) {
-        infoText.innerText = `${local.planting}. ${local.fertilizer}. ${local.harvest}.`;
+        infoText.innerText = `${local.planting}. ${local.fertilizer}.`;
     } else {
-        // Kama halipo kwenye JSON, tafuta Wikipedia ya Kiswahili
         try {
             const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${input}`);
             const data = await res.json();
-            infoText.innerText = data.extract || "Maelezo ya ziada hayajapatikana, lakini picha imepakiwa.";
+            infoText.innerText = data.extract || "Zao lipo lakini maelezo ya kina yanakuja hivi punde.";
         } catch {
-            infoText.innerText = "Maelezo hayajapatikana. Hakikisha umeandika jina sahihi.";
+            infoText.innerText = "Maelezo hayajapatikana. Hakikisha jina liko sahihi.";
         }
     }
 
-    // Onyesha kadi baada ya picha kumaliza kupakia
     img.onload = () => {
-        document.getElementById("loadingSpinner").style.display = "none";
-        document.getElementById("cropCard").style.display = "block";
-    };
-    
-    // Ikitokea picha imegoma kupakia
-    img.onerror = () => {
-        img.src = "https://via.placeholder.com/800x500?text=Picha+ya+Zao";
         document.getElementById("loadingSpinner").style.display = "none";
         document.getElementById("cropCard").style.display = "block";
     };
 }
 
-// Kazi ya AI (Majibu ya haraka)
+// ========================= AI LOGIC (HAPA NDIPO AI INAPOJIBU) =========================
 function askAI() {
-    const q = document.getElementById("aiQuestion").value.toLowerCase();
+    const question = document.getElementById("aiQuestion").value.toLowerCase();
     const info = cropsDataDB[currentCrop] ? cropsDataDB[currentCrop][language] : null;
-    let answer = "Samahani, sina jibu la kitaalamu kuhusu hilo kwa zao hili. Wasiliana na bwana shamba wa karibu.";
+    let answer = "";
 
-    if (info) {
-        if (q.includes("mbolea")) answer = info.fertilizer;
-        else if (q.includes("panda") || q.includes("msimu")) answer = info.planting;
-        else if (q.includes("vuna")) answer = info.harvest;
+    if (!currentCrop) {
+        answer = "Tafadhali tafuta zao kwanza kabla ya kuuliza maswali.";
+    } else if (!info) {
+        answer = `Samahani, bado sina data ya kitaalamu kuhusu ${currentCrop}. Lakini kwa ujumla, hakikisha udongo una unyevu na mbolea ya kutosha.`;
+    } else {
+        // AI inachambua swali la mkulima hapa
+        if (question.includes("mbolea") || question.includes("chakula cha mmea")) {
+            answer = "Kuhusu mbolea: " + info.fertilizer;
+        } else if (question.includes("panda") || question.includes("msimu") || question.includes("wakati gani")) {
+            answer = "Kuhusu upandaji: " + info.planting;
+        } else if (question.includes("vuna") || question.includes("muda gani") || question.includes("kukomaa")) {
+            answer = "Kuhusu kuvuna: " + info.harvest;
+        } else if (question.includes("maji") || question.includes("mwagilia")) {
+            answer = "Zao la " + currentCrop + " linahitaji maji ya kutosha, hasa wakati wa kutoa maua.";
+        } else if (question.includes("wadudu") || question.includes("ugonjwa") || question.includes("dawa")) {
+            answer = "Inashauriwa kukagua majani kila siku. Ukiona wadudu, tumia viuadudu (pesticides) vinavyopendekezwa na bwana shamba.";
+        } else {
+            answer = `Kwa zao la ${currentCrop}, ninaweza kukupa maelezo kuhusu mbolea, upandaji, na uvunaji. Unaweza kuuliza mfano: 'Nitumie mbolea gani?'`;
+        }
     }
 
-    document.getElementById("aiAnswer").style.display = "block";
+    const aiBox = document.getElementById("aiAnswer");
+    aiBox.style.display = "block";
     document.getElementById("aiText").innerText = answer;
 }
 
