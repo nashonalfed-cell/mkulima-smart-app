@@ -1,5 +1,6 @@
 async function generateData() {
-    const userInput = document.getElementById('userCrop').value.toLowerCase().trim();
+    const userInputField = document.getElementById('userCrop');
+    const userInput = userInputField.value.toLowerCase().trim();
     const card = document.getElementById('cropCard');
     const spinner = document.getElementById('loadingSpinner');
     
@@ -8,65 +9,75 @@ async function generateData() {
         return;
     }
 
+    // Onyesha Loading na ficha matokeo ya zamani
     spinner.style.display = 'block';
     card.style.display = 'none';
 
     try {
-        // 1. Hapa sasa tunaita 'crops.json' badala ya 'data.json'
+        // 1. Jaribu kusoma crops.json
         const response = await fetch('crops.json');
         
         if (!response.ok) {
-            throw new Error("Faili la crops.json halijapatikana!");
+            throw new Error("Imeshindwa kupata faili la crops.json");
         }
 
         const localData = await response.json();
 
-        // 2. Angalia kama zao lipo kwenye faili lako la JSON
+        // 2. Angalia kama zao lipo kwenye JSON
         if (localData[userInput]) {
-            displayResults(userInput, localData[userInput].sw, "Mkulima Smart Database");
+            const data = localData[userInput].sw;
+            renderResults(userInput, data, "Database ya Mkulima Smart");
         } else {
-            // 3. KAMA HALIPO (AI Mode): Inatafuta Wikipedia ya Kiswahili
+            // 3. Kama halipo kwenye JSON, tafuta Wikipedia (AI Mode)
             const wikiUrl = `https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(userInput)}`;
             const wikiRes = await fetch(wikiUrl);
             
             if (wikiRes.ok) {
                 const wikiData = await wikiRes.json();
-                const aiResult = {
-                    planting: wikiData.extract || "Maelezo ya kina hayajapatikana kwa sasa.",
-                    fertilizer: "Wasiliana na mtaalamu wa kilimo kwa ushauri wa mbolea ya zao hili.",
-                    harvest: "Vuna kulingana na maelezo ya ukomavu yaliyotolewa hapo juu."
+                const aiData = {
+                    planting: wikiData.extract,
+                    fertilizer: "Maelezo ya mbolea hayajapatikana moja kwa moja. Tafadhali wasiliana na bwana shamba.",
+                    harvest: "Angalia maelezo ya Wikipedia hapo juu kwa ukomavu."
                 };
-                displayResults(userInput, aiResult, "Mkulima Smart AI (Wikipedia)");
+                renderResults(userInput, aiData, "Maelezo kutoka AI (Wikipedia)");
             } else {
-                alert("Zao hili halipo kwenye orodha yetu wala mtandaoni. Jaribu zao lingine.");
+                alert("Zao halijapatikana. Jaribu: maize, tomato, au beans.");
             }
         }
     } catch (error) {
-        console.error("Kosa:", error);
-        alert("Hitilafu: " + error.message);
+        console.error("Error detail:", error);
+        alert("Hitilafu: Hakikisha unatumia 'Live Server' kufungua app yako na faili linaitwa crops.json.");
     } finally {
+        // Zima spinner mwisho wa kila kitu
         spinner.style.display = 'none';
     }
 }
 
-function displayResults(title, content, source) {
+// Function ya kuonyesha data kwenye Screen
+function renderResults(title, content, source) {
     const card = document.getElementById('cropCard');
-    card.style.display = 'flex';
-    document.getElementById('cropTitle').innerText = `${title.toUpperCase()} (${source})`;
+    const titleEl = document.getElementById('cropTitle');
+    const infoEl = document.getElementById('wikiInfo');
+    const imgEl = document.getElementById('cropImage');
+    const videoArea = document.getElementById('videoArea');
+
+    // Jaza data
+    titleEl.innerText = `${title.toUpperCase()} - (${source})`;
+    imgEl.src = `https://loremflickr.com/800/600/${title},agriculture/all`;
     
-    // Picha inajidhalisha yenyewe kulingana na jina la zao
-    document.getElementById('cropImage').src = `https://loremflickr.com/600/400/${title},agriculture`;
-    
-    document.getElementById('wikiInfo').innerHTML = `
-        <div class="p-2">
-            <p><strong>🌱 Maelezo ya Upandaji:</strong><br>${content.planting}</p>
+    infoEl.innerHTML = `
+        <div class="mt-3">
+            <p><strong>🌱 Upandaji:</strong><br>${content.planting}</p>
             <p><strong>🧪 Mbolea:</strong><br>${content.fertilizer}</p>
             <p><strong>🌾 Uvunaji:</strong><br>${content.harvest}</p>
         </div>
     `;
-    
-    document.getElementById('videoArea').innerHTML = `
+
+    videoArea.innerHTML = `
         <a href="https://www.youtube.com/results?search_query=kilimo+cha+${title}" target="_blank" class="video-btn">
             📺 Tazama Video za ${title}
         </a>`;
+
+    // Onyesha kadi ya matokeo
+    card.style.display = 'flex';
 }
