@@ -5,18 +5,17 @@ let cropsDataDB = {};
 const cropAlias = {
     "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
     "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
-    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine",
-    "parachichi": "avocado", "tikiti": "watermelon"
+    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
 };
 
 fetch('crops.json')
     .then(res => res.json())
     .then(data => { cropsDataDB = data; })
-    .catch(e => console.log("Database ya ndani haijapatikana."));
+    .catch(() => console.log("Database ya ndani haipo, nitatumia mtandao tu."));
 
 async function generateData() {
     let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!userInput) return alert("Andika jina la zao!");
+    if (!userInput) return alert("Tafadhali andika jina la zao!");
 
     let searchName = cropAlias[userInput] || userInput;
     currentCrop = searchName;
@@ -24,46 +23,40 @@ async function generateData() {
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
 
+    // 1. Picha
     const img = document.getElementById("cropImage");
-    img.src = `https://loremflickr.com/800/500/${searchName},agriculture,plant`;
+    img.src = `https://loremflickr.com/800/500/${searchName},agriculture`;
 
-    const titleText = document.getElementById("cropTitle");
-    const infoText = document.getElementById("wikiInfo");
-    titleText.innerText = userInput;
+    document.getElementById("cropTitle").innerText = userInput;
 
-    // --- HATUA YA KUCHUKUA MAELEZO MENGI ---
+    // 2. KUKUSANYA MAELEZO MENGI (JSON + Wikipedia Deep Search)
     let fullReport = "";
-
-    // 1. Chukua data ya ndani (JSON)
     const local = cropsDataDB[searchName] ? cropsDataDB[searchName][language] : null;
+    
     if (local) {
-        fullReport += `<h5>📍 Mwongozo wa Haraka:</h5><ul>
-            <li><b>Upandaji:</b> ${local.planting}</li>
-            <li><b>Mbolea:</b> ${local.fertilizer}</li>
-            <li><b>Uvunaji:</b> ${local.harvest}</li>
-        </ul><hr>`;
+        fullReport += `<h5>📍 Mwongozo wa Shambani (Kutoka kwetu):</h5>
+            <p><b>🌱 Upandaji:</b> ${local.planting}</p>
+            <p><b>🧪 Mbolea:</b> ${local.fertilizer}</p>
+            <p><b>🌾 Uvunaji:</b> ${local.harvest}</p><hr>`;
     }
 
-    // 2. Chukua maelezo marefu mtandaoni (Wikipedia Deep Search)
     try {
-        // Tunatafuta Wikipedia ya Kiswahili
-        const wikiUrl = `https://sw.wikipedia.org/api/rest_v1/page/summary/${userInput}`;
-        const res = await fetch(wikiUrl);
-        const data = await res.json();
-        
-        if (data.extract) {
-            fullReport += `<h5>🌍 Maelezo ya Kina:</h5><p>${data.extract}</p>`;
-        } else {
-            // Ikiwa ya Kiswahili haipo, jaribu ya Kiingereza na utafsiri ndani ya app
-            const engRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${searchName}`);
-            const engData = await engRes.json();
-            fullReport += `<h5>🌍 Maelezo ya Kina (Kiingereza):</h5><p>${engData.extract}</p>`;
+        const wikiRes = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${userInput}`);
+        const wikiData = await wikiRes.json();
+        if (wikiData.extract) {
+            fullReport += `<h5>📖 Maelezo ya Kina (Wikipedia):</h5><p>${wikiData.extract}</p>`;
         }
-    } catch (e) {
-        fullReport += "<p>Maelezo ya ziada yanatafutwa...</p>";
-    }
+    } catch (e) { console.log("Wiki search failed."); }
 
-    infoText.innerHTML = fullReport;
+    document.getElementById("wikiInfo").innerHTML = fullReport || "Sikuweza kupata maelezo marefu, tafadhali uliza AI hapa chini.";
+
+    // 3. SEHEMU YA VIDEO ZA YOUTUBE
+    const youtubeSearch = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${userInput}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `
+        <h6 class="fw-bold">📺 Jifunze kwa Vitendo:</h6>
+        <p class="small text-muted">Tazama video za wataalamu jinsi ya kupanda ${userInput}.</p>
+        <a href="${youtubeSearch}" target="_blank" class="video-btn">BONYEZA HAPA KUONA VIDEO</a>
+    `;
 
     img.onload = () => {
         document.getElementById("loadingSpinner").style.display = "none";
@@ -71,35 +64,22 @@ async function generateData() {
     };
 }
 
-// SEHEMU YA CHAT (Inabaki kusaidia mkulima anapohitaji kuuliza zaidi)
+// 4. AI CHATBOT (Database + Web Integration)
 async function askAI() {
     const question = document.getElementById("aiQuestion").value.trim().toLowerCase();
     const aiText = document.getElementById("aiText");
-    const aiAnswerBox = document.getElementById("aiAnswer");
+    const aiBox = document.getElementById("aiAnswer");
 
     if (!question || !currentCrop) return;
+    aiBox.style.display = "block";
+    aiText.innerHTML = "<em>AI inatafuta majibu ya ziada...</em>";
 
-    aiAnswerBox.style.display = "block";
-    aiText.innerHTML = "<em>AI inachambua swali lako...</em>";
-
-    let response = "";
     try {
-        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+agriculture+tips&format=json&no_html=1`);
+        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+kilimo&format=json&no_html=1`);
         const data = await res.json();
-        response = data.AbstractText || "Sikuweza kupata jibu mahususi mtandaoni, lakini nakushauri uzingatie kanuni bora za kilimo kulingana na maelezo niliyokupa hapo juu.";
-    } catch (e) {
-        response = "Samahani, muunganisho wa mtandao umekwama.";
+        let answer = data.AbstractText || "Sijaweza kupata jibu lingine mtandaoni, tafadhali rejea maelezo ya kina hapo juu.";
+        aiText.innerHTML = `<b>🤖 Jibu:</b> ${answer}`;
+    } catch {
+        aiText.innerHTML = "Samahani, mtandao unaleta shida.";
     }
-
-    aiText.innerHTML = `<b>🤖 Jibu:</b> ${response}`;
-}
-
-function startVoice() {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'sw-TZ';
-    recognition.onresult = (e) => {
-        document.getElementById("aiQuestion").value = e.results[0][0].transcript;
-        askAI();
-    };
-    recognition.start();
 }
