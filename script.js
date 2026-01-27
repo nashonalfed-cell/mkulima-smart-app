@@ -1,66 +1,116 @@
-// 1. DATA ZOTE ZIPO HAPA (Hazihitaji faili la nje)
-const mazaoData = {
-    "maize": { "p": "Panda mwanzoni mwa mvua, nafasi ya 75cm x 25cm.", "f": "Tumia DAP kupanda na UREA mahindi yakiwa urefu wa goti.", "h": "Hukomaa baada ya miezi 3-4." },
-    "tomato": { "p": "Panda kwenye kitalu kwa wiki 4 kisha hamishia shambani.", "f": "Tumia NPK na mbolea ya samadi iliyoiva.", "h": "Huanza kuvunwa baada ya siku 75-90." },
-    "beans": { "p": "Panda kwa nafasi ya 50cm x 10cm.", "f": "Inahitaji mbolea kidogo ya DAP, hujitengenezea naitrojeni.", "h": "Hukuvunwa baada ya siku 60-90." },
-    "onion": { "p": "Panda mbegu kwenye kitalu, kisha hamishia kwa nafasi ya 10cm.", "f": "Inahitaji mbolea ya CAN na NPK.", "h": "Hukomaa baada ya miezi 3-4." },
-    "rice": { "p": "Panda kwenye vitalu kwanza kisha hamishia shambani kwenye maji.", "f": "Tumia mbolea ya kukuzia (UREA) mara mbili.", "h": "Hukomaa baada ya miezi 4-5." },
-    "mkaratusi": { "p": "Panda miche kwenye mashimo yenye kina cha kutosha.", "f": "Inastahimili udongo duni, samadi inatosha.", "h": "Huvunwa kwa nguzo baada ya miaka 5-8." },
-    "watermelon": { "p": "Panda mbegu moja kwa moja shambani, nafasi mita 2.", "f": "Inahitaji mbolea ya samadi na NPK.", "h": "Hukomaa baada ya siku 80-100." }
-};
+/**
+ * MKULIMA SMART AI - VERSION 4.0 (Final Stable)
+ * Kazi: Sauti, Picha, AI, na Video (Faster & Accurate)
+ */
 
-// Ramani ya kutafsiri Kiswahili kwenda kwenye Key za juu
-const kamusi = {
-    "mahindi": "maize", "nyanya": "tomato", "maharage": "beans", 
-    "kitunguu": "onion", "mpunga": "rice", "tikiti": "watermelon"
-};
-
-function generateData() {
-    // 1. Pata kile mkulima alichoandika
-    const inputField = document.getElementById('userCrop');
-    if (!inputField) return console.error("Huwezi kupata ID 'userCrop'");
-    
-    const input = inputField.value.toLowerCase().trim();
-    const card = document.getElementById('cropCard');
-    const spinner = document.getElementById('loadingSpinner');
-
-    if (input === "") {
-        alert("Tafadhali andika jina la zao!");
+// 1. KUSIKILIZA SAUTI (Speech to Text)
+function recordVoice() {
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+        alert("Samahani, Browser yako hairuhusu sauti. Tafadhali tumia Chrome.");
         return;
     }
 
-    // Onyesha loading
-    spinner.style.display = 'block';
+    const recognition = new Recognition();
+    recognition.lang = 'sw-TZ'; // Lugha ya Kiswahili
+
+    recognition.onstart = () => {
+        const btn = document.querySelector('button[onclick="recordVoice()"]');
+        if (btn) btn.innerHTML = "🎤 Inasikiliza...";
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('userCrop').value = transcript;
+        generateData(); // Anza kutafuta papo hapo
+    };
+
+    recognition.onend = () => {
+        const btn = document.querySelector('button[onclick="recordVoice()"]');
+        if (btn) btn.innerHTML = "🎤 Ongea";
+    };
+
+    recognition.start();
+}
+
+// 2. AI KUONGEA (Text to Speech)
+function speak(text) {
+    // Zima sauti yoyote inayoongea kabla ya kuanza mpya
+    window.speechSynthesis.cancel();
+    
+    if (!text) return;
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'sw-TZ';
+    utterance.pitch = 1.0;
+    utterance.rate = 1.0; // Kasi ya kawaida ya binadamu
+    window.speechSynthesis.speak(utterance);
+}
+
+// 3. KAZI KUU (Picha, AI, na Video)
+async function generateData() {
+    const inputField = document.getElementById('userCrop');
+    const input = inputField.value.trim();
+    const card = document.getElementById('cropCard');
+    const spinner = document.getElementById('loadingSpinner');
+    
+    if (!input) {
+        alert("Tafadhali andika jina la zao au swali!");
+        return;
+    }
+
+    // Maandalizi ya haraka (Instant UI)
+    if (spinner) spinner.style.display = 'block';
     card.style.display = 'none';
 
-    // Chelewesha kidogo kuleta hisia ya AI
-    setTimeout(() => {
-        spinner.style.display = 'none';
+    try {
+        // A. PICHA: Inavuta picha papo hapo kwa kutumia jina la zao
+        const imgElement = document.getElementById('cropImage');
+        // Tunatumia cache-breaker ili kupata picha mpya kila wakati
+        imgElement.src = `https://loremflickr.com/800/600/${encodeURIComponent(input)},agriculture/all?t=${new Date().getTime()}`;
 
-        // Tafuta zao
-        let key = mazaoData[input] ? input : kamusi[input];
+        // B. AI DATA: Tunavuta kutoka Wikipedia ya Kiswahili (Parallel Fetch kwa Kasi)
+        const wikiUrl = `https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(input)}`;
+        
+        // C. VIDEO: Tunatengeneza Embed ya YouTube kwa wakati mmoja
+        const videoArea = document.getElementById('videoArea');
+        videoArea.innerHTML = `
+            <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+                <iframe 
+                    style="position:absolute; top:0; left:0; width:100%; height:100%;" 
+                    src="https://www.youtube.com/embed?listType=search&list=kilimo+cha+${encodeURIComponent(input)}" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-center mt-2 small">📺 Video za Mafunzo: Kilimo cha ${input}</p>
+        `;
 
-        if (key && mazaoData[key]) {
-            const zao = mazaoData[key];
-            
-            // Jaza taarifa kwenye HTML
+        // D. KUKAMILISHA AI DATA
+        const response = await fetch(wikiUrl);
+        let jibuText = "";
+
+        if (response.ok) {
+            const data = await response.json();
+            jibuText = data.extract;
             document.getElementById('cropTitle').innerText = input.toUpperCase();
-            document.getElementById('cropImage').src = `https://loremflickr.com/600/400/${key},agriculture`;
-            
-            document.getElementById('wikiInfo').innerHTML = `
-                <p><strong>🌱 Upandaji:</strong><br> ${zao.p}</p>
-                <p><strong>🧪 Mbolea:</strong><br> ${zao.f}</p>
-                <p><strong>🌾 Uvunaji:</strong><br> ${zao.h}</p>
-            `;
-            
-            document.getElementById('videoArea').innerHTML = `
-                <a href="https://www.youtube.com/results?search_query=kilimo+cha+${input}" target="_blank" class="video-btn">
-                    📺 Tazama Video za ${input}
-                </a>`;
-            
-            card.style.display = 'block'; // Tumia 'block' badala ya 'flex' kama inazingua
+            document.getElementById('wikiInfo').innerHTML = `<p>${jibuText}</p>`;
         } else {
-            alert("Samahani, zao hili halipo kwenye orodha yetu. Jaribu: Mahindi, Nyanya, au Tikiti.");
+            jibuText = `Nimepata video za kilimo kuhusu ${input}. Unaweza kutazama hapo chini kujifunza zaidi.`;
+            document.getElementById('cropTitle').innerText = input.toUpperCase();
+            document.getElementById('wikiInfo').innerHTML = `<p>${jibuText}</p>`;
         }
-    }, 800);
+
+        // E. ONYESHA MATOKEO (FINAL OUTPUT)
+        if (spinner) spinner.style.display = 'none';
+        card.style.display = 'block';
+        
+        // AI Inaanza kuongea jibu
+        speak(jibuText);
+
+    } catch (error) {
+        if (spinner) spinner.style.display = 'none';
+        console.error("Kosa:", error);
+        alert("Imeshindwa kupata data. Hakikisha una internet.");
+    }
 }
