@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mkulima Smart AI - Multilingual Edition</title>
+    <title>Mkulima Smart AI - Soko & Utaalamu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
     <header class="hero-section text-center text-white p-5">
         <div class="container">
             <h1 class="fw-bold">🚜 Mkulima Smart AI</h1>
-            <p>Search in English or Swahili | Scan Diseases | Soil Expert</p>
+            <p>Maelezo ya Mazao | Scan Magonjwa | Bei za Masoko</p>
         </div>
     </header>
 
@@ -27,36 +27,49 @@
                     <input type="file" id="imageUpload" accept="image/*" capture="camera" class="form-control my-3">
                     <div id="imagePreviewContainer" style="display:none;">
                         <img id="previewImg" src="#" class="img-fluid rounded mb-2 shadow" style="max-height: 150px;">
-                        <div id="scanResult" class="small fw-bold text-dark"></div>
+                        <div id="scanResult" class="small fw-bold"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <div class="card p-4 h-100 border-0 shadow-sm rounded-4 border-start border-primary border-5">
-                    <h5 class="fw-bold text-primary">🧪 Soil & Fertilizer Guide</h5>
-                    <p class="small text-muted">Jibu hali ya udongo wako upate ushauri:</p>
+                    <h5 class="fw-bold text-primary">🧪 Soil & Market Insights</h5>
                     <select id="soilColor" class="form-select mb-2">
-                        <option value="black">Mweusi/Rutuba (Black/Rich)</option>
-                        <option value="red">Mwekundu/Asidi (Red/Acidic)</option>
-                        <option value="sandy">Mweupe/Mchanga (Sandy)</option>
+                        <option value="black">Mweusi (Rutuba)</option>
+                        <option value="red">Mwekundu (Asidi)</option>
                     </select>
-                    <button onclick="testSoil()" class="btn btn-primary w-100 fw-bold">CHAMBUA UDONGO</button>
-                    <div id="soilResult" class="mt-2 small p-2 rounded" style="display:none;"></div>
+                    <button onclick="testSoil()" class="btn btn-primary w-100 fw-bold mb-3">PIMA UDONGO</button>
+                    <div id="soilResult" class="small p-2 rounded mb-2" style="display:none;"></div>
+                    <hr>
+                    <button onclick="showMarket()" class="btn btn-outline-dark w-100 btn-sm fw-bold">📊 ANGALIA BEI ZA SOKONI</button>
                 </div>
             </div>
         </div>
 
         <div class="card p-4 shadow-lg border-0 rounded-4 mb-5">
-            <h5 class="fw-bold text-success mb-3">🔍 Tafuta Zao (Andika kwa Kiswahili au Kiingereza):</h5>
+            <h5 class="fw-bold text-success mb-3">🔍 Tafuta Zao (Swahili/English):</h5>
             <div class="input-group">
-                <input type="text" id="userCrop" class="form-control form-control-lg" placeholder="Mfano: Sunflower, Mahindi, Cassava, Papai...">
+                <input type="text" id="userCrop" class="form-control form-control-lg" placeholder="Mfano: Coffee, Mahindi, Ginger, Alizeti...">
                 <button onclick="generateData()" class="btn btn-success px-4 fw-bold">PATA MAELEZO</button>
+            </div>
+        </div>
+
+        <div id="marketSection" class="mb-5" style="display:none;">
+            <div class="card border-0 shadow rounded-4 p-4 bg-dark text-white">
+                <h5 class="fw-bold text-warning">💰 Makadirio ya Bei za Masoko (Tanzania)</h5>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover mb-0">
+                        <thead><tr><th>Zao</th><th>Soko</th><th>Bei (Kilo)</th><th>Hali</th></tr></thead>
+                        <tbody id="marketTable"></tbody>
+                    </table>
+                </div>
+                <p class="small text-muted mt-2 mb-0">* Bei hizi ni makadirio ya wastani wa mikoani.</p>
             </div>
         </div>
 
         <div id="loadingSpinner" class="text-center my-5" style="display:none;">
             <div class="spinner-border text-success" role="status"></div>
-            <p class="mt-2 fw-bold text-success">AI inachambua takwimu za kitaalamu...</p>
+            <p class="mt-2 fw-bold">AI inakusanya utaalamu na bei za soko...</p>
         </div>
 
         <div id="cropCard" class="row justify-content-center" style="display:none;">
@@ -64,12 +77,11 @@
                 <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
                     <div class="row g-0">
                         <div class="col-lg-5">
-                            <img id="cropImage" src="" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 450px;">
+                            <img id="cropImage" src="" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 400px;">
                         </div>
                         <div class="col-lg-7 p-4 bg-white">
                             <h2 id="cropTitle" class="text-success fw-bold text-uppercase border-bottom pb-2"></h2>
-                            <div id="infoArea" class="info-content mt-3">
-                                </div>
+                            <div id="infoArea" class="info-content mt-3"></div>
                             <div id="videoArea" class="mt-4"></div>
                         </div>
                     </div>
