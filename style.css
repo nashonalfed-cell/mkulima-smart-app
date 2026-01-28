@@ -1,7 +1,40 @@
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-.card { border-radius: 15px; transition: 0.3s; }
-.ai-section { border: 1px solid #ddd; }
-#cropImage { transition: transform 0.5s ease; }
-#cropImage:hover { transform: scale(1.02); }
-.btn-success { background-color: #2e7d32 !important; }
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background-color: #f4f7f6; 
+}
 
+.header-section {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.search-container {
+    margin-top: -60px;
+    z-index: 100;
+}
+
+.crop-card img {
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+}
+
+.ai-section {
+    background-color: #e9f5ee;
+    border: 1px solid #d4edda;
+}
+
+.ai-chat-box {
+    background-color: white;
+    border-left: 4px solid #198754;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-success {
+    background-color: #198754 !important;
+}
