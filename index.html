@@ -3,26 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mkulima Smart AI - Elimu ya Kilimo</title>
+    <title>Mkulima Smart AI - Scan & Search</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 </head>
 <body>
 
     <header class="hero-section text-center text-white p-5">
         <div class="container">
             <h1 class="fw-bold">🚜 Mkulima Smart AI</h1>
-            <p class="lead">Pata mwongozo kamili wa mazao, mbolea, na uvunaji.</p>
+            <p class="lead">Scan zao lako au tafuta mwongozo wa kilimo bora.</p>
         </div>
     </header>
 
     <main class="container my-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="card p-4 shadow-sm border-0 rounded-4 scanner-card text-center">
+                    <h5 class="fw-bold text-success mb-3">📸 AI Camera: Scan Zao/Jani</h5>
+                    <p class="small text-muted">Piga picha jani au zao ili AI itambue tatizo</p>
+                    <input type="file" id="imageUpload" accept="image/*" capture="camera" class="form-control mb-3">
+                    <div id="imagePreviewContainer" style="display:none;">
+                        <img id="previewImg" src="#" alt="Preview" class="img-fluid rounded mb-3">
+                        <div id="scanResult" class="fw-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row justify-content-center search-box">
             <div class="col-md-8">
                 <div class="card p-4 shadow-lg border-0 rounded-4">
                     <div class="input-group">
-                        <input type="text" id="userCrop" class="form-control form-control-lg" placeholder="Tafuta zao lolote (mfano: Mahindi, Karanga, Papai)...">
+                        <input type="text" id="userCrop" class="form-control form-control-lg" placeholder="Andika zao (mfano: Mahindi, Alizeti, Papai)...">
                         <button onclick="generateData()" class="btn btn-success px-4 fw-bold">TAFUTA</button>
                     </div>
                 </div>
@@ -31,30 +47,29 @@
 
         <div id="loadingSpinner" class="text-center my-5" style="display:none;">
             <div class="spinner-border text-success" role="status"></div>
-            <p class="mt-2 fw-bold">AI inakusanya taarifa za kina...</p>
+            <p class="mt-2 fw-bold">AI inatayarisha maelezo...</p>
         </div>
 
         <div id="cropCard" class="row justify-content-center mt-5" style="display:none;">
             <div class="col-md-11">
-                <div class="card crop-card border-0 shadow-lg">
+                <div class="card result-card border-0 shadow-lg overflow-hidden">
                     <div class="row g-0">
                         <div class="col-lg-5">
-                            <img id="cropImage" src="" class="img-fluid h-100" alt="Zao">
+                            <img id="cropImage" src="" class="img-fluid h-100" style="object-fit: cover; min-height: 400px;">
                         </div>
                         <div class="col-lg-7 p-4">
-                            <h2 id="cropTitle" class="text-success fw-bold text-uppercase mb-3"></h2>
-                            <div id="infoScrollArea" class="info-content">
-                                <div id="wikiInfo"></div>
-                                <div id="videoArea" class="mt-4"></div>
-                            </div>
+                            <h2 id="cropTitle" class="text-success fw-bold text-uppercase border-bottom pb-2"></h2>
+                            <div id="infoArea" class="mt-3">
+                                </div>
+                            <div id="videoArea" class="mt-3"></div>
                             <hr>
-                            <div class="ai-chat mt-3">
-                                <h6 class="fw-bold">🤖 Uliza swali la ziada (Magonjwa, Masoko):</h6>
+                            <div class="ai-chat">
+                                <h6 class="fw-bold">🤖 Uliza Swali la Nyongeza:</h6>
                                 <div class="input-group">
-                                    <input type="text" id="aiQuestion" class="form-control" placeholder="Uliza swali hapa...">
+                                    <input type="text" id="aiQuestion" class="form-control" placeholder="Uliza mbolea, wadudu au masoko...">
                                     <button onclick="askAI()" class="btn btn-dark">TUMA</button>
                                 </div>
-                                <div id="aiAnswer" class="mt-3 ai-box" style="display:none;">
+                                <div id="aiAnswer" class="mt-3 p-3 bg-light rounded border-start border-success border-4" style="display:none;">
                                     <p id="aiText" class="mb-0 small"></p>
                                 </div>
                             </div>
