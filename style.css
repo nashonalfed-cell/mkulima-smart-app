@@ -1,40 +1,71 @@
-body { 
-    font-family: 'Poppins', sans-serif; 
-    background-color: #f4f7f6; 
+let cropsDataDB = {};
+const cropAlias = { "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato" };
+
+// 1. Pakia Database ya JSON mara moja app ikifunguka
+fetch('crops.json')
+    .then(res => res.json())
+    .then(data => { cropsDataDB = data; })
+    .catch(() => console.log("Database ya ndani haijapatikana."));
+
+async function generateData() {
+    let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
+    if (!userInput) return alert("Andika jina la zao!");
+
+    let searchKey = cropAlias[userInput] || userInput;
+    
+    document.getElementById("loadingSpinner").style.display = "block";
+    document.getElementById("cropCard").style.display = "none";
+
+    // Set Picha na Kichwa
+    document.getElementById("cropImage").src = `https://loremflickr.com/800/500/${searchKey},agriculture`;
+    document.getElementById("cropTitle").innerText = userInput;
+
+    // A. Tafuta Data ya JSON (Fast)
+    let localHtml = "";
+    const local = cropsDataDB[searchKey] ? cropsDataDB[searchKey]["sw"] : null;
+    if (local) {
+        localHtml = `
+            <div class="alert alert-success p-2 small">
+                <strong>📍 Mwongozo wa Database:</strong><br>
+                🌱 <b>Kupanda:</b> ${local.planting}<br>
+                🧪 <b>Mbolea:</b> ${local.fertilizer}<br>
+                🌾 <b>Kuvuna:</b> ${local.harvest}
+            </div>`;
+    }
+
+    // B. Tafuta Wikipedia (Background)
+    const infoDiv = document.getElementById("wikiInfo");
+    infoDiv.innerHTML = localHtml + "<em>Inapakia maelezo zaidi...</em>";
+
+    try {
+        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(userInput)}`);
+        const data = await res.json();
+        if (data.extract) {
+            infoDiv.innerHTML = localHtml + `<h6>📖 Maelezo:</h6><p class="small">${data.extract}</p>`;
+        }
+    } catch (e) {
+        infoDiv.innerHTML = localHtml + "<p class='small text-danger'>Maelezo ya ziada mtandaoni hayakupatikana.</p>";
+    }
+
+    // C. Video Link
+    const ytLink = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${userInput}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `<a href="${ytLink}" target="_blank" class="btn btn-danger btn-sm w-100 fw-bold">📺 TAZAMA VIDEO ZA ${userInput.toUpperCase()}</a>`;
+
+    document.getElementById("loadingSpinner").style.display = "none";
+    document.getElementById("cropCard").style.display = "flex";
 }
 
-.header-section {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-}
+async function askAI() {
+    const q = document.getElementById("aiQuestion").value;
+    if (!q) return;
+    document.getElementById("aiAnswer").style.display = "block";
+    document.getElementById("aiText").innerText = "🤖 AI inatafuta jibu...";
 
-.search-container {
-    margin-top: -60px;
-    z-index: 100;
-}
-
-.crop-card img {
-    height: 100%;
-    min-height: 300px;
-    object-fit: cover;
-}
-
-.ai-section {
-    background-color: #e9f5ee;
-    border: 1px solid #d4edda;
-}
-
-.ai-chat-box {
-    background-color: white;
-    border-left: 4px solid #198754;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.btn-success {
-    background-color: #198754 !important;
+    try {
+        const res = await fetch(`https://api.duckduckgo.com/?q=${q}+kilimo&format=json&no_html=1`);
+        const data = await res.json();
+        document.getElementById("aiText").innerText = data.AbstractText || "Samahani, sijaweza kupata jibu la ziada. Jaribu kuuliza tofauti.";
+    } catch (e) {
+        document.getElementById("aiText").innerText = "Hitilafu ya mtandao.";
+    }
 }
