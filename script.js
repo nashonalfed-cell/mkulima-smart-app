@@ -1,85 +1,85 @@
-// 1. DATABASE YA NDANI (Hii inatoa majibu papo hapo hata kama internet ni dhaifu)
-const dataYaMazao = {
-    "mahindi": "🌱 Panda kwa nafasi ya 75cm x 25cm. Tumia mbolea ya DAP wakati wa kupanda na UREA mahindi yakiwa urefu wa goti. Hukomaa miezi 3-4.",
-    "nyanya": "🍅 Anzia kitaluni wiki 4. Hamishia shambani kwa nafasi ya 60cm x 45cm. Inahitaji mbolea ya NPK na maji mengi.",
-    "maharage": "🌱 Panda kwa nafasi ya 50cm x 10cm. Inahitaji udongo usiotuama maji. Hukomaa siku 60-90.",
-    "kitunguu": "🧅 Panda kwa nafasi ya 10cm. Inahitaji mbolea ya CAN na samadi. Hukomaa miezi 3-4.",
-    "mpunga": "🌾 Panda kitaluni kwanza. Inahitaji maji mengi na mbolea ya kukuzia (UREA) mara mbili.",
-    "tikiti": "🍉 Panda mbegu moja kwa moja, nafasi mita 2. Inahitaji jua kali na mbolea ya asili."
+let language = "sw";
+let currentCrop = "";
+let cropsDataDB = {};
+
+const cropAlias = {
+    "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
+    "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
+    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
 };
 
-// 2. Kazi ya Kutafuta (Imeboreshwa kwa ajili ya Simu)
+fetch('crops.json')
+    .then(res => res.json())
+    .then(data => { cropsDataDB = data; })
+    .catch(() => console.log("Database ya ndani haipo, nitatumia mtandao tu."));
+
 async function generateData() {
-    const inputField = document.getElementById('userCrop');
-    const input = inputField.value.toLowerCase().trim();
-    const card = document.getElementById('cropCard');
+    let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
+    if (!userInput) return alert("Tafadhali andika jina la zao!");
+
+    let searchName = cropAlias[userInput] || userInput;
+    currentCrop = searchName;
+
+    document.getElementById("loadingSpinner").style.display = "block";
+    document.getElementById("cropCard").style.display = "none";
+
+    // 1. Picha
+    const img = document.getElementById("cropImage");
+    img.src = `https://loremflickr.com/800/500/${searchName},agriculture`;
+
+    document.getElementById("cropTitle").innerText = userInput;
+
+    // 2. KUKUSANYA MAELEZO MENGI (JSON + Wikipedia Deep Search)
+    let fullReport = "";
+    const local = cropsDataDB[searchName] ? cropsDataDB[searchName][language] : null;
     
-    if (!input) {
-        alert("Andika jina la zao!");
-        return;
+    if (local) {
+        fullReport += `<h5>📍 Mwongozo wa Shambani (Kutoka kwetu):</h5>
+            <p><b>🌱 Upandaji:</b> ${local.planting}</p>
+            <p><b>🧪 Mbolea:</b> ${local.fertilizer}</p>
+            <p><b>🌾 Uvunaji:</b> ${local.harvest}</p><hr>`;
     }
 
-    // Onyesha kadi mara moja
-    card.style.display = 'block';
-    document.getElementById('cropTitle').innerText = input.toUpperCase();
-    
-    // Picha inaanza kupakia
-    document.getElementById('cropImage').src = `https://loremflickr.com/800/600/${input},agriculture/all`;
-
-    // Tafuta maelezo
-    let maelezo = dataYaMazao[input];
-
-    if (maelezo) {
-        // Kama lipo kwenye database yetu, lilete fasta
-        shushaMajibu(maelezo);
-    } else {
-        // Kama halipo, uliza Wikipedia kwa haraka
-        document.getElementById('wikiInfo').innerText = "AI inatafuta maelezo...";
-        try {
-            const response = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(input)}`);
-            const data = await response.json();
-            maelezo = data.extract || "Samahani, sijapata maelezo ya zao hili. Tazama video hapo chini.";
-            shushaMajibu(maelezo);
-        } catch (e) {
-            shushaMajibu("Shida ya mtandao. Angalia video za mafunzo hapo chini.");
+    try {
+        const wikiRes = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${userInput}`);
+        const wikiData = await wikiRes.json();
+        if (wikiData.extract) {
+            fullReport += `<h5>📖 Maelezo ya Kina (Wikipedia):</h5><p>${wikiData.extract}</p>`;
         }
-    }
+    } catch (e) { console.log("Wiki search failed."); }
 
-    // Weka Video ya YouTube
-    document.getElementById('videoArea').innerHTML = `
-        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px;">
-            <iframe style="position:absolute; top:0; left:0; width:100%; height:100%;" 
-                src="https://www.youtube.com/embed?listType=search&list=kilimo+cha+${input}" 
-                frameborder="0" allowfullscreen>
-            </iframe>
-        </div>`;
-}
+    document.getElementById("wikiInfo").innerHTML = fullReport || "Sikuweza kupata maelezo marefu, tafadhali uliza AI hapa chini.";
 
-function shushaMajibu(maelezo) {
-    document.getElementById('wikiInfo').innerHTML = `<p>${maelezo}</p>`;
-    // AI Inasoma jibu kwa sauti
-    speak(maelezo);
-}
+    // 3. SEHEMU YA VIDEO ZA YOUTUBE
+    const youtubeSearch = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${userInput}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `
+        <h6 class="fw-bold">📺 Jifunze kwa Vitendo:</h6>
+        <p class="small text-muted">Tazama video za wataalamu jinsi ya kupanda ${userInput}.</p>
+        <a href="${youtubeSearch}" target="_blank" class="video-btn">BONYEZA HAPA KUONA VIDEO</a>
+    `;
 
-// 3. SAUTI (Inafanya kazi vizuri kwenye Chrome ya Simu)
-function recordVoice() {
-    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!Recognition) {
-        alert("Browser yako haina uwezo wa sauti.");
-        return;
-    }
-    const rec = new Recognition();
-    rec.lang = 'sw-TZ';
-    rec.onresult = (e) => {
-        document.getElementById('userCrop').value = e.results[0][0].transcript;
-        generateData();
+    img.onload = () => {
+        document.getElementById("loadingSpinner").style.display = "none";
+        document.getElementById("cropCard").style.display = "block";
     };
-    rec.start();
 }
 
-function speak(text) {
-    window.speechSynthesis.cancel();
-    const talk = new SpeechSynthesisUtterance(text);
-    talk.lang = 'sw-TZ';
-    window.speechSynthesis.speak(talk);
+// 4. AI CHATBOT (Database + Web Integration)
+async function askAI() {
+    const question = document.getElementById("aiQuestion").value.trim().toLowerCase();
+    const aiText = document.getElementById("aiText");
+    const aiBox = document.getElementById("aiAnswer");
+
+    if (!question || !currentCrop) return;
+    aiBox.style.display = "block";
+    aiText.innerHTML = "<em>AI inatafuta majibu ya ziada...</em>";
+
+    try {
+        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+kilimo&format=json&no_html=1`);
+        const data = await res.json();
+        let answer = data.AbstractText || "Sijaweza kupata jibu lingine mtandaoni, tafadhali rejea maelezo ya kina hapo juu.";
+        aiText.innerHTML = `<b>🤖 Jibu:</b> ${answer}`;
+    } catch {
+        aiText.innerHTML = "Samahani, mtandao unaleta shida.";
+    }
 }
