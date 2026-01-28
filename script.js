@@ -1,98 +1,60 @@
-/**
- * MKULIMA SMART AI - SCRIPT (STABLE & FAST VERSION)
- */
-
-let language = "sw";
-let currentCrop = "";
 let cropsDataDB = {};
-
+// Kamusi ya kutafsiri majina ya Kiswahili kwenda Kiingereza ili picha zipatikane kirahisi
 const cropAlias = {
-    "mahindi": "maize", "mpunga": "rice", "maharage": "beans", "nyanya": "tomato",
+    "mahindi": "maize", "nyanya": "tomato", "mpunga": "rice", "maharage": "beans",
     "kitunguu": "onion", "kabichi": "cabbage", "muhogo": "cassava", "viazi": "potato",
-    "mkaratusi": "eucalyptus", "mti wa mbao": "teak", "mwanzi": "bamboo", "mmsunobari": "pine"
+    "tikiti": "watermelon", "parachichi": "avocado", "nanasi": "pineapple", "chungwa": "orange",
+    "mwembe": "mango", "ndizi": "banana", "alizeti": "sunflower", "karanga": "groundnuts",
+    "karoti": "carrot", "kitunguu swaumu": "garlic", "hoho": "pepper", "tangawizi": "ginger",
+    "kahawa": "coffee", "chai": "tea", "pamba": "cotton", "mkonge": "sisal", "karafuu": "cloves",
+    "mkaratusi": "eucalyptus", "msunobari": "pine", "mti wa mbao": "teak", "mwanzi": "bamboo",
+    "ufuta": "sesame", "maharage ya soya": "soybeans", "mbaazi": "pigeonpeas", "kunde": "cowpeas",
+    "tango": "cucumber", "biringanya": "eggplant", "bamia": "okra", "mchicha": "spinach",
+    "vanila": "vanilla", "kakao": "cocoa", "korosho": "cashew", "zabibu": "grapes",
+    "limao": "lemon", "strowberi": "strawberry", "papai": "papaya", "ngano": "wheat",
+    "shayiri": "barley", "mtama": "sorghum", "ulezi": "millet", "mnazi": "coconut", "epo": "apple"
 };
 
-// 1. Pakia Database ya ndani (JSON) haraka
 fetch('crops.json')
     .then(res => res.json())
     .then(data => { cropsDataDB = data; })
-    .catch(() => console.error("Database ya ndani haijapatikana. Hakikisha crops.json ipo!"));
+    .catch(() => console.log("Database ya JSON haipo."));
 
 async function generateData() {
-    const inputField = document.getElementById("userCrop");
-    let userInput = inputField.value.trim().toLowerCase();
-    
-    if (!userInput) return alert("Andika jina la zao!");
+    let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
+    if (!userInput) return alert("Andika zao!");
 
-    let searchName = cropAlias[userInput] || userInput;
-    currentCrop = searchName;
+    let searchKey = cropAlias[userInput] || userInput; // Kama lipo kwenye alias chukua Kiingereza, vinginevyo chukua hivyohivyo
 
-    // Ficha matokeo ya zamani na onyesha loading
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
-    
-    // Anza kuandaa picha
-    const img = document.getElementById("cropImage");
-    img.src = `https://loremflickr.com/800/500/${searchName},agriculture`;
 
+    // 1. PICHA YA AUTOMATIC: Inatafuta picha kulingana na jina la zao
+    document.getElementById("cropImage").src = `https://loremflickr.com/800/500/${searchKey},agriculture,farm`;
     document.getElementById("cropTitle").innerText = userInput;
 
-    // --- HATUA YA KUPATA DATA (JSON + WEB) ---
-    let localContent = "";
-    const local = cropsDataDB[searchName] ? cropsDataDB[searchName][language] : null;
-    
+    let localHtml = "";
+    const local = cropsDataDB[searchKey] ? cropsDataDB[searchKey]["sw"] : null;
     if (local) {
-        localContent = `
-            <div class="alert alert-success">
-                <h6>📍 Ushauri wa Kitaalamu (Database):</h6>
-                <p><b>🌱 Upandaji:</b> ${local.planting}</p>
-                <p><b>🧪 Mbolea:</b> ${local.fertilizer}</p>
-                <p><b>🌾 Kuvuna:</b> ${local.harvest}</p>
-            </div><hr>`;
+        localHtml = `<div class="alert alert-success"><strong>📍 Mwongozo:</strong><br>🌱 ${local.planting}<br>🧪 ${local.fertilizer}<br>🌾 ${local.harvest}</div>`;
     }
 
-    // Jaribu kuvuta data Wikipedia kwa "Promise.race" ili kuzuia kukwama (Timeout 5 seconds)
-    const fetchWiki = fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${userInput}`).then(res => res.json());
-    const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+    const infoDiv = document.getElementById("wikiInfo");
+    infoDiv.innerHTML = localHtml + "<em>Inapakia maelezo ya kina...</em>";
 
     try {
-        const wikiData = await Promise.race([fetchWiki, timeout]);
-        let wikiExtract = wikiData.extract ? `<h5>📖 Maelezo ya Kina:</h5><p>${wikiData.extract}</p>` : "<p>Maelezo ya ziada hayakuonekana mtandaoni.</p>";
-        document.getElementById("wikiInfo").innerHTML = localContent + wikiExtract;
-    } catch (error) {
-        // Ikitokea mtandao ni mbaya, onyesha tu data ya JSON
-        document.getElementById("wikiInfo").innerHTML = localContent + "<p class='text-danger'>⚠️ Imeshindwa kupata maelezo ya ziada mtandaoni (Network Slow), lakini tumia mwongozo huo wa juu.</p>";
-    }
-
-    // Tayarisha link ya Video
-    const youtubeSearch = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${userInput}+tanzania`;
-    document.getElementById("videoArea").innerHTML = `
-        <div class="mt-3">
-            <h6 class="fw-bold text-danger">📺 Mafunzo ya Video:</h6>
-            <a href="${youtubeSearch}" target="_blank" class="btn btn-danger btn-sm w-100 fw-bold">ANGALIA VIDEO ZA ${userInput.toUpperCase()}</a>
-        </div>`;
-
-    // Maliza Loading
-    document.getElementById("loadingSpinner").style.display = "none";
-    document.getElementById("cropCard").style.display = "block";
-}
-
-// AI Chatbot Logic
-async function askAI() {
-    const question = document.getElementById("aiQuestion").value.trim();
-    const aiText = document.getElementById("aiText");
-    const aiBox = document.getElementById("aiAnswer");
-
-    if (!question || !currentCrop) return;
-
-    aiBox.style.display = "block";
-    aiText.innerHTML = "<em>🤖 AI inatafuta majibu...</em>";
-
-    try {
-        const res = await fetch(`https://api.duckduckgo.com/?q=${currentCrop}+${question}+kilimo&format=json&no_html=1`);
+        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(userInput)}`);
         const data = await res.json();
-        aiText.innerHTML = `<b>🤖 Jibu:</b> ${data.AbstractText || "Samahani, sijaweza kupata jibu la ziada mtandaoni kwa sasa."}`;
+        if (data.extract) {
+            infoDiv.innerHTML = localHtml + `<h6>📖 Kuhusu:</h6><p>${data.extract}</p>`;
+        }
     } catch (e) {
-        aiText.innerHTML = "Hitilafu ya mtandao.";
+        infoDiv.innerHTML = localHtml + "<p class='small'>Tumia mwongozo wa hapo juu.</p>";
     }
+
+    const ytLink = `https://www.youtube.com/results?search_query=kilimo+cha+${userInput}`;
+    document.getElementById("videoArea").innerHTML = `<a href="${ytLink}" target="_blank" class="btn btn-danger btn-sm w-100">📺 TAZAMA VIDEO ZA ${userInput.toUpperCase()}</a>`;
+
+    document.getElementById("loadingSpinner").style.display = "none";
+    document.getElementById("cropCard").style.display = "flex";
 }
