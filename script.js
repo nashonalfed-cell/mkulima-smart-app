@@ -1,7 +1,6 @@
 /**
- * MKULIMA SMART AI - FULL ENGINE
+ * MKULIMA SMART AI - THE MASTER ENGINE (FINAL SPEED VERSION)
  * Bwana Shamba: +255797818582
- * UPDATE: Strict Leaf Scanner Output (Plant/Healthy/Problem)
  */
 
 const nambaYaBwanaShamba = "255797818582";
@@ -22,45 +21,35 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. 📸 AI VISUAL SCANNER (MAREKEBISHO PEKEE YAMEFANYIKA HAPA)
+// 2. 📸 AI VISUAL SCANNER (MAREKEBISHO YA KASI NA MAJIBU PEKEE)
 let net;
 async function startAI() { 
+    // Inaanza kupakia model mara tu app inapofunguliwa ili kuokoa muda
     net = await mobilenet.load(); 
+    console.log("AI Model Loaded & Ready");
 }
 
 async function analyzeLeaf() {
     const resultDiv = document.getElementById('scanResult');
     const img = document.getElementById('previewImg');
     
-    resultDiv.innerHTML = "Inachambua... / Analyzing...";
-    
+    // Inachambua haraka sana
     const predictions = await net.classify(img);
     const topResult = predictions[0].className.toLowerCase();
     const probability = predictions[0].probability;
 
-    // Maneno ya mimea
     const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop", "potted"];
-    // Maneno ya matatizo
     const diseaseKeys = ["spot", "rust", "mildew", "rot", "pest", "worm", "fungus", "blight", "damage", "wilt", "aphid", "bug"];
 
     const isPlant = plantKeys.some(word => topResult.includes(word));
     const hasDisease = diseaseKeys.some(word => topResult.includes(word));
 
-    // A. Jibu kama sio mmea
-    if (!isPlant && probability < 0.4) {
-        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">Huu sio mmea / This is not a plant.</div>`;
-    } 
-    // B. Jibu kama jani ni zima (Hamna tatizo)
-    else if (!hasDisease) {
-        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">Hamna tatizo / No problem.</div>`;
-    } 
-    // C. Jibu kama lina shida (Lina ugonjwa)
-    else {
-        resultDiv.innerHTML = `
-            <div class="alert alert-warning mt-2 fw-bold">
-                Lina shida / It has a problem: <span class="text-danger">${topResult}</span>
-                <br><small class="fw-normal">Tuma picha WhatsApp kwa msaada zaidi.</small>
-            </div>`;
+    if (!isPlant && probability < 0.3) {
+        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea / This is not a plant.</div>`;
+    } else if (!hasDisease) {
+        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Hamna tatizo / No problem.</div>`;
+    } else {
+        resultDiv.innerHTML = `<div class="alert alert-warning mt-2 fw-bold">⚠️ Lina shida / It has a problem: <span class="text-danger">${topResult}</span></div>`;
     }
 }
 
@@ -71,7 +60,9 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
         reader.onload = function(ev) {
             document.getElementById('previewImg').src = ev.target.result;
             document.getElementById('imagePreviewContainer').style.display = 'block';
-            setTimeout(analyzeLeaf, 1000); 
+            
+            // Inaanza analysis hapo hapo picha ikishatokea
+            analyzeLeaf(); 
         };
         reader.readAsDataURL(file);
     }
@@ -116,4 +107,8 @@ async function generateData() {
     document.getElementById("cropCard").style.display = "flex";
 }
 
-window.onload = () => { loadMarket(); startAI(); };
+// Start Everything
+window.onload = () => { 
+    loadMarket(); 
+    startAI(); // Pre-loading mapema kabisa
+};
