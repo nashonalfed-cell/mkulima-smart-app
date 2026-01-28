@@ -1,17 +1,17 @@
-body { font-family: 'Poppins', sans-serif; background-color: #f1f6f2; color: #333; }
+body { font-family: 'Poppins', sans-serif; background-color: #f1f6f3; }
 .hero-section { 
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=1200&q=80');
-    background-size: cover; background-position: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
 }
-.scanner-card { border: 2px dashed #198754 !important; background: #fff; }
-.info-content { max-height: 550px; overflow-y: auto; line-height: 1.8; padding-right: 10px; }
-.detail-box { 
-    background: #f8faf9; padding: 15px; border-radius: 12px; margin-bottom: 15px;
-    border-left: 6px solid #198754; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+.scanner-card { border: 2px dashed #198754 !important; }
+.info-content { max-height: 600px; overflow-y: auto; padding-right: 15px; }
+.guide-item { 
+    background: #ffffff; padding: 20px; border-radius: 12px; margin-bottom: 15px;
+    border-left: 8px solid #198754; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+.guide-item h6 { color: #198754; font-weight: bold; margin-bottom: 10px; }
 .btn-success { background-color: #198754 !important; border: none; }
-.btn-primary { background-color: #0d6efd !important; border: none; }
 
-/* Muonekano wa Scrollbar */
-.info-content::-webkit-scrollbar { width: 6px; }
-.info-content::-webkit-scrollbar-thumb { background: #198754; border-radius: 10px; }
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #198754; border-radius: 10px; }
