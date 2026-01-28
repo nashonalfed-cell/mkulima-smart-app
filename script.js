@@ -1,5 +1,5 @@
 /**
- * MKULIMA SMART AI - THE MASTER ENGINE (FINAL SPEED VERSION)
+ * MKULIMA SMART AI - INSTANT SPEED VERSION
  * Bwana Shamba: +255797818582
  */
 
@@ -21,22 +21,20 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. 📸 AI VISUAL SCANNER (MAREKEBISHO YA KASI NA MAJIBU PEKEE)
+// 2. 📸 AI VISUAL SCANNER (INSTANT SPEED - MAREKEBISHO PEKEE)
 let net;
 async function startAI() { 
-    // Inaanza kupakia model mara tu app inapofunguliwa ili kuokoa muda
-    net = await mobilenet.load(); 
-    console.log("AI Model Loaded & Ready");
+    // Hii itapakia AI mara tu App ikifunguka kule nyuma (background)
+    if (!net) net = await mobilenet.load(); 
 }
 
 async function analyzeLeaf() {
     const resultDiv = document.getElementById('scanResult');
     const img = document.getElementById('previewImg');
     
-    // Inachambua haraka sana
+    // 1. Matokeo ya Haraka
     const predictions = await net.classify(img);
     const topResult = predictions[0].className.toLowerCase();
-    const probability = predictions[0].probability;
 
     const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop", "potted"];
     const diseaseKeys = ["spot", "rust", "mildew", "rot", "pest", "worm", "fungus", "blight", "damage", "wilt", "aphid", "bug"];
@@ -44,7 +42,8 @@ async function analyzeLeaf() {
     const isPlant = plantKeys.some(word => topResult.includes(word));
     const hasDisease = diseaseKeys.some(word => topResult.includes(word));
 
-    if (!isPlant && probability < 0.3) {
+    // 2. Toa Majibu Papo Hapo
+    if (!isPlant) {
         resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea / This is not a plant.</div>`;
     } else if (!hasDisease) {
         resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Hamna tatizo / No problem.</div>`;
@@ -61,8 +60,12 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
             document.getElementById('previewImg').src = ev.target.result;
             document.getElementById('imagePreviewContainer').style.display = 'block';
             
-            // Inaanza analysis hapo hapo picha ikishatokea
-            analyzeLeaf(); 
+            // Hakuna kusubiri (setTimeout), fanya kazi sasa hivi!
+            if (net) {
+                analyzeLeaf();
+            } else {
+                document.getElementById('scanResult').innerHTML = "AI bado inajipanga, jaribu tena baada ya sekunde 2...";
+            }
         };
         reader.readAsDataURL(file);
     }
@@ -107,8 +110,7 @@ async function generateData() {
     document.getElementById("cropCard").style.display = "flex";
 }
 
-// Start Everything
 window.onload = () => { 
     loadMarket(); 
-    startAI(); // Pre-loading mapema kabisa
+    startAI(); // Muhimu: Inapakia AI mapema kabisa
 };
