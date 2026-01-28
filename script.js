@@ -1,89 +1,86 @@
-// Database ya Kitaalamu
-const expertBase = {
-    "maize": {sw: "Mahindi", guide: ["Nafasi: 75cm x 25cm", "Mbolea: DAP & UREA", "Muda: Miezi 3-4"]},
-    "coffee": {sw: "Kahawa", guide: ["Aina: Arabica & Robusta", "Nafasi: 3m x 3m", "Mbolea: NPK 20-10-10", "Kuvuna: Baada ya miaka 2-3"]},
-    "ginger": {sw: "Tangawizi", guide: ["Udongo: Tifutifu wenye mifereji", "Mbolea: Samadi nyingi", "Muda: Miezi 9"]},
-    "sunflower": {sw: "Alizeti", guide: ["Nafasi: 75cm x 30cm", "Mbolea: DAP", "Sifa: Inavumilia ukame"]}
+// 1. DATA YA BWANA SHAMBA
+const nambaYaBwanaShamba = "255797818582";
+
+// 2. SMART DATABASE (Nafasi & Mbolea kwa Makundi ya Mazao 200+)
+const cropExpertRules = {
+    "nafaka": { spacing: "75cm x 25cm", fertilizer: "DAP & UREA", harvest: "Miezi 3-5" },
+    "mikunde": { spacing: "45cm x 15cm", fertilizer: "Minjingu (Lime)", harvest: "Miezi 2-3" },
+    "mbogamboga": { spacing: "60cm x 45cm", fertilizer: "NPK & Samadi", harvest: "Siku 60-90" },
+    "matunda": { spacing: "4m x 4m", fertilizer: "Mboji na CAN", harvest: "Miaka 1-3" },
+    "viungo": { spacing: "30cm x 30cm", fertilizer: "Samadi nyingi", harvest: "Miezi 6-12" }
 };
 
-const translator = { "ginger": "tangawizi", "garlic": "kitunguu swaumu", "pepper": "pilipili", "coffee": "kahawa" };
+// Orodha ya Mazao (Mifano ya jinsi yanavyopangwa)
+const cropCategories = {
+    "mahindi": "nafaka", "mpunga": "nafaka", "ngano": "nafaka", "mtama": "nafaka",
+    "maharage": "mikunde", "karanga": "mikunde", "mbaazi": "mikunde", "kunde": "mikunde", "soy": "mikunde",
+    "nyanya": "mbogamboga", "kitunguu": "mbogamboga", "kabichi": "mbogamboga", "hoho": "mbogamboga", "bamia": "mbogamboga",
+    "embe": "matunda", "papai": "matunda", "parachichi": "matunda", "chungwa": "matunda", "tikiti": "matunda",
+    "tangawizi": "viungo", "vitunguu saumu": "viungo", "karafuu": "viungo", "vanila": "viungo", "ufuta": "viungo"
+};
 
-// AI Scanner
-let net;
-async function initAI() { net = await mobilenet.load(); }
-initAI();
+// 3. DATA YA MASOKO
+const marketPrices = [
+    {z: "Mahindi", s: "Kibaigwa", b: "800/kg", h: "Sawa"},
+    {z: "Ufuta", s: "Lindi", b: "3,200/kg", h: "Panda ↑"},
+    {z: "Mpunga", s: "Mbeya", b: "1,400/kg", h: "Panda ↑"}
+];
 
-document.getElementById('imageUpload').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async (ev) => {
-        const img = document.getElementById('previewImg');
-        img.src = ev.target.result;
-        document.getElementById('imagePreviewContainer').style.display = 'block';
-        const res = await net.classify(img);
-        document.getElementById('scanResult').innerText = `Matokeo: ${res[0].className}`;
-    };
-    reader.readAsDataURL(file);
-});
-
-// Market Price Logic
-function showMarket() {
-    const market = [
-        {z: "Mahindi", s: "Dar / Kibaigwa", b: "750 - 900", h: "Inapanda ↑"},
-        {z: "Mpunga", s: "Mbeya / Kahama", b: "1,200 - 1,500", h: "Imetulia -"},
-        {z: "Nyanya", s: "Ilala / Arusha", b: "25,000 (Sado)", h: "Inashuka ↓"},
-        {z: "Kitunguu", s: "Singida / Karatu", b: "120,000 (Gunia)", h: "Inapanda ↑"}
-    ];
+// Pakia Masoko
+(function() {
     let rows = "";
-    market.forEach(m => {
-        rows += `<tr><td>${m.z}</td><td>${m.s}</td><td>${m.b}</td><td>${m.h}</td></tr>`;
-    });
+    marketPrices.forEach(m => rows += `<tr><td>${m.z}</td><td>${m.s}</td><td class='fw-bold text-success'>${m.b}</td><td>${m.h}</td></tr>`);
     document.getElementById('marketTable').innerHTML = rows;
-    document.getElementById('marketSection').style.display = 'block';
-    window.scrollTo(0, 300);
-}
+})();
 
-// Soil Test
-function testSoil() {
-    const res = document.getElementById('soilResult');
-    res.style.display = "block";
-    res.innerHTML = "<b>Ushauri:</b> Tumia mbolea ya Minjingu (RP) na samadi kurekebisha pH.";
-    res.className = "small p-2 rounded bg-warning text-dark border-start border-4 border-dark";
-}
-
-// Expert Search Engine
+// 4. SEARCH ENGINE (Inazalisha maelezo ya kina ya kila zao)
 async function generateData() {
-    const raw = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!raw) return;
-    const input = translator[raw] || raw;
+    const query = document.getElementById("userCrop").value.trim().toLowerCase();
+    if (!query) return;
 
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
-    document.getElementById("marketSection").style.display = "none";
 
-    document.getElementById("cropImage").src = `https://loremflickr.com/800/800/${input},agriculture,plant`;
-    document.getElementById("cropTitle").innerText = input;
+    document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${query},agriculture`;
+    document.getElementById("cropTitle").innerText = query;
 
     let html = "";
-    const data = expertBase[input] || expertBase[Object.keys(expertBase).find(k => expertBase[k].sw.toLowerCase() === input)];
+    
+    // A. Maelezo ya Kitaalamu (Spacing/Fertilizer)
+    const category = cropCategories[query] || "nafaka"; // Default kwenda nafaka kama halipo
+    const expert = cropExpertRules[category];
 
-    if (data) {
-        html += `<div class="guide-card"><h6>✅ MWONGOZO WA KITAALAMU</h6><ul>${data.guide.map(i => `<li>${i}</li>`).join('')}</ul></div>`;
-    }
+    html += `
+        <div class="guide-card">
+            <h6>✅ MWONGOZO WA KILIMO BORA (${query.toUpperCase()})</h6>
+            <p><b>Nafasi:</b> ${expert.spacing}</p>
+            <p><b>Mbolea:</b> ${expert.fertilizer}</p>
+            <p><b>Muda wa Kuvuna:</b> ${expert.harvest}</p>
+        </div>`;
 
+    // B. Wikipedia Fetch (Inatoa maelezo marefu ya kila zao kati ya 200+)
     try {
-        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(input)}`);
-        const wiki = await res.json();
-        if (wiki.extract) {
-            html += `<div class="guide-card" style="border-left-color: #0d6efd;"><h6>📖 MAELEZO YA KINA (RESEARCH)</h6><p>${wiki.extract}</p></div>`;
+        const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (data.extract) {
+            html += `<div class="guide-card" style="border-left-color: #0d6efd;"><h6>📖 HISTORIA NA MAELEZO MAREFU</h6><p>${data.extract}</p></div>`;
         }
     } catch (e) {}
 
-    html += `<div class="guide-card" style="border-left-color: #ffc107;"><h6>🛡️ USHAURI WA JUMLA</h6><p>Hakikisha unatumia mbegu zilizothibitishwa na TOSCI. Palilia shamba lako mapema ili kuzuia ushindani wa virutubisho kati ya zao na magugu.</p></div>`;
+    // C. KITUFE CHA WHATSAPP (Direct to You)
+    const msg = encodeURIComponent(`Habari Bwana Shamba, nimekwama kidogo kwenye kilimo cha ${query}. Naomba msaada.`);
+    html += `
+        <div class="mt-4 p-4 text-center rounded-4 border-dashed border-success border-2 bg-light">
+            <h6 class="fw-bold">Je, unahitaji msaada zaidi wa ${query}?</h6>
+            <a href="https://wa.me/${nambaYaBwanaShamba}?text=${msg}" target="_blank" class="btn btn-success btn-lg w-100 fw-bold shadow">
+                💬 CHAT NA BWANA SHAMBA (WhatsApp)
+            </a>
+        </div>`;
 
     document.getElementById("infoArea").innerHTML = html;
-    const yt = `https://www.youtube.com/results?search_query=kilimo+cha+${input}+tanzania`;
-    document.getElementById("videoArea").innerHTML = `<a href="${yt}" target="_blank" class="btn btn-danger w-100 fw-bold">📺 TAZAMA VIDEO ZA MAFUNZO</a>`;
+    
+    const yt = `https://www.youtube.com/results?search_query=kilimo+cha+${query}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `<a href="${yt}" target="_blank" class="btn btn-danger w-100 fw-bold py-2">📺 TAZAMA VIDEO ZA MAFUNZO</a>`;
 
     document.getElementById("loadingSpinner").style.display = "none";
     document.getElementById("cropCard").style.display = "flex";
