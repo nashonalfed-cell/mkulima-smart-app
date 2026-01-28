@@ -1,16 +1,52 @@
 {
-  "maize": {
-    "sw": {
-      "planting": "Panda nafasi ya 75cm x 25cm mwanzoni mwa mvua.",
-      "fertilizer": "Tumia DAP wakati wa kupanda na UREA mahindi yakiwa urefu wa goti.",
-      "harvest": "Vuna baada ya miezi 3-4 kulingana na mbegu."
-    }
-  },
-  "nyanya": {
-    "sw": {
-      "planting": "Panda kitaluni kwanza kisha hamishia shambani baada ya wiki 4.",
-      "fertilizer": "Tumia mbolea ya NPK na samadi iliyoiva vizuri.",
-      "harvest": "Huanza kuvunwa baada ya siku 75-90."
-    }
-  }
+  "maize": { "sw": { "planting": "Nafasi: 75cm x 25cm.", "fertilizer": "DAP na UREA.", "harvest": "Miezi 3-4." } },
+  "tomato": { "sw": { "planting": "Kitalu wiki 4, kisha 60cm x 45cm.", "fertilizer": "NPK na Samadi.", "harvest": "Siku 75." } },
+  "rice": { "sw": { "planting": "Nafasi 20cm x 20cm.", "fertilizer": "UREA na SA.", "harvest": "Miezi 4-5." } },
+  "beans": { "sw": { "planting": "Nafasi 50cm x 10cm.", "fertilizer": "DAP kidogo.", "harvest": "Siku 60-90." } },
+  "onion": { "sw": { "planting": "Kitalu kisha 15cm x 10cm.", "fertilizer": "CAN au UREA.", "harvest": "Miezi 3-4." } },
+  "cabbage": { "sw": { "planting": "Nafasi 60cm x 45cm.", "fertilizer": "Mbolea ya nitrojeni.", "harvest": "Siku 70-90." } },
+  "cassava": { "sw": { "planting": "Vipandikizi mita 1 x mita 1.", "fertilizer": "Samadi.", "harvest": "Miezi 9-12." } },
+  "potato": { "sw": { "planting": "Nafasi 30cm x 60cm.", "fertilizer": "NPK 10:20:10.", "harvest": "Miezi 3-4." } },
+  "watermelon": { "sw": { "planting": "Mita 2 x mita 2.", "fertilizer": "DAP na mbolea ya majani.", "harvest": "Siku 80-90." } },
+  "avocado": { "sw": { "planting": "Shimo mita 5 x mita 5.", "fertilizer": "Mbolea ya asili.", "harvest": "Miaka 3-4." } },
+  "pineapple": { "sw": { "planting": "Nafasi 30cm x 60cm x 90cm.", "fertilizer": "N (Nitrojeni).", "harvest": "Miezi 18-24." } },
+  "orange": { "sw": { "planting": "Mita 6 x mita 6.", "fertilizer": "NPK na Samadi.", "harvest": "Miaka 3-5." } },
+  "mango": { "sw": { "planting": "Mita 9 x mita 9.", "fertilizer": "DAP wakati wa kupanda.", "harvest": "Miaka 4-6." } },
+  "banana": { "sw": { "planting": "Mita 3 x mita 3.", "fertilizer": "Mbolea nyingi ya vunde.", "harvest": "Miezi 12-15." } },
+  "sunflower": { "sw": { "planting": "Nafasi 75cm x 30cm.", "fertilizer": "NPK au mbolea vunde.", "harvest": "Miezi 3-4." } },
+  "groundnuts": { "sw": { "planting": "Nafasi 30-45cm x 10-15cm.", "fertilizer": "Mbolea ya chokaa na P.", "harvest": "Miezi 3-4." } },
+  "carrot": { "sw": { "planting": "Mistari 20cm mbali.", "fertilizer": "Vunde.", "harvest": "Siku 70-80." } },
+  "garlic": { "sw": { "planting": "Nafasi 15cm x 10cm.", "fertilizer": "CAN.", "harvest": "Miezi 4-5." } },
+  "pepper": { "sw": { "planting": "Nafasi 50cm x 50cm.", "fertilizer": "Samadi na NPK.", "harvest": "Siku 70-90." } },
+  "ginger": { "sw": { "planting": "Nafasi 30cm x 20cm.", "fertilizer": "Samadi nyingi.", "harvest": "Miezi 8-10." } },
+  "coffee": { "sw": { "planting": "Mita 3 x mita 3.", "fertilizer": "NPK na Chokaa.", "harvest": "Miaka 3." } },
+  "tea": { "sw": { "planting": "Nafasi 1.2m x 0.75m.", "fertilizer": "NPK 25:5:5.", "harvest": "Miaka 2-3." } },
+  "cotton": { "sw": { "planting": "Nafasi 90cm x 40cm.", "fertilizer": "NPK na SA.", "harvest": "Miezi 5-6." } },
+  "sisal": { "sw": { "planting": "Nafasi mita 4 x 1 x 0.8.", "fertilizer": "Chokaa na N.", "harvest": "Miaka 2-3." } },
+  "cloves": { "sw": { "planting": "Mita 8 x mita 8.", "fertilizer": "Mbolea ya asili.", "harvest": "Miaka 4-6." } },
+  "eucalyptus": { "sw": { "planting": "Mita 3 x mita 3.", "fertilizer": "Mbolea kidogo mwanzoni.", "harvest": "Miaka 5-10." } },
+  "pine": { "sw": { "planting": "Mita 2.5 x mita 2.5.", "fertilizer": "Mbolea ya asili.", "harvest": "Miaka 15-20." } },
+  "teak": { "sw": { "planting": "Mita 3 x mita 3.", "fertilizer": "Nafasi kubwa na mwanga.", "harvest": "Miaka 20+." } },
+  "bamboo": { "sw": { "planting": "Mita 5 x mita 5.", "fertilizer": "Nitrojeni.", "harvest": "Miaka 3-5." } },
+  "sesame": { "sw": { "planting": "Nafasi 50cm x 10cm.", "fertilizer": "DAP na CAN.", "harvest": "Miezi 3-4." } },
+  "soybeans": { "sw": { "planting": "Nafasi 45cm x 10cm.", "fertilizer": "P (Phosphorus).", "harvest": "Miezi 3-4." } },
+  "pigeonpeas": { "sw": { "planting": "Nafasi 75cm x 50cm.", "fertilizer": "Haihitaji sana.", "harvest": "Miezi 6-9." } },
+  "cowpeas": { "sw": { "planting": "Nafasi 50cm x 20cm.", "fertilizer": "DAP.", "harvest": "Miezi 3-4." } },
+  "cucumber": { "sw": { "planting": "Nafasi 50cm x 50cm.", "fertilizer": "NPK.", "harvest": "Siku 50-60." } },
+  "eggplant": { "sw": { "planting": "Nafasi 60cm x 60cm.", "fertilizer": "Samadi.", "harvest": "Siku 70-90." } },
+  "okra": { "sw": { "planting": "Nafasi 60cm x 30cm.", "fertilizer": "NPK.", "harvest": "Siku 50-60." } },
+  "spinach": { "sw": { "planting": "Mistari 30cm.", "fertilizer": "Nitrojeni.", "harvest": "Siku 30-45." } },
+  "vanilla": { "sw": { "planting": "Mita 2.5 x mita 2.5.", "fertilizer": "Vunde na matandazo.", "harvest": "Miaka 3." } },
+  "cocoa": { "sw": { "planting": "Mita 3 x mita 3.", "fertilizer": "NPK.", "harvest": "Miaka 3-5." } },
+  "cashew": { "sw": { "planting": "Mita 12 x mita 12.", "fertilizer": "Mbolea ya asili.", "harvest": "Miaka 3-4." } },
+  "grapes": { "sw": { "planting": "Mita 3 x mita 1.5.", "fertilizer": "Potasiamu.", "harvest": "Miaka 2-3." } },
+  "lemon": { "sw": { "planting": "Mita 5 x mita 5.", "fertilizer": "Samadi.", "harvest": "Miaka 3-4." } },
+  "strawberry": { "sw": { "planting": "Nafasi 30cm x 30cm.", "fertilizer": "NPK.", "harvest": "Siku 60-90." } },
+  "papaya": { "sw": { "planting": "Mita 2 x mita 2.", "fertilizer": "Nitrojeni na Boron.", "harvest": "Miezi 9-12." } },
+  "wheat": { "sw": { "planting": "Mistari 20cm.", "fertilizer": "NPK.", "harvest": "Miezi 4-5." } },
+  "barley": { "sw": { "planting": "Mistari 20cm.", "fertilizer": "NPK.", "harvest": "Miezi 4-5." } },
+  "sorghum": { "sw": { "planting": "Nafasi 75cm x 20cm.", "fertilizer": "DAP/UREA.", "harvest": "Miezi 3-5." } },
+  "millet": { "sw": { "planting": "Nafasi 30cm x 15cm.", "fertilizer": "Samadi.", "harvest": "Miezi 3-4." } },
+  "coconut": { "sw": { "planting": "Mita 9 x mita 9.", "fertilizer": "Mbolea ya asili.", "harvest": "Miaka 5-7." } },
+  "apple": { "sw": { "planting": "Mita 4 x mita 4.", "fertilizer": "Chokaa na NPK.", "harvest": "Miaka 3-4." } }
 }
