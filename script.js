@@ -1,84 +1,115 @@
-// Database ya Ndani (Mazao yenye maelezo marefu)
+// 1. DATABASE KUBWA (Baadhi ya mazao muhimu yenye maelezo mengi)
 const cropsDataDB = {
     "maize": {
         "sw": {
-            "summary": "Mahindi ni zao muhimu la chakula. Hustawi katika maeneo yenye mvua ya kutosha na joto la wastani.",
+            "summary": "Mahindi ni zao muhimu la chakula. Hustawi katika maeneo mengi ya Tanzania.",
             "details": [
-                "🌱 <b>Upandaji:</b> Tumia nafasi ya 75cm x 25cm kwa mbegu moja kwa kila shimo. Kina cha shimo kiwe 5cm hivi.",
-                "🌦️ <b>Hali ya Hewa:</b> Inahitaji joto la 18°C - 30°C. Udongo uwe na rutuba na usiojiandaa maji.",
-                "🧪 <b>Mbolea:</b> Weka mbolea ya DAP (mfuko 1 kwa ekari) wakati wa kupanda. Weka UREA mahindi yakiwa urefu wa goti.",
-                "🐛 <b>Wadudu:</b> Shambuliaji mkuu ni Funza wa Mahindi. Tumia viuadudu kama 'Belt' au 'Vantex' mapema.",
-                "🌾 <b>Uvunaji:</b> Vuna mahindi yakikauka vizuri (unyevu chini ya 13%) kuzuia sumu kuvu."
+                "🌱 <b>Upandaji:</b> Nafasi: 75cm x 25cm. Tumia mbegu bora kama SC403 au nyingine kulingana na eneo.",
+                "🧪 <b>Mbolea:</b> DAP wakati wa kupanda (mfuko 1/ekari). UREA wakati mahindi yana urefu wa goti.",
+                "🐛 <b>Wadudu:</b> Funza wa mahindi ni hatari. Tumia dawa kama Belt, Vantex au Ema-Mectin.",
+                "🌾 <b>Uvunaji:</b> Vuna yakikauka vizuri. Hakikisha unyevu uko chini ya 13% kuzuia sumu kuvu."
             ]
         }
     },
     "tomato": {
         "sw": {
-            "summary": "Nyanya ni zao la mbogamboga lenye faida kubwa lakini linahitaji uangalizi wa hali ya juu.",
+            "summary": "Nyanya ni zao la biashara lenye faida kubwa.",
             "details": [
-                "🌱 <b>Upandaji:</b> Anza kitaluni kwa wiki 4. Hamishia shambani kwa nafasi ya 60cm x 45cm.",
-                "🧪 <b>Mbolea:</b> Tumia samadi iliyoiva vizuri na mbolea ya NPK (17:17:17) wakati wa maua.",
-                "🦟 <b>Magonjwa:</b> Kanitangaze na Mnyauko Bakteria ni hatari sana. Badilisha mazao kila msimu.",
-                "🍅 <b>Uvunaji:</b> Vuna kulingana na umbali wa soko; nyekundu kabisa kwa soko la jirani."
-            ]
-        }
-    },
-    "rice": {
-        "sw": {
-            "summary": "Mpunga ni zao la biashara na chakula linalostawi maeneo ya mabondeni yenye maji.",
-            "details": [
-                "🌱 <b>Upandaji:</b> Tumia mfumo wa SRI kwa matokeo bora. Nafasi ni 20cm x 20cm.",
-                "🧪 <b>Mbolea:</b> Tumia mbolea ya kukuzia (UREA) katika awamu mbili; siku 21 na siku 45 baada ya kupanda.",
-                "🌾 <b>Uvunaji:</b> Vuna asilimia 80 ya mashuke yakiwa yamegeuka rangi kuwa manjano."
+                "🌱 <b>Upandaji:</b> Kitalu wiki 4. Shambani nafasi 60cm x 45cm. Hakikisha unatumia kigingi (staking).",
+                "🧪 <b>Mbolea:</b> Samadi iliyoiva vizuri na NPK (17:17:17) wakati wa maua na matunda.",
+                "🦟 <b>Changamoto:</b> Kanitangaze (Tuta Absoluta) na Mnyauko. Nyunyizia dawa za ukungu kila wiki msimu wa mvua.",
+                "🍅 <b>Uvunaji:</b> Vuna matunda yanapoanza kugeuka rangi kuwa pinki/nyekundu."
             ]
         }
     }
-    // Unaweza kuongeza mazao mengine hapa kwa kufuata muundo huu...
+    // Unaweza kuongeza mazao mengine hapa kwa kufuata mfumo huu huu
 };
 
-const cropAlias = {
-    "mahindi": "maize", "nyanya": "tomato", "mpunga": "rice", "maharage": "beans",
-    "kitunguu": "onion", "tikiti": "watermelon", "parachichi": "avocado"
-};
+const cropAlias = { "mahindi": "maize", "nyanya": "tomato", "mpunga": "rice", "maharage": "beans", "alizeti": "sunflower" };
 
+// 2. AI IMAGE SCANNER LOGIC
+let net;
+async function loadAI() {
+    console.log("AI inajiandaa...");
+    net = await mobilenet.load();
+    console.log("AI ipo tayari!");
+}
+loadAI();
+
+document.getElementById('imageUpload').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        const img = document.getElementById('previewImg');
+        img.src = event.target.result;
+        document.getElementById('imagePreviewContainer').style.display = 'block';
+        document.getElementById('scanResult').innerHTML = "<span class='text-muted'>AI inasoma picha...</span>";
+
+        img.onload = async () => {
+            const result = await net.classify(img);
+            processScanResult(result);
+        };
+    };
+    reader.readAsDataURL(file);
+});
+
+function processScanResult(data) {
+    const top = data[0]; // Jibu la kwanza
+    let name = top.className.toLowerCase();
+    let prob = Math.round(top.probability * 100);
+    
+    let diagnosis = "Zao linaonekana kuwa na afya.";
+    if(name.includes('spot') || name.includes('brown') || name.includes('yellow')) {
+        diagnosis = "Tahadhari: Dalili za ugonjwa wa madoa au ukungu zimeonekana.";
+    }
+
+    document.getElementById('scanResult').innerHTML = `
+        <div class="alert alert-success mt-2">
+            Zao: <b>${name}</b> (${prob}%)<br>
+            Hali: <b>${diagnosis}</b>
+        </div>
+    `;
+}
+
+// 3. SEARCH LOGIC
 async function generateData() {
     let userInput = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!userInput) return alert("Andika zao!");
+    if (!userInput) return alert("Andika jina la zao!");
 
     let searchKey = cropAlias[userInput] || userInput;
 
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
 
-    // Picha ya Automatic
     document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${searchKey},agriculture,plant`;
     document.getElementById("cropTitle").innerText = userInput;
 
-    let contentHtml = "";
+    let html = "";
     const local = cropsDataDB[searchKey] ? cropsDataDB[searchKey]["sw"] : null;
-
+    
     if (local) {
-        contentHtml += `<p class="lead"><em>${local.summary}</em></p>`;
-        local.details.forEach(item => {
-            contentHtml += `<div class="detail-box">${item}</div>`;
+        html += `<p class="lead"><em>${local.summary}</em></p>`;
+        local.details.forEach(d => {
+            html += `<div class="detail-item">${d}</div>`;
         });
     }
 
-    const infoDiv = document.getElementById("wikiInfo");
-    infoDiv.innerHTML = contentHtml || "<em>Inapakia maelezo zaidi kutoka mtandaoni...</em>";
+    // Wiki Nyongeza
+    const infoArea = document.getElementById("infoArea");
+    infoArea.innerHTML = html;
 
-    // Vuta Wikipedia kama nyongeza
     try {
         const res = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(userInput)}`);
-        const data = await res.json();
-        if (data.extract) {
-            infoDiv.innerHTML += `<div class="mt-4"><h6>📖 Maelezo ya Ziada:</h6><p class="small">${data.extract}</p></div>`;
+        const wiki = await res.json();
+        if (wiki.extract) {
+            infoArea.innerHTML += `<div class="mt-4"><h6>📖 Maelezo ya Ziada (Wikipedia):</h6><p class="small">${wiki.extract}</p></div>`;
         }
-    } catch (e) { console.log("Wiki error"); }
+    } catch (e) {}
 
-    // Video Area
-    const ytLink = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${userInput}`;
-    document.getElementById("videoArea").innerHTML = `<a href="${ytLink}" target="_blank" class="btn btn-danger w-100 fw-bold">📺 TAZAMA VIDEO ZA MAFUNZO YA ${userInput.toUpperCase()}</a>`;
+    const yt = `https://www.youtube.com/results?search_query=kilimo+cha+${userInput}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `<a href="${yt}" target="_blank" class="btn btn-danger w-100 fw-bold">📺 TAZAMA VIDEO ZA MAFUNZO</a>`;
 
     document.getElementById("loadingSpinner").style.display = "none";
     document.getElementById("cropCard").style.display = "flex";
@@ -86,18 +117,13 @@ async function generateData() {
 
 async function askAI() {
     const q = document.getElementById("aiQuestion").value;
-    if (!q) return;
-    const aiBox = document.getElementById("aiAnswer");
-    const aiText = document.getElementById("aiText");
-
-    aiBox.style.display = "block";
-    aiText.innerHTML = "<em>🤖 AI inafikiria...</em>";
-
+    if(!q) return;
+    document.getElementById("aiAnswer").style.display = "block";
+    document.getElementById("aiText").innerText = "AI inatafuta jibu la kitaalamu...";
+    
     try {
-        const res = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(q)}+farming&format=json&no_html=1`);
+        const res = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(q)}+agriculture&format=json&no_html=1`);
         const data = await res.json();
-        aiText.innerText = data.AbstractText || "Samahani, sijaweza kupata jibu la ziada. Jaribu kuuliza tofauti.";
-    } catch (e) {
-        aiText.innerText = "Hitilafu ya mtandao.";
-    }
+        document.getElementById("aiText").innerText = data.AbstractText || "Samahani, jaribu kuuliza kwa maneno mepesi zaidi kuhusu kilimo.";
+    } catch (e) { document.getElementById("aiText").innerText = "Hitilafu ya mtandao."; }
 }
