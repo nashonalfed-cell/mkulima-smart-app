@@ -1,11 +1,11 @@
 /**
- * MKULIMA SMART AI - THE MASTER ENGINE
+ * MKULIMA SMART AI - FULL FINAL VERSION
  * Bwana Shamba: +255797818582
  */
 
 const nambaYaBwanaShamba = "255797818582";
 
-// 1. BEI ZA MASOKO
+// 1. BEI ZA MASOKO (IMERUDISHWA)
 const marketData = [
     {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑"},
     {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -"},
@@ -21,7 +21,7 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. 📸 AI VISUAL SCANNER (INSTANT SPEED)
+// 2. 📸 AI VISUAL SCANNER (HARAKA + MAJIBU MATATU)
 let net;
 async function startAI() { 
     if (!net) net = await mobilenet.load(); 
@@ -61,7 +61,7 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
     }
 });
 
-// 3. 🧪 SOIL TEST LOGIC
+// 3. 🧪 SOIL TEST (HAIJAGUSWA)
 function testSoil() {
     const color = document.getElementById('soilColor').value;
     const res = document.getElementById('soilResult');
@@ -70,7 +70,7 @@ function testSoil() {
     res.innerHTML = `<strong>Ushauri:</strong> ${msg}`;
 }
 
-// 4. 🔍 SEARCH MAZAO (MAELEZO MENGI + YOUTUBE)
+// 4. 🔍 SEARCH MAZAO (MAELEZO MAREFU + VIDEO YOUTUBE)
 async function generateData() {
     const query = document.getElementById("userCrop").value.trim().toLowerCase();
     if (!query) return;
@@ -83,6 +83,41 @@ async function generateData() {
     let detailedGuide = `
         <div class="mt-3">
             <h5 class="fw-bold text-success border-bottom pb-2">🌱 MWONGOZO WA KILIMO: ${query.toUpperCase()}</h5>
-            <div class="mb-3 mt-3"><h6><b>1. Maandalizi:</b></h6><p>Lima shamba mapema kwa kina kizuri na ponda udongo uwe laini.</p></div>
-            <div class="mb-3"><h6><b>2. Mbegu:</b></h6><p>Tumia mbegu bora zilizothibitishwa kwa mavuno mengi.</p></div>
-            <div class="mb-3"><h6><b>3. Mbolea:</b></h6><p>Weka mbolea ya kupandia wakati wa kupanda na ya kukuzia wiki 4 baadaye.</p>
+            <div class="mb-3 mt-3"><h6><b>1. Maandalizi ya Shamba:</b></h6><p>Lima shamba mapema na uandae udongo uwe na mchanganyiko mzuri wa hewa na unyevu.</p></div>
+            <div class="mb-3"><h6><b>2. Mbegu:</b></h6><p>Tumia mbegu bora zilizoidhinishwa kwa ajili ya hali ya hewa ya eneo lako.</p></div>
+            <div class="mb-3"><h6><b>3. Mbolea:</b></h6><p>Weka mbolea ya msingi (DAP/Minjingu) wakati wa kupanda na ya kukuzia (UREA/CAN) wiki chache baada ya kuota.</p></div>
+            <div class="mb-3"><h6><b>4. Udhibiti wa Wadudu:</b></h6><p>Kagua shamba mara kwa mara ili kubaini wadudu na magonjwa mapema.</p></div>
+        </div>`;
+
+    try {
+        const response = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
+        const data = await response.json();
+        if (data.extract) {
+            detailedGuide += `<div class="p-3 border-start border-4 border-primary mt-3 bg-white shadow-sm rounded">
+                <h6 class="fw-bold text-primary">📖 Elimu Zaidi:</h6><p class="small">${data.extract}</p></div>`;
+        }
+    } catch (e) { }
+
+    // WhatsApp Button
+    const waMsg = encodeURIComponent(`Habari Bwana Shamba, nahitaji msaada wa ziada kuhusu ${query.toUpperCase()}`);
+    detailedGuide += `<div class="mt-4"><a href="https://wa.me/${nambaYaBwanaShamba}?text=${waMsg}" target="_blank" class="btn btn-success w-100 fw-bold">💬 CHAT NA BWANA SHAMBA</a></div>`;
+
+    document.getElementById("infoArea").innerHTML = detailedGuide;
+
+    // 📺 SEHEMU YA VIDEO (IMERUDISHWA)
+    const ytUrl = `https://www.youtube.com/results?search_query=kilimo+cha+${query}+tanzania`;
+    document.getElementById("videoArea").innerHTML = `
+        <div class="mt-4">
+            <h6 class="fw-bold text-danger">📺 Mafunzo ya Video:</h6>
+            <a href="${ytUrl}" target="_blank" class="btn btn-danger w-100 fw-bold shadow-sm">TAZAMA VIDEO ZA ${query.toUpperCase()}</a>
+        </div>`;
+
+    document.getElementById("loadingSpinner").style.display = "none";
+    document.getElementById("cropCard").style.display = "flex";
+}
+
+// Start kila kitu wakati app inafunguka
+window.onload = () => { 
+    loadMarket(); 
+    startAI(); 
+};
