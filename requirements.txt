@@ -1,1 +1,2 @@
-stremlit
+streamlit
+requests
