@@ -1,7 +1,7 @@
 /**
- * MKULIMA SMART AI - FULL COMPREHENSIVE SCRIPT
+ * MKULIMA SMART AI - FINAL STABLE VERSION
  * Developer: Nashon Alfred
- * Features: Chat, Scanner, Soil, Market, Wiki, WhatsApp Integration
+ * Features: WhatsApp Integration, AI Chat, Scanner, Soil Test, Market Prices
  */
 
 const GEMINI_API_KEY = "AIzaSyB3R_geIR-seSQ0eQZ65DCVpGxeUHJkT5I";
@@ -24,7 +24,7 @@ function loadMarket() {
     if (table) table.innerHTML = rows;
 }
 
-// 2. AI SCANNER
+// 2. AI SCANNER (TensorFlow)
 let net;
 async function startAI() { 
     try { 
@@ -70,7 +70,7 @@ async function generateData() {
     document.getElementById("cropCard").style.display = "flex";
 }
 
-// 5. 💬 GEMINI CHAT & WHATSAPP REDIRECT
+// 5. 💬 AI CHAT NA WHATSAPP BUTTON (FIXED URL)
 async function askAI() {
     const input = document.getElementById("chatInput");
     const windowChat = document.getElementById("chatWindow");
@@ -85,24 +85,27 @@ async function askAI() {
     windowChat.scrollTop = windowChat.scrollHeight;
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        // MABADILIKO: Tumetumia v1beta kwa ajili ya gemini-1.5-flash
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }] }] })
+            body: JSON.stringify({ contents: [{ parts: [{ text: `Wewe ni mtaalamu wa kilimo (Bwana Shamba) Tanzania. Jibu kwa Kiswahili fasaha: ${msg}` }] }] })
         });
 
         const data = await response.json();
+        
         if (data.candidates && data.candidates[0].content) {
             const aiText = data.candidates[0].content.parts[0].text;
-            // Ongeza button ya WhatsApp ndani ya jibu la AI
-            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari, nina swali kuhusu: ${msg}" class="btn btn-sm btn-success">Ongea na Bwana Shamba WhatsApp</a>`;
+            
+            // Button ya WhatsApp
+            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari Nashon, nina swali kuhusu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">Ongea na Bwana Shamba WhatsApp</a>`;
+            
             document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiText} ${waButton}</span>`;
         } else {
-            document.getElementById(loadingId).innerHTML = `<span class="text-danger">Kosa la Google: ${data.error ? data.error.message : "Jaribu tena."}</span>`;
+            document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Kosa: ${data.error ? data.error.message : "Jaribu tena."}</span>`;
         }
     } catch (err) {
-        document.getElementById(loadingId).innerHTML = `<span class="text-danger">Hitilafu: Jaribu kufungua kwenye Chrome au Refresh ukurasa.</span>`;
-        console.error("Fetch Error:", err);
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Hitilafu: Angalia kama internet imewaka.</span>`;
     }
     windowChat.scrollTop = windowChat.scrollHeight;
 }
