@@ -38,5 +38,705 @@
   "pilipili": {
     "picha": "https://images.unsplash.com/photo-1588252390731-ca91ac1f9bc1?auto=format&fit=crop&w=800",
     "maelezo": "<b>Pilipili Hoho:</b> Zinahitaji uangalizi dhidi ya wadudu wanaofyonza majani. <br><b>Ushauri:</b> Tumia neti (Greenhouse) kama una uwezo ili kupata mazao bora zaidi yasiyo na madoa."
+  },
+  "ngano": {
+    "picha": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Ngano:</b> Hustawi vizuri maeneo yenye baridi na miinuko. <br><b>Ushauri:</b> Panda wakati wa mvua za kwanza (Machi/Aprili kwa kanda ya kaskazini). Hakikisha unadhibiti magonjwa ya ukungu (Rusts) na tumia mbolea ya DAP wakati wa kupanda kwa ajili ya mizizi imara."
+  },
+"mtama": {
+    "picha": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mtama:</b> Ni zao la nafaka linalohimili ukame na joto kali kuliko mahindi. <br><b>Ushauri:</b> Panda wakati wa mvua za kwanza kwa kutumia nafasi ya 60cm kwa 20cm. Hakikisha unadhibiti ndege wakati wa kukomaa na tumia mbolea ya kukuzia ili kuongeza ukubwa wa mashuke."
+  },
+  "uwele": {
+    "picha": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Uwele:</b> Ni zao linalostahimili ukame mkali na hali ngumu ya hewa. <br><b>Ushauri:</b> Panda kwenye udongo wa mchanga unaopitisha maji kwa urahisi. Hakikisha unapanda kwa nafasi ya 45cm kwa 15cm na palilia mapema ili kuzuia magugu yanayoweza kudumaza mmea."
+  },
+  "oats": {
+    "picha": "https://images.unsplash.com/photo-1599021456807-25db0f970724?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Oats (Oti):</b> Hustawi vizuri kwenye maeneo ya miinuko yenye baridi na mvua za kutosha. <br><b>Ushauri:</b> Inahitaji udongo unaopitisha maji vizuri. Inatumika sana kama chakula chenye nyuzinyuzi nyingi (fiber) na ni bora kwa lishe ya mifugo. Panda kwa kutumia mbolea ya DAP na hakikisha unadhibiti magugu mapema."
+  },
+  "rhye": {
+    "picha": "https://images.unsplash.com/photo-1531081190477-80252327b738?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Rhye (Rai):</b> Ni zao imara sana linalostahimili baridi kali na udongo wenye asidi. <br><b>Ushauri:</b> Hutumika sana kutengeneza unga wa mkate mweusi na vinywaji. Panda kwa nafasi kama ya ngano na hakikisha udongo unapitisha maji vizuri ili kuzuia magonjwa ya mizizi."
+  },
+  "triclticle": {
+    "picha": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Triticale:</b> Ni zao chotara lililounganishwa kutoka kwenye ngano na rai ili kustahimili magonjwa na udongo wenye rutuba kidogo. <br><b>Ushauri:</b> Hustawi vizuri maeneo ya miinuko. Inatoa mavuno mengi ya nafaka na pia majani yake ni bora sana kwa ajili ya kulishia mifugo (silage)."
+  },
+  "fonio": {
+    "picha": "https://images.unsplash.com/photo-1509473302766-34aa4bf3f581?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Fonio:</b> Ni nafaka ya asili ya Afrika inayostahimili ukame na kukua haraka sana (ndani ya miezi miwili). <br><b>Ushauri:</b> Haihitaji mbolea nyingi na hustawi hata kwenye udongo duni au wa kichanga. Ni muhimu sana kwa afya kwa sababu haina gluten na ina virutubisho vingi vya asili."
+  },
+  "maharage": {
+    "picha": "https://images.unsplash.com/photo-1551462147-ff29053fad31?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Maharage:</b> Ni chanzo kizuri cha protini na hustawi vizuri kwenye udongo usiotuamisha maji. <br><b>Ushauri:</b> Panda kwa nafasi ya 50cm kwa 10cm au 50cm kwa 20cm kulingana na aina ya mbegu. Hakikisha unadhibiti wadudu kama 'aphids' na magonjwa ya ukungu wakati wa maua ili kupata mavuno mengi."
+  },
+  "dengu": {
+    "picha": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Dengu:</b> Ni zao linalohimili ukame na hustawi vizuri kwenye unyevu wa akiba ardhini baada ya mvua kukata. <br><b>Ushauri:</b> Panda wakati udongo bado una unyevu (mwishoni mwa msimu wa mvua). Inahitaji udongo usiotuamisha maji na udhibiti wa wadudu waharibifu kama 'pod borers' wakati wa kutoa maua na matunda."
+  },
+  "choroko": {
+    "picha": "https://images.unsplash.com/photo-1547496613-4e193f038141?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Choroko:</b> Ni zao linalostahimili ukame na hustawi vizuri kwenye udongo wa kichanga au kichanga-tifutifu. <br><b>Ushauri:</b> Panda kwa nafasi ya 45cm kwa 15cm. Hakikisha unavuna mara tu maganda yanapobadilika rangi na kuwa meusi ili kuzuia yasipasuke na kupoteza mbegu shambani."
+  },
+  "njegere": {
+    "picha": "https://images.unsplash.com/photo-1587996537445-bc09307779f4?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Njegere:</b> Hustawi vizuri maeneo yenye hali ya hewa ya baridi na unyevu wa kutosha. <br><b>Ushauri:</b> Panda kwenye udongo wenye rutuba na usiotuamisha maji. Kwa aina za njegere ndefu, hakikisha unaweka vifito (stakes) ili mmea uweze kutambaa na kutoa maganda mengi zaidi."
+  },
+  "kunde": {
+    "picha": "https://images.unsplash.com/photo-1599595229023-99933069c9b4?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kunde:</b> Ni zao linalostahimili ukame na hustawi kwenye udongo wa aina nyingi. <br><b>Ushauri:</b> Zaidi ya mbegu, majani yake ni mboga nzuri sana. Hakikisha unadhibiti wadudu (thrips) wanaoshambulia maua ili upate maganda mengi."
+  },
+  "soya": {
+    "picha": "https://images.unsplash.com/photo-1582234306487-06d9fd199d22?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Soya:</b> Zao la biashara lenye protini nyingi na mafuta. <br><b>Ushauri:</b> Inahitaji mbolea ya Phosphorus na udongo usio na asidi nyingi. Hakikisha unatumia mbegu bora zinazoendana na hali ya hewa ya eneo lako."
+  },
+  "mbaazi": {
+    "picha": "https://images.unsplash.com/photo-1604153063462-236780702d73?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mbaazi:</b> Zao linalovumilia ukame na linaweza kukua kwa msimu mrefu. <br><b>Ushauri:</b> Ni nzuri kwa kuboresha udongo (nitrogen fixation). Panda kwa nafasi kubwa kwa sababu mmea huu hupanuka na kuwa kama kichaka."
+  },
+  "lentilis": {
+    "picha": "https://images.unsplash.com/photo-1547496613-4e193f038141?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Lentils (Dengu ndogo):</b> Hustawi vizuri maeneo yenye baridi kiasi na udongo unaopitisha maji. <br><b>Ushauri:</b> Hazihitaji maji mengi sana. Hakikisha shamba lina paliliwa mapema kwa sababu mimea yake ni midogo na inaweza kuzidiwa na magugu kwa urahisi."
+  },
+  "lupin": {
+    "picha": "https://images.unsplash.com/photo-1508610332882-720875953051?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Lupin (Lupini):</b> Zao la mikunde linalostahimili hali ya hewa ya baridi na udongo wenye asidi. <br><b>Ushauri:</b> Hutumika sana kama chakula cha mifugo na pia kuboresha rutuba ya shamba. Hakikisha unatumia aina ambazo si chungu (sweet lupins) kwa matumizi ya chakula."
+  },
+  "muhogo": {
+    "picha": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Muhogo:</b> Ni zao linalostahimili ukame na hustawi kwenye udongo wa aina mbalimbali. <br><b>Ushauri:</b> Tumia mashina bora yasiyo na magonjwa ya kuberu. Hakikisha unachimba mashimo yenye kina cha kutosha ili mizizi ipate nafasi ya kutanuka vizuri."
+  },
+  "viazi vitamu": {
+    "picha": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Viazi Vitamu:</b> Hustawi vizuri kwenye udongo wa tifutifu na huchukua muda mfupi kukomaa. <br><b>Ushauri:</b> Panda kwenye matuta ili kuruhusu viazi kukua kwa urahisi. Aina ya viazi vya njano (orange-fleshed) vina vitamini A kwa wingi."
+  },
+  "viazi mviringo": {
+    "picha": "https://images.unsplash.com/photo-1518977676601-b53f02bad67b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Viazi Mviringo:</b> Hustawi maeneo yenye baridi na udongo wenye rutuba ya kutosha. <br><b>Ushauri:</b> Hakikisha unatumia mbegu safi na dhibiti ugonjwa wa ukungu (blight) kwa kupiga dawa mapema kabla ya mvua kuzidi."
+  },
+  "magimbi": {
+    "picha": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Magimbi (Taro):</b> Hustawi vizuri maeneo yenye unyevu mwingi au mabondeni. <br><b>Ushauri:</b> Yanahitaji maji ya kutosha wakati wote wa ukuaji. Hakikisha shamba lina rutuba ya asili ili kupata magimbi makubwa na laini."
+  },
+  "viazi vikuu": {
+    "picha": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Viazi Vikuu (Yams):</b> Ni zao la chakula lenye asili ya nishati nyingi. <br><b>Ushauri:</b> Yanahitaji udongo wa ndani na wenye mifereji ya maji. Mara nyingi yanahitaji miti ya kuegemea (staking) ili majani yapate mwanga wa jua."
+  },
+  "arrowroot": {
+    "picha": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Arrowroot (Nduma):</b> Hustawi kando kando ya vyanzo vya maji au maeneo yenye unyevu wa kudumu. <br><b>Ushauri:</b> Ni zao bora kwa afya ya mfumo wa mmeng'enyo wa chakula. Hakikisha unatumia mbolea ya samadi kuboresha udongo."
+  },
+  "kisamvu": {
+    "picha": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kisamvu (Cassava Leaves):</b> Ni mboga inayopendwa sana na yenye virutubisho vingi. <br><b>Ushauri:</b> Chuma majani machanga kwa ajili ya mboga bora. Epuka kuchuma majani mengi kupita kiasi ili usidumishe ukuaji wa muhogo wenyewe."
+  },
+  "beetroot": {
+    "picha": "https://images.unsplash.com/photo-1585559604118-202979203923?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Beetroot:</b> Ni zao la mbogamboga linalosaidia kuongeza damu na madini mwilini. <br><b>Ushauri:</b> Hustawi vizuri kwenye udongo baridi na tifutifu. Hakikisha unapata maji ya kutosha ili kuzuia mizizi kuwa migumu au yenye nyuzinyuzi."
+  },
+  "turnip": {
+    "picha": "https://images.unsplash.com/photo-1585559604118-202979203923?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Turnip:</b> Ni zao la mizizi linaloliwa kama mboga au saladi. <br><b>Ushauri:</b> Inakua haraka na inahitaji hali ya hewa ya ubaridi. Panda kwa nafasi ndogo na uvune yakiwa bado machanga kwa ladha bora."
+  },
+  "mchicha": {
+    "picha": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mchicha:</b> Ni mboga inayokua haraka na inayopendwa sana nchini. <br><b>Ushauri:</b> Inahitaji maji mengi na mbolea ya kukuzia (Nitrogen) ili kutoa majani mapana na yenye rangi nzuri ya kijani. Unaweza kuvuna baada ya wiki 3 hadi 4."
+  },
+  "spinach": {
+    "picha": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Spinachi:</b> Hustawi vizuri zaidi maeneo yenye ubaridi. <br><b>Ushauri:</b> Hakikisha udongo una rutuba ya kutosha na unyevu wa kudumu. Ni muhimu kwa kuongeza madini ya chuma mwilini."
+  },
+  "kabichi": {
+    "picha": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kabichi:</b> Hustawi vizuri kwenye udongo wenye rutuba na unaohifadhi unyevu. <br><b>Ushauri:</b> Dhibiti wadudu (diamondback moth) kwa kupiga dawa mapema. Hakikisha unapanda kwa nafasi ya 60cm kwa 60cm ili vichwa vutanuke vizuri."
+  },
+  "chinese cabbage": {
+    "picha": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Chinese Cabbage:</b> Ni aina ya kabichi inayokua haraka na yenye majani laini. <br><b>Ushauri:</b> Inahitaji unyevu mwingi na udongo usiotuamisha maji. Ni nzuri sana kwa kutengeneza saladi au kupika kwa muda mfupi."
+  },
+  "lettuce": {
+    "picha": "https://images.unsplash.com/photo-1622206141845-369406560965?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Lettuce (Saladi):</b> Hustawi vizuri kwenye hali ya hewa ya ubaridi. <br><b>Ushauri:</b> Epuka jua kali sana ambalo linaweza kufanya majani yawe machungu. Mwagia maji asubuhi na jioni ili yawe na unyevu na ulaini."
+  },
+  "majani ya maboga": {
+    "picha": "https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Majani ya Maboga (Matembele):</b> Ni mboga yenye virutubisho vingi na inayopatikana kwa urahisi. <br><b>Ushauri:</b> Chuma majani machanga na epuka kuchuma mengi kutoka kwenye mmea mmoja ili usizuie ukuaji wa boga lenyewe."
+  },
+  "dodo": {
+    "picha": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Dodo:</b> Ni aina ya mchicha wenye majani makubwa na imara zaidi. <br><b>Ushauri:</b> Hustahimili magonjwa mengi ya mbogamboga. Hakikisha shamba lina mbolea ya samadi kwa wingi ili kupata mavuno bora."
+  },
+  "sukuma wiki": {
+    "picha": "https://images.unsplash.com/photo-1524179524662-136bb0432ddf?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Sukuma Wiki:</b> Ni mboga inayolimwa na kuliwa kwa wingi zaidi Afrika Mashariki. <br><b>Ushauri:</b> Hakikisha unapunguza majani ya chini ili kuruhusu mmea kukua kwenda juu. Inahitaji maji na mbolea ya mkojo wa sungura au samadi kwa matokeo mazuri."
+  },
+  "kale": {
+    "picha": "https://images.unsplash.com/photo-1524179524662-136bb0432ddf?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kale:</b> Inafanana na sukuma wiki lakini ina majani yenye mikunjo na virutubisho vingi zaidi (Superfood). <br><b>Ushauri:</b> Inastahimili baridi na inaweza kuvunwa kwa muda mrefu. Hakikisha unadhibiti wadudu (aphids) ambao hupenda kujificha kwenye mikunjo ya majani."
+  },
+  "nyanya": {
+    "picha": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Nyanya:</b> Ni zao la kibiashara linalohitaji uangalizi wa karibu. <br><b>Ushauri:</b> Hakikisha unapiga dawa za kuzuia ukungu (Fungicides) na wadudu (Tuta Absoluta). Inastawi vizuri kwenye hali ya hewa ya joto kiasi na maji ya kutosha."
+  },
+  "kitunguu": {
+    "picha": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kitunguu Maji:</b> Kinahitaji udongo wenye rutuba na usiotuamisha maji. <br><b>Ushauri:</b> Punguza kumwagilia maji wiki mbili kabla ya kuvuna ili kusaidia vitunguu kukauka vizuri na kukaa muda mrefu bila kuoza."
+  },
+  "kitunguu saumu": {
+    "picha": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kitunguu Saumu:</b> Hustawi vizuri maeneo yenye baridi kiasi (kama Arusha). <br><b>Ushauri:</b> Panda punje moja moja kwa nafasi ya 10cm. Inahitaji muda mrefu kidogo kukomaa (miezi 4-6) lakini ina soko zuri sana."
+  },
+  "hoho": {
+    "picha": "https://images.unsplash.com/photo-1563565038-a533af3daad7?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pilipili Hoho:</b> Zinahitaji udongo wenye rutuba na mbolea ya samadi kwa wingi. <br><b>Ushauri:</b> Dhibiti wadudu wanaofyonza majani (Aphids/Thrips). Ukipanda kwenye Greenhouse, utapata mazao bora na mengi zaidi."
+  },
+  "bamia": {
+    "picha": "https://images.unsplash.com/photo-1464454709131-ffd692591ee5?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Bamia:</b> Ni zao linalopenda hali ya hewa ya joto. <br><b>Ushauri:</b> Loweka mbegu kwenye maji kwa saa 24 kabla ya kupanda ili kuharakisha uotaji. Vuna bamia zikiwa bado changa ili ziwe laini."
+  },
+  "tango": {
+    "picha": "https://images.unsplash.com/photo-1449300079323-02e209d9d020?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tango:</b> Ni zao linalokua haraka na linahitaji maji mengi. <br><b>Ushauri:</b> Hakikisha unaweka miti au kamba za kupanda (trellising) ili matunda yasiguse ardhi na kuoza. Inahitaji mbolea ya Booster wakati wa maua."
+  },
+  "biringanya": {
+    "picha": "https://images.unsplash.com/photo-1615484477201-9f495c169fab?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Biringanya (Eggplant):</b> Ni zao imara linalozalisha kwa muda mrefu. <br><b>Ushauri:</b> Panda kwa nafasi ya 60cm kwa 90cm. Hakikisha unadhibiti wadudu wanaotoboa matunda mapema."
+  },
+  "boga": {
+    "picha": "https://images.unsplash.com/photo-1506806732259-39c2d4468673?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Boga:</b> Ni zao linalotambaa na kuhitaji eneo kubwa. <br><b>Ushauri:</b> Ni zao rahisi kutunza. Unaweza kupanda katikati ya mahindi (intercropping). Mazao yake (boga, mbegu, na majani) yote yanaliwa."
+  },
+  "zucchini": {
+    "picha": "https://images.unsplash.com/photo-1503146234394-6312006759bb?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Zucchini:</b> Inafanana na boga lakini inakua kama kichaka (haisambai sana). <br><b>Ushauri:</b> Vuna matunda yakiwa na urefu wa nchi 6-8 kwa ladha bora. Inahitaji unyevu wa kudumu kwenye udongo."
+  },
+  "pilipili kali": {
+    "picha": "https://images.unsplash.com/photo-1588252390731-ca91ac1f9bc1?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pilipili Kali:</b> Hustawi vizuri maeneo ya joto. <br><b>Ushauri:</b> Inavumilia hali ngumu ya hewa kuliko hoho. Hakikisha unavuna mara kwa mara ili kuchochea mmea kutoa maua na pilipili mpya."
+  },
+  "ndizi": {
+    "picha": "https://images.unsplash.com/photo-1571771894821-ad9902412746?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Ndizi:</b> Hustawi vizuri maeneo yenye mvua nyingi na udongo wenye rutuba. <br><b>Ushauri:</b> Hakikisha unapunguza machipukizi (suckers) na kuacha machache tu kwenye kila shina ili mgomba uwe na nguvu ya kutoa mkungu mkubwa."
+  },
+  "embe": {
+    "picha": "https://images.unsplash.com/photo-1553134802-ff9ec463f2e9?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Embe:</b> Ni zao la biashara linalostahimili ukame kiasi likishakua. <br><b>Ushauri:</b> Tumia miche iliyopandikizwa (Grafted) ili upate mavuno mapema. Dhibiti nzi wa matunda (fruit flies) wakati embe zinaanza kukomaa."
+  },
+  "parachichi": {
+    "picha": "https://images.unsplash.com/photo-1523038793306-2c212563454b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Parachichi:</b> Hustawi vizuri sana maeneo ya miinuko (kama Arusha). <br><b>Ushauri:</b> Zao hili lina soko kubwa la nje (Hass avocado). Hakikisha udongo unapitisha maji vizuri kwani parachichi halipendi maji kutuama kwenye mizizi."
+  },
+  "nanasi": {
+    "picha": "https://images.unsplash.com/photo-1550258114-b834e7231ad4?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Nanasi:</b> Hustawi maeneo ya joto na udongo wa kichanga tifutifu. <br><b>Ushauri:</b> Panda kwa kutumia vichipukizi bora. Inahitaji mbolea ya potasiamu (Potash) kwa wingi ili matunda yawe matamu na makubwa."
+  },
+  "papai": {
+    "picha": "https://images.unsplash.com/photo-1517282003259-f958866293b1?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Papai:</b> Ni zao linalokua haraka na kutoa mavuno ndani ya mwaka mmoja. <br><b>Ushauri:</b> Hakikisha unapata mbegu bora (hybrid) ili upate mapapai yenye nyama nyingi na sukari. Dhibiti wadudu weupe (Mealybugs) kwenye majani."
+  },
+  "chungwa": {
+    "picha": "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Chungwa:</b> Hustawi kwenye hali ya hewa ya joto na jua la kutosha. <br><b>Ushauri:</b> Inahitaji mbolea ya samadi na maji ya kutosha wakati wa kutoa maua. Punguza matawi yaliyopandana ili mwanga wa jua uingie katikati ya mti."
+  },
+  "ndimu": {
+    "picha": "https://images.unsplash.com/photo-1590505681534-423c1b14444a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Ndimu/Limau:</b> Ni jamii ya machungwa inayohimili hali nyingi za hewa. <br><b>Ushauri:</b> Ni zao muhimu kwa kinga ya mwili. Hakikisha unapiga dawa ya kuzuia wadudu wanaokunja majani (leaf miners) wanapokuwa bado wadogo."
+  },
+  "tufaha": {
+    "picha": "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tufaha (Apple):</b> Hustawi maeneo yenye baridi kali ya kudumu. <br><b>Ushauri:</b> Inahitaji uangalizi mkubwa wa mbolea na dawa. Hakikisha unapunguza matawi (pruning) wakati wa msimu wa baridi ili kuchochea uzalishaji wa matunda."
+  },
+  "zabibu": {
+    "picha": "https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Zabibu:</b> Hustawi vizuri maeneo yenye jua kali na mvua kidogo (kama Dodoma). <br><b>Ushauri:</b> Inahitaji mfumo wa kamba au miti ya kutambaa. Pruning ni muhimu sana ili kupata vishada vikubwa vya zabibu."
+  },
+  "tikiti maji": {
+    "picha": "https://images.unsplash.com/photo-1587049633562-ad300263690d?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tikiti Maji:</b> Hustawi kwenye udongo wa kichanga na joto la kutosha. <br><b>Ushauri:</b> Inahitaji maji mengi wakati wa ukuaji. Tumia mbolea ya 'Booster' wakati wa kutoa maua ili matunda yawe makubwa na matamu zaidi."
+  },
+  "tikiti tamu": {
+    "picha": "https://images.unsplash.com/photo-1595124253349-207047c24482?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tikiti Tamu (Sweet Melon):</b> Hustawi vizuri kwenye hali ya hewa ya joto na udongo unaopitisha maji. <br><b>Ushauri:</b> Inahitaji uangalizi zaidi dhidi ya wadudu kuliko tikiti maji. Hakikisha unavuna yakiwa yameiva vizuri ili kupata harufu nzuri na utamu wa asili."
+  },
+  "pomegranate": {
+    "picha": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pomegranate (Komamanga):</b> Ni mti unaostahimili ukame na hali ya hewa ya joto. <br><b>Ushauri:</b> Hustawi kwenye aina nyingi za udongo lakini hupenda zaidi udongo wa tifutifu. Ni tunda lenye faida nyingi za kitabibu na virutubisho vya kuzuia sumu mwilini (antioxidants)."
+  },
+  "passionfruit": {
+    "picha": "https://images.unsplash.com/photo-1528660493888-ab6f4761e036?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Passionfruit (Tunda la Shauku):</b> Ni zao la kibiashara linalotambaa na kutoa mavuno mengi. <br><b>Ushauri:</b> Inahitaji mfumo imara wa kamba au nyaya (trellising). Hakikisha unadhibiti ugonjwa wa mnyauko (Fusarium wilt) na piga dawa ya kuzuia wadudu wakati wa kutoa maua."
+  },
+  "guava": {
+    "picha": "https://images.unsplash.com/photo-1536594411134-297d288d669a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Guava (Pera):</b> Ni tunda imara linalostahimili hali mbalimbali za hewa na udongo. <br><b>Ushauri:</b> Punguza matawi (pruning) mara kwa mara ili kuchochea mti kutoa matunda mengi na makubwa. Ni chanzo bora sana cha Vitamini C."
+  },
+  "jackfruit": {
+    "picha": "https://images.unsplash.com/photo-1596272584594-87428453f06c?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Jackfruit (Fenesi):</b> Ni tunda kubwa kuliko yote yanayokua kwenye miti. <br><b>Ushauri:</b> Hustawi vizuri kwenye joto na unyevu wa kutosha. Hakikisha udongo una rutuba na mti una nafasi ya kutosha kutanuka."
+  },
+  "durian": {
+    "picha": "https://images.unsplash.com/photo-1605658639598-a62176461c3b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Durian:</b> Inajulikana kama 'Mfalme wa Matunda' kutokana na harufu yake kali na ladha ya kipekee. <br><b>Ushauri:</b> Hustawi maeneo ya joto na yenye mvua nyingi. Inahitaji udongo wenye rutuba ya asili (samadi) kwa wingi."
+  },
+  "lychee": {
+    "picha": "https://images.unsplash.com/photo-1533220551065-83e9549f6a7d?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Lychee:</b> Ni tunda dogo lenye ladha tamu sana na harufu nzuri. <br><b>Ushauri:</b> Hustawi maeneo yenye baridi kidogo wakati wa kiangazi ili kusaidia maua kutoa matunda. Inahitaji maji ya kutosha wakati wa ukuaji wa matunda."
+  },
+  "dragon fruit": {
+    "picha": "https://images.unsplash.com/photo-1527325679963-41f4074a342e?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Dragon Fruit:</b> Ni zao la kaktasi (cactus) linalopata umaarufu mkubwa kwa thamani yake ya lishe. <br><b>Ushauri:</b> Inahitaji nguzo ya kusaidia mmea kupanda. Haitaji maji mengi na hustahimili jua kali sana."
+  },
+  "raspberry": {
+    "picha": "https://images.unsplash.com/photo-1568434313621-0026e6378e9f?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Raspberry:</b> Ni tunda dogo linalostawi vizuri kwenye hali ya hewa ya ubaridi. <br><b>Ushauri:</b> Inahitaji udongo wenye asidi kidogo na unyevu wa kudumu. Vuna mara tu yanapoiva kwani hayakai muda mrefu baada ya kuvunwa."
+  },
+  "strawberry": {
+    "picha": "https://images.unsplash.com/photo-1464965211914-53be74b706f0?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Strawberry (Stroberi):</b> Ni zao lenye soko zuri maeneo ya miji na hoteli. <br><b>Ushauri:</b> Panda kwenye matandazo (mulching) ili kuzuia matunda yasiguse udongo na kuoza. Inahitaji mwanga wa jua kwa saa angalau 6 kwa siku."
+  },
+  "pamba": {
+    "picha": "https://images.unsplash.com/photo-1594904351111-a072f80b1a71?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pamba:</b> Ni 'dhahabu nyeupe' ya Tanzania, inayolimwa sana kanda ya ziwa. <br><b>Ushauri:</b> Panda mapema msimu wa mvua unapoanza. Dhibiti wadudu (bollworms) kwa kupiga dawa kwa wakati ili kulinda vitumba vya pamba."
+  },
+  "kahawa": {
+    "picha": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kahawa:</b> Zao kuu la biashara maeneo ya milimani. <br><b>Ushauri:</b> Hakikisha unapunguza kivuli kikizidi na fanya 'pruning' mara kwa mara. Inahitaji udongo wenye asidi kidogo na mbolea ya samadi kwa wingi."
+  },
+  "chai": {
+    "picha": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Chai:</b> Hustawi maeneo ya baridi na mvua nyingi mwaka mzima. <br><b>Ushauri:</b> Inahitaji udongo wenye asidi (pH 4.5 - 5.5). Vuna majani mawili na chipukizi moja (two leaves and a bud) kwa ajili ya chai bora zaidi."
+  },
+  "korosho": {
+    "picha": "https://images.unsplash.com/photo-1509919753148-39fe0df47405?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Korosho:</b> Hustawi vizuri maeneo ya pwani na kusini mwa Tanzania. <br><b>Ushauri:</b> Dhibiti ugonjwa wa ukungu (powdery mildew) kwa kutumia unga wa kiberiti (sulphur). Hakikisha shamba ni safi ili kuzuia wadudu waharibifu."
+  },
+  "alizeti": {
+    "picha": "https://images.unsplash.com/photo-1470137237906-d8a4f71e1966?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Alizeti:</b> Zao bora la mafuta linalovumilia ukame. <br><b>Ushauri:</b> Panda kwa nafasi ya 75cm kwa 30cm. Hakikisha unavuna mara tu nyuma ya kichwa cha alizeti kinapobadilika rangi na kuwa njano/kahawia."
+  },
+  "pili pili manga": {
+    "picha": "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pilipili Manga (Black Pepper):</b> Ni zao la kiungo linalotambaa kwenye miti. <br><b>Ushauri:</b> Inahitaji mazingira yenye unyevu na kivuli kiasi. Panda kando ya miti imara kama miembe au mibonye ili ipate sehemu ya kupanda."
+  },
+  "karafuu": {
+    "picha": "https://images.unsplash.com/photo-1599147785640-0869687e140d?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Karafuu:</b> Zao maarufu sana kutoka Zanzibar. <br><b>Ushauri:</b> Vuna matumba ya maua kabla hayajafunguka na kuwa maua kamili. Yaasike juani ili yakauke vizuri na kubadilika rangi kuwa kahawia iliyokolea."
+  },
+  "mchikichi": {
+    "picha": "https://images.unsplash.com/photo-1520188129113-bc753896bc31?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mchikichi (Oil Palm):</b> Chanzo kikuu cha mafuta ya mawese. <br><b>Ushauri:</b> Hustawi maeneo ya joto na unyevu mwingi (kama Kigoma). Inahitaji mbolea ya potasiamu kwa wingi ili kutoa vishada vikubwa vya matunda."
+  },
+  "kakao": {
+    "picha": "https://images.unsplash.com/photo-1542691457-cbe4df041eb2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Kakao:</b> Zao linalotumika kutengeneza chokoleti. <br><b>Ushauri:</b> Inahitaji kivuli cha kutosha inapokuwa bado changa na udongo wenye rutuba ya juu. Dhibiti magonjwa ya kuzuia kuoza kwa matunda (black pod disease)."
+  },
+  "mkonge": {
+    "picha": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mkonge (Sisal):</b> Zao linalostahimili ukame mkali sana. <br><b>Ushauri:</b> Inatumika kutengeneza kamba na magunia. Panda kwenye mistari iliyonyooka ili kurahisisha uvunaji wa majani ya mkonge kwa kutumia mapanga maalum."
+  },
+  "tangawizi": {
+    "picha": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tangawizi:</b> Hustawi vizuri maeneo yenye mwinuko na mvua za kutosha. <br><b>Ushauri:</b> Inahitaji udongo tifutifu wenye mbolea ya samadi kwa wingi. Hakikisha unachimba mapema kabla ya mvua kubwa kuanza ili kuzuia mizizi isioze."
+  },
+  "manjano": {
+    "picha": "https://images.unsplash.com/photo-1615485500704-8e990f3900fb?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Manjano (Turmeric):</b> Zao la kiungo linalofanana na tangawizi kwa ukuaji. <br><b>Ushauri:</b> Inachukua muda mrefu kidogo (miezi 7-9) kukomaa. Ni zao zuri sana kwa biashara na lina faida kubwa za kiafya."
+  },
+  "mdalasini": {
+    "picha": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mdalasini (Cinnamon):</b> Ni zao linalotokana na magome ya mti wa mdalasini. <br><b>Ushauri:</b> Hustawi maeneo ya joto na unyevu (Pwani). Vuna magome wakati wa msimu wa mvua wakati magome yanabanduka kwa urahisi kwenye mti."
+  },
+  "iliki": {
+    "picha": "https://images.unsplash.com/photo-1599147785640-0869687e140d?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Iliki (Cardamom):</b> Zao la thamani kubwa linalopenda kivuli na unyevu. <br><b>Ushauri:</b> Mara nyingi hupandwa chini ya miti mikubwa ya misitu au migomba. Hakikisha unavuna matunda kabla hayajapasuka yenyewe."
+  },
+  "ufuta": {
+    "picha": "https://images.unsplash.com/photo-1536620239035-6199348e5f6a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Ufuta (Sesame):</b> Zao la mafuta linalostahimili ukame. <br><b>Ushauri:</b> Panda kwenye udongo unaopitisha maji vizuri. Vuna wakati majani yanaanza kuwa na rangi ya njano na maganda ya chini kuanza kupasuka."
+  },
+  "karanga": {
+    "picha": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Karanga:</b> Zao la mikunde linalozalisha mbegu za mafuta ardhini. <br><b>Ushauri:</b> Inahitaji udongo wa kichanga tifutifu ili kuruhusu 'pegs' kuingia ardhini kwa urahisi. Palilia mapema kabla ya mmea kuanza kutoa maua."
+  },
+  "vanila": {
+    "picha": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Vanila:</b> Moja ya viungo vyenye bei kubwa zaidi duniani. <br><b>Ushauri:</b> Inahitaji mti wa kuegemea na kivuli kiasi. Maua yake lazima yarutubishwe (pollination) kwa mkono ili kutoa matunda (pods)."
+  },
+  "pili pili hoho": {
+    "picha": "https://images.unsplash.com/photo-1563565038-a533af3daad7?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pilipili Hoho:</b> Ni zao la biashara linalohitaji udongo wenye rutuba. <br><b>Ushauri:</b> Hakikisha unapata mbegu bora na dhibiti wadudu (aphids) mapema. Inahitaji maji ya kutosha na mbolea ya samadi."
+  },
+  "makaa": {
+    "picha": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Makaa (Macadamia):</b> Ni karanga zenye thamani kubwa sokoni. <br><b>Ushauri:</b> Mti huu unachukua miaka michache kuanza kutoa mavuno. Inahitaji udongo wenye rutuba na maeneo yenye mwinuko kidogo."
+  },
+  "parachichi hasi": {
+    "picha": "https://images.unsplash.com/photo-1523038793306-2c212563454b?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Hass Avocado:</b> Aina maarufu ya parachichi kwa soko la nje. <br><b>Ushauri:</b> Tumia miche iliyopandikizwa kitaalamu. Inahitaji umwagiliaji mzuri na udhibiti wa magonjwa ya ukungu (fungal diseases)."
+  },
+  "miwa": {
+    "picha": "https://images.unsplash.com/photo-1590059392653-5e749f7b2372?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Miwa:</b> Zao kuu la kutengenezea sukari linalostawi maeneo ya joto na yenye unyevu. <br><b>Ushauri:</b> Panda vipandikizi vyenye pingili mbili au tatu. Inahitaji mbolea ya Nitrogen kwa wingi na umwagiliaji wa kutosha ili kupata miwa yenye maji mengi na sukari."
+  },
+  "tumbaku": {
+    "picha": "https://images.unsplash.com/photo-1510134441584-c5a89895057a?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Tumbaku:</b> Zao la biashara linalolimwa sana mikoa ya Tabora na Shinyanga. <br><b>Ushauri:</b> Inahitaji uangalizi mkubwa kuanzia kitaluni hadi kukausha. Hakikisha udhibiti wa wadudu waharibifu unazingatiwa ili kulinda ubora wa majani."
+  },
+  "mpira": {
+    "picha": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Mpira (Rubber):</b> Zao linalotoa utomvu wa kutengenezea tairi na plastiki. <br><b>Ushauri:</b> Hustawi maeneo ya joto na mvua nyingi (Kama Muheza na visiwani). Mti unahitaji miaka 5-7 kabla ya kuanza kuvunwa utomvu wake (latex)."
+  },
+  "cocoa": {
+    "picha": "https://images.unsplash.com/photo-1542691457-cbe4df041eb2?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Cocoa (Kakao):</b> Zao linalopendwa kwa utengenezaji wa chokoleti na vinywaji. <br><b>Ushauri:</b> Inahitaji kivuli cha miti mikubwa inapokuwa changa. Dhibiti unyevu kupita kiasi ili kuzuia magonjwa ya ukungu yanayoshambulia matunda."
+  },
+  "pareto": {
+    "picha": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Pareto (Pyrethrum):</b> Zao linalotumika kutengenezea dawa za kuua wadudu. <br><b>Ushauri:</b> Hustawi maeneo ya miinuko yenye baridi kali (kama mikoa ya Njombe na Iringa). Vuna maua yaliyofunguka vizuri na uyaasike juani mara moja."
+  },
+  "katani": {
+    "picha": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Katani (Sisal):</b> Zao imara kwa ajili ya nyuzi za kamba na magunia. <br><b>Ushauri:</b> Tanzania ni mzalishaji mkubwa wa zao hili. Inahitaji maeneo ya joto na udongo usiotuamisha maji. Inaweza kuvunwa kwa miaka mingi mfululizo."
+  },
+  "stevia": {
+    "picha": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "maelezo": "<b>Stevia:</b> Mmea unaotumika kama mbadala wa sukari kwa watu wenye matatizo ya sukari. <br><b>Ushauri:</b> Hustawi vizuri kwenye udongo tifutifu wenye rutuba. Majani yake ni matamu mara kumi zaidi ya sukari ya kawaida."
+  },
+  {
+  "maize": {
+    "image": "https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=800",
+    "description": "<b>Maize:</b> Grows best in fertile soil. <br><b>Advice:</b> Plant at a spacing of 75cm by 25cm and use top-dressing fertilizer (UREA) when the plant is knee-high."
+  },
+  "tomato": {
+    "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800",
+    "description": "<b>Tomato:</b> Requires moderate warm weather. <br><b>Advice:</b> Ensure you apply fungicides every two weeks, especially during the rainy season."
+  },
+  "avocado": {
+    "image": "https://images.unsplash.com/photo-1523038793306-2c212563454b?auto=format&fit=crop&w=800",
+    "description": "<b>Avocado:</b> This crop has a large export market. <br><b>Advice:</b> Use grafted seedlings of the Hass variety for high yields and international market quality."
+  },
+  "rice": {
+    "image": "https://images.unsplash.com/photo-1536331153400-02985479ec71?auto=format&fit=crop&w=800",
+    "description": "<b>Rice:</b> Thrives in lowland areas with sufficient water. <br><b>Advice:</b> Weed early to prevent weeds from absorbing the plant's nutrients."
+  },
+  "onion": {
+    "image": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800",
+    "description": "<b>Onion:</b> Requires loose soil and enough water during bulb formation. <br><b>Advice:</b> Reduce watering two weeks before harvest to ensure they last longer without rotting."
+  },
+  "peanuts": {
+    "image": "https://images.unsplash.com/photo-1567333160937-c558739b8f62?auto=format&fit=crop&w=800",
+    "description": "<b>Peanuts:</b> Thrive in sandy soil that drains water easily. <br><b>Advice:</b> Ensure the field is fertile enough and avoid areas where water stagnates."
+  },
+  "watermelon": {
+    "image": "https://images.unsplash.com/photo-1587049633562-ad300263690d?auto=format&fit=crop&w=800",
+    "description": "<b>Watermelon:</b> Needs heat and plenty of sunlight. <br><b>Advice:</b> Use foliar fertilizers (Booster) during flowering to get large and sweet fruits."
+  },
+  "coffee": {
+    "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800",
+    "description": "<b>Coffee:</b> Thrives in high-altitude areas with moderate cold. <br><b>Advice:</b> Prune branches to allow the plant to have the energy to produce more beans."
+  },
+  "pineapple": {
+    "image": "https://images.unsplash.com/photo-1550258114-b834e7231ad4?auto=format&fit=crop&w=800",
+    "description": "<b>Pineapple:</b> Grows well in warm areas. <br><b>Advice:</b> Plant using quality suckers and ensure the soil has enough Calcium fertilizer."
+  },
+  "bell pepper": {
+    "image": "https://images.unsplash.com/photo-1588252390731-ca91ac1f9bc1?auto=format&fit=crop&w=800",
+    "description": "<b>Bell Pepper:</b> Needs protection against sap-sucking insects. <br><b>Advice:</b> Use a Greenhouse if possible to get better quality crops without blemishes."
+  },
+  "wheat": {
+    "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800",
+    "description": "<b>Wheat:</b> Thrives well in cold and high-altitude areas. <br><b>Advice:</b> Plant during the first rains. Control fungal diseases (Rusts) and use DAP fertilizer during planting for strong roots."
+  },
+  "sorghum": {
+    "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "description": "<b>Sorghum:</b> A grain crop that tolerates drought and high heat better than maize. <br><b>Advice:</b> Plant during the first rains using 60cm by 20cm spacing. Control birds during maturity."
+  },
+  "beans": {
+    "image": "https://images.unsplash.com/photo-1551462147-ff29053fad31?auto=format&fit=crop&w=800",
+    "description": "<b>Beans:</b> A good source of protein; grows best in soil that doesn't hold stagnant water. <br><b>Advice:</b> Control aphids and fungal diseases during flowering for high yields."
+  },
+  "cassava": {
+    "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "description": "<b>Cassava:</b> A drought-tolerant crop that grows in various soil types. <br><b>Advice:</b> Use quality cuttings free from mosaic disease."
+  },
+  "sweet potatoes": {
+    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800",
+    "description": "<b>Sweet Potatoes:</b> Grow well in loamy soil and mature quickly. <br><b>Advice:</b> Plant on ridges to allow tubers to grow easily. Orange-fleshed varieties are rich in Vitamin A."
+  },
+  "garlic": {
+    "image": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=800",
+    "description": "<b>Garlic:</b> Thrives well in moderately cold areas. <br><b>Advice:</b> Plant individual cloves at 10cm spacing. It takes 4-6 months to mature but has a very good market."
+  },
+  "banana": {
+    "image": "https://images.unsplash.com/photo-1571771894821-ad9902412746?auto=format&fit=crop&w=800",
+    "description": "<b>Banana:</b> Thrives in areas with high rainfall and fertile soil. <br><b>Advice:</b> Reduce suckers and leave only a few per stool so the plant has the strength to produce a large bunch."
+},
+  "beans": {
+    "image": "https://images.unsplash.com/photo-1551462147-ff29053fad31?auto=format&fit=crop&w=800",
+    "description": "<b>Beans:</b> A great source of protein; grows best in well-drained soil. <br><b>Advice:</b> Plant at a spacing of 50cm by 10cm or 50cm by 20cm depending on the seed variety. Ensure you control pests like aphids and fungal diseases during flowering for high yields."
+  },
+  "lentils": {
+    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=800",
+    "description": "<b>Lentils:</b> A drought-tolerant crop that thrives on residual soil moisture after the rains stop. <br><b>Advice:</b> Plant while the soil is still moist (end of the rainy season). Requires well-drained soil and pest control for pod borers during flowering."
+  },
+  "green grams": {
+    "image": "https://images.unsplash.com/photo-1547496613-4e193f038141?auto=format&fit=crop&w=800",
+    "description": "<b>Green Grams:</b> Drought-resistant and grows well in sandy or sandy-loam soils. <br><b>Advice:</b> Plant at 45cm by 15cm spacing. Harvest as soon as pods turn black to prevent them from splitting and losing seeds."
+  },
+  "peas": {
+    "image": "https://images.unsplash.com/photo-1587996537445-bc09307779f4?auto=format&fit=crop&w=800",
+    "description": "<b>Peas:</b> Thrive in cool climates with sufficient moisture. <br><b>Advice:</b> Plant in fertile, well-drained soil. For tall varieties, use stakes to allow the plant to climb and produce more pods."
+  },
+  "cowpeas": {
+    "image": "https://images.unsplash.com/photo-1599595229023-99933069c9b4?auto=format&fit=crop&w=800",
+    "description": "<b>Cowpeas:</b> A drought-tolerant crop that grows in many soil types. <br><b>Advice:</b> Besides the seeds, the leaves are excellent vegetables. Control thrips during flowering to ensure high pod production."
+  },
+  "soybeans": {
+    "image": "https://images.unsplash.com/photo-1582234306487-06d9fd199d22?auto=format&fit=crop&w=800",
+    "description": "<b>Soybeans:</b> A commercial crop high in protein and oil. <br><b>Advice:</b> Requires Phosphorus fertilizer and low-acid soil. Use high-quality seeds suitable for your local climate."
+  },
+  "pigeon peas": {
+    "image": "https://images.unsplash.com/photo-1604153063462-236780702d73?auto=format&fit=crop&w=800",
+    "description": "<b>Pigeon Peas:</b> Drought-tolerant and can grow over a long season. <br><b>Advice:</b> Excellent for nitrogen fixation (soil improvement). Use wide spacing as the plant grows into a large bush."
+  },
+  "small lentils": {
+    "image": "https://images.unsplash.com/photo-1547496613-4e193f038141?auto=format&fit=crop&w=800",
+    "description": "<b>Lentils (Small):</b> Grow well in moderately cool areas with well-drained soil. <br><b>Advice:</b> Do not require much water. Weed early because the plants are small and easily overwhelmed by weeds."
+  },
+  "lupin": {
+    "image": "https://images.unsplash.com/photo-1508610332882-720875953051?auto=format&fit=crop&w=800",
+    "description": "<b>Lupin:</b> A legume crop that tolerates cold weather and acidic soils. <br><b>Advice:</b> Widely used for livestock feed and soil fertility improvement. Ensure you use 'sweet lupins' for human consumption."
+  },
+  "cassava": {
+    "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "description": "<b>Cassava:</b> Drought-tolerant and thrives in various soil types. <br><b>Advice:</b> Use healthy cuttings free from mosaic disease. Dig deep holes to allow the roots enough space to expand."
+  },
+  "sweet potatoes": {
+    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800",
+    "description": "<b>Sweet Potatoes:</b> Grow well in loamy soil and mature quickly. <br><b>Advice:</b> Plant on ridges to allow the tubers to develop easily. Orange-fleshed varieties are very high in Vitamin A."
+  },
+  "potato": {
+    "image": "https://images.unsplash.com/photo-1518977676601-b53f02bad67b?auto=format&fit=crop&w=800",
+    "description": "<b>Potato:</b> Thrives in cool areas with fertile soil. <br><b>Advice:</b> Use clean seeds and control blight by applying fungicides early before the heavy rains start."
+  },
+  "taro": {
+    "image": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "description": "<b>Taro (Magimbi):</b> Grows best in very moist areas or valleys. <br><b>Advice:</b> Requires constant water throughout the growth period. Ensure the field has natural fertility to produce large, soft tubers."
+  },
+  "yam": {
+    "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "description": "<b>Yam (Viazi Vikuu):</b> A high-energy food crop. <br><b>Advice:</b> Requires deep, well-drained soil. Often needs staking so the leaves can access enough sunlight."
+  },
+  "arrowroot": {
+    "image": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "description": "<b>Arrowroot (Nduma):</b> Thrives along water sources or areas with permanent moisture. <br><b>Advice:</b> Excellent for digestive health. Use manure to improve soil quality."
+  },
+  "cassava leaves": {
+    "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
+    "description": "<b>Cassava Leaves (Kisamvu):</b> A popular vegetable rich in nutrients. <br><b>Advice:</b> Harvest young leaves for the best quality. Avoid over-harvesting to ensure the cassava root continues to grow well."
+  },
+  "beetroot": {
+    "image": "https://images.unsplash.com/photo-1585559604118-202979203923?auto=format&fit=crop&w=800",
+    "description": "<b>Beetroot:</b> A vegetable crop that helps increase blood levels and minerals. <br><b>Advice:</b> Grows best in cool, loamy soil. Ensure sufficient water to prevent the roots from becoming hard or fibrous."
+  },
+  "turnip": {
+    "image": "https://images.unsplash.com/photo-1585559604118-202979203923?auto=format&fit=crop&w=800",
+    "description": "<b>Turnip:</b> A root crop eaten as a vegetable or salad. <br><b>Advice:</b> Grows quickly and needs cool weather. Plant at close spacing and harvest while young for the best flavor."
+  },
+  "amaranth": {
+    "image": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "description": "<b>Amaranth (Mchicha):</b> A fast-growing and very popular vegetable. <br><b>Advice:</b> Requires plenty of water and Nitrogen fertilizer for broad, vibrant green leaves. Can be harvested in 3 to 4 weeks."
+  },
+  "spinach": {
+    "image": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800",
+    "description": "<b>Spinach:</b> Thrives best in cool climates. <br><b>Advice:</b> Ensure the soil has high fertility and permanent moisture. Important for boosting iron levels in the body."
+  },
+  "cabbage": {
+    "image": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=800",
+    "description": "<b>Cabbage:</b> Grows well in fertile soil that retains moisture. <br><b>Advice:</b> Control pests like the diamondback moth early. Use 60cm by 60cm spacing to allow heads to expand properly."
+  },
+  "chinese cabbage": {
+    "image": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=800",
+    "description": "<b>Chinese Cabbage:</b> A fast-growing cabbage variety with soft leaves. <br><b>Advice:</b> Needs high moisture and well-drained soil. Perfect for salads or quick cooking."
+  },
+  "lettuce": {
+    "image": "https://images.unsplash.com/photo-1622206141845-369406560965?auto=format&fit=crop&w=800",
+    "description": "<b>Lettuce:</b> Thrives in cool weather. <br><b>Advice:</b> Avoid intense sun which can make leaves bitter. Water in the morning and evening to maintain moisture and tenderness."
+  },
+  "pumpkin leaves": {
+    "image": "https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800",
+    "description": "<b>Pumpkin Leaves:</b> Highly nutritious and easily available. <br><b>Advice:</b> Harvest young leaves and avoid taking too many from one plant to ensure the pumpkin fruit develops."
+  },
+  "dodo": {
+    "image": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "description": "<b>Dodo:</b> A type of amaranth with larger, sturdier leaves. <br><b>Advice:</b> Resistant to many vegetable diseases. Use plenty of manure for the best yields."
+  },
+  "kale": {
+    "image": "https://images.unsplash.com/photo-1524179524662-136bb0432ddf?auto=format&fit=crop&w=800",
+    "description": "<b>Kale (Sukuma Wiki):</b> The most widely grown and consumed vegetable in East Africa. <br><b>Advice:</b> Remove lower leaves to allow upward growth. Requires water and organic fertilizers like rabbit urine for best results."
+  },
+"watermelon": {
+    "image": "https://images.unsplash.com/photo-1587049633562-ad300263690d?auto=format&fit=crop&w=800",
+    "description": "<b>Watermelon:</b> Thrives in sandy soil and warm temperatures. <br><b>Advice:</b> Requires plenty of water during growth. Use 'Booster' fertilizer during flowering to ensure large and sweet fruits."
+  },
+  "sweet melon": {
+    "image": "https://images.unsplash.com/photo-1595124253349-207047c24482?auto=format&fit=crop&w=800",
+    "description": "<b>Sweet Melon:</b> Grows best in warm climates and well-drained soil. <br><b>Advice:</b> Needs more pest monitoring than watermelon. Ensure you harvest when fully ripe to get the best natural aroma and sweetness."
+  },
+  "pomegranate": {
+    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
+    "description": "<b>Pomegranate:</b> A drought-tolerant tree that thrives in warm weather. <br><b>Advice:</b> Grows in many soil types but prefers loamy soil. It is highly nutritious and rich in antioxidants."
+  },
+  "passion fruit": {
+    "image": "https://images.unsplash.com/photo-1528660493888-ab6f4761e036?auto=format&fit=crop&w=800",
+    "description": "<b>Passion Fruit:</b> A high-yielding commercial climbing crop. <br><b>Advice:</b> Requires a strong trellis system. Monitor for Fusarium wilt and apply pesticides during flowering."
+  },
+  "guava": {
+    "image": "https://images.unsplash.com/photo-1536594411134-297d288d669a?auto=format&fit=crop&w=800",
+    "description": "<b>Guava:</b> A resilient fruit that tolerates various climates and soils. <br><b>Advice:</b> Prune branches regularly to stimulate more and larger fruits. It is an excellent source of Vitamin C."
+  },
+  "jackfruit": {
+    "image": "https://images.unsplash.com/photo-1596272584594-87428453f06c?auto=format&fit=crop&w=800",
+    "description": "<b>Jackfruit:</b> The largest fruit that grows on trees. <br><b>Advice:</b> Thrives in heat and high humidity. Ensure the soil is fertile and provide enough space for the tree to expand."
+  },
+  "durian": {
+    "image": "https://images.unsplash.com/photo-1605658639598-a62176461c3b?auto=format&fit=crop&w=800",
+    "description": "<b>Durian:</b> Known as the 'King of Fruits' for its strong aroma and unique taste. <br><b>Advice:</b> Thrives in tropical areas with high rainfall. Requires plenty of organic manure."
+  },
+  "lychee": {
+    "image": "https://images.unsplash.com/photo-1533220551065-83e9549f6a7d?auto=format&fit=crop&w=800",
+    "description": "<b>Lychee:</b> A small fruit with a very sweet taste and pleasant aroma. <br><b>Advice:</b> Needs a slight cold period during the dry season to help with flowering. Requires constant water during fruit development."
+  },
+  "dragon fruit": {
+    "image": "https://images.unsplash.com/photo-1527325679963-41f4074a342e?auto=format&fit=crop&w=800",
+    "description": "<b>Dragon Fruit:</b> A cactus crop gaining popularity for its high nutritional value. <br><b>Advice:</b> Requires a support post for the plant to climb. Needs very little water and is heat resistant."
+  },
+  "raspberry": {
+    "image": "https://images.unsplash.com/photo-1568434313621-0026e6378e9f?auto=format&fit=crop&w=800",
+    "description": "<b>Raspberry:</b> A small fruit that grows best in cool climates. <br><b>Advice:</b> Needs slightly acidic soil and permanent moisture. Harvest immediately when ripe as they have a short shelf life."
+  },
+  "strawberry": {
+    "image": "https://images.unsplash.com/photo-1464965211914-53be74b706f0?auto=format&fit=crop&w=800",
+    "description": "<b>Strawberry:</b> A high-value crop for urban markets and hotels. <br><b>Advice:</b> Use mulching to prevent fruit from touching the soil and rotting. Needs at least 6 hours of sunlight daily."
+  },
+  "cotton": {
+    "image": "https://images.unsplash.com/photo-1594904351111-a072f80b1a71?auto=format&fit=crop&w=800",
+    "description": "<b>Cotton:</b> Known as 'White Gold' in Tanzania, widely grown in the Lake Zone. <br><b>Advice:</b> Plant early at the start of the rainy season. Control bollworms on time to protect the cotton bolls."
+  },
+  "coffee": {
+    "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800",
+    "description": "<b>Coffee:</b> A major cash crop in highland areas. <br><b>Advice:</b> Prune regularly and manage shade levels. Requires slightly acidic soil and plenty of organic manure."
+  },
+  "tea": {
+    "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800",
+    "description": "<b>Tea:</b> Thrives in cool areas with high rainfall year-round. <br><b>Advice:</b> Requires acidic soil (pH 4.5 - 5.5). Harvest 'two leaves and a bud' for the best tea quality."
+  },
+  "cashew nuts": {
+    "image": "https://images.unsplash.com/photo-1509919753148-39fe0df47405?auto=format&fit=crop&w=800",
+    "description": "<b>Cashew Nuts:</b> Thrives in coastal and southern regions of Tanzania. <br><b>Advice:</b> Control powdery mildew using sulphur powder. Keep the farm clean to prevent destructive pests."
+  },
+  "sunflower": {
+    "image": "https://images.unsplash.com/photo-1470137237906-d8a4f71e1966?auto=format&fit=crop&w=800",
+    "description": "<b>Sunflower:</b> An excellent oilseed crop that is drought-tolerant. <br><b>Advice:</b> Plant at 75cm by 30cm spacing. Harvest as soon as the back of the sunflower head turns yellow/brown."
+  },
+  "black pepper": {
+    "image": "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=800",
+    "description": "<b>Black Pepper:</b> A spice crop that climbs on trees. <br><b>Advice:</b> Requires a humid environment and partial shade. Plant next to sturdy trees like mango for support."
+  },
+  "cloves": {
+    "image": "https://images.unsplash.com/photo-1599147785640-0869687e140d?auto=format&fit=crop&w=800",
+    "description": "<b>Cloves:</b> A famous crop from Zanzibar. <br><b>Advice:</b> Harvest the flower buds before they open. Dry them in the sun until they turn a deep brown color."
+  },
+  "oil palm": {
+    "image": "https://images.unsplash.com/photo-1520188129113-bc753896bc31?auto=format&fit=crop&w=800",
+    "description": "<b>Oil Palm:</b> The primary source of palm oil. <br><b>Advice:</b> Thrives in hot, humid areas like Kigoma. Requires plenty of Potassium fertilizer for large fruit bunches."
+  },
+  "cocoa": {
+    "image": "https://images.unsplash.com/photo-1542691457-cbe4df041eb2?auto=format&fit=crop&w=800",
+    "description": "<b>Cocoa:</b> The crop used to make chocolate. <br><b>Advice:</b> Needs sufficient shade when young and very fertile soil. Control black pod disease to prevent fruit rot."
+  },
+  "sisal": {
+    "image": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "description": "<b>Sisal:</b> A very drought-tolerant crop used for ropes and bags. <br><b>Advice:</b> Plant in straight rows to make harvesting easier using specialized knives."
+  },
+  "ginger": {
+    "image": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800",
+    "description": "<b>Ginger:</b> Thrives in highlands with sufficient rainfall. <br><b>Advice:</b> Requires loamy soil and plenty of manure. Harvest before the heavy rains to prevent the rhizomes from rotting."
+  },
+  "turmeric": {
+    "image": "https://images.unsplash.com/photo-1615485500704-8e990f3900fb?auto=format&fit=crop&w=800",
+    "description": "<b>Turmeric:</b> A spice crop similar to ginger in growth. <br><b>Advice:</b> Takes 7-9 months to mature. It is a high-value commercial crop with many health benefits."
+  },
+  "cinnamon": {
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800",
+    "description": "<b>Cinnamon:</b> Produced from the bark of the cinnamon tree. <br><b>Advice:</b> Grows best in hot, humid coastal areas. Harvest bark during the rainy season when it peels easily."
+  },
+  "cardamom": {
+    "image": "https://images.unsplash.com/photo-1599147785640-0869687e140d?auto=format&fit=crop&w=800",
+    "description": "<b>Cardamom:</b> A high-value spice that loves shade and moisture. <br><b>Advice:</b> Often grown under forest canopies or banana trees. Harvest fruits before they split open."
+  },
+  "sesame": {
+    "image": "https://images.unsplash.com/photo-1536620239035-6199348e5f6a?auto=format&fit=crop&w=800",
+    "description": "<b>Sesame (Simsim):</b> A drought-tolerant oilseed crop. <br><b>Advice:</b> Plant in well-drained soil. Harvest when leaves turn yellow and lower pods begin to split."
+  },
+  "peanuts": {
+    "image": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
+    "description": "<b>Peanuts (Groundnuts):</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Needs sandy-loam soil to allow 'pegs' to enter the ground easily. Weed before flowering begins."
+  },
+  "vanilla": {
+    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
+    "description": "<b>Vanilla:</b> One of the most expensive spices in the world. <br><b>Advice:</b> Requires a support tree and partial shade. Flowers must be hand-pollinated to produce pods."
+  },
+  "peanuts": {
+    "image": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
+    "description": "<b>Peanuts:</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Requires sandy loam soil to allow 'pegs' to enter the ground easily. Weed early before the plant starts flowering."
+  },
+  "vanilla": {
+    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
+    "description": "<b>Vanilla:</b> One of the most expensive spices in the world. <br><b>Advice:</b> Requires a support tree and partial shade. Its flowers must be hand-pollinated to produce fruit (pods)."
+  },
+  "bell pepper": {
+    "image": "https://images.unsplash.com/photo-1563565038-a533af3daad7?auto=format&fit=crop&w=800",
+    "description": "<b>Bell Pepper:</b> A commercial crop that requires fertile soil. <br><b>Advice:</b> Ensure you get high-quality seeds and control pests (aphids) early. Requires sufficient water and organic manure."
+  },
+  "macadamia": {
+    "image": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
+    "description": "<b>Macadamia:</b> Highly valuable nuts in the market. <br><b>Advice:</b> This tree takes a few years to start yielding. It requires fertile soil and slightly high-altitude areas."
+  },
+  "hass avocado": {
+    "image": "https://images.unsplash.com/photo-1523038793306-2c212563454b?auto=format&fit=crop&w=800",
+    "description": "<b>Hass Avocado:</b> A popular avocado variety for the export market. <br><b>Advice:</b> Use professionally grafted seedlings. Requires good irrigation and control of fungal diseases."
+  },
+  "sugar cane": {
+    "image": "https://images.unsplash.com/photo-1590059392653-5e749f7b2372?auto=format&fit=crop&w=800",
+    "description": "<b>Sugar Cane:</b> The main crop for sugar production, thriving in hot and humid areas. <br><b>Advice:</b> Plant cuttings with two or three nodes. Requires high Nitrogen fertilizer and sufficient irrigation for high water and sugar content."
+  },
+  "tobacco": {
+    "image": "https://images.unsplash.com/photo-1510134441584-c5a89895057a?auto=format&fit=crop&w=800",
+    "description": "<b>Tobacco:</b> A cash crop widely grown in Tabora and Shinyanga regions. <br><b>Advice:</b> Requires close monitoring from the nursery to the curing stage. Ensure pest control is prioritized to protect leaf quality."
+  },
+  "rubber": {
+    "image": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "description": "<b>Rubber:</b> A crop that produces sap used for making tires and plastics. <br><b>Advice:</b> Thrives in hot areas with high rainfall (like Muheza and the islands). The tree needs 5-7 years before starting to harvest its latex."
+  },
+  "cocoa": {
+    "image": "https://images.unsplash.com/photo-1542691457-cbe4df041eb2?auto=format&fit=crop&w=800",
+    "description": "<b>Cocoa:</b> A crop loved for making chocolate and beverages. <br><b>Advice:</b> Requires shade from large trees when young. Control excess humidity to prevent fungal diseases that attack the fruits."
+  },
+  "pyrethrum": {
+    "image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800",
+    "description": "<b>Pyrethrum:</b> A crop used to manufacture insecticides. <br><b>Advice:</b> Thrives in high-altitude areas with cold weather (like Njombe and Iringa). Harvest well-opened flowers and dry them in the sun immediately."
+  },
+  "sisal": {
+    "image": "https://images.unsplash.com/photo-1596720426673-e483d7ff1d21?auto=format&fit=crop&w=800",
+    "description": "<b>Sisal:</b> A hardy crop for producing rope fibers and bags. <br><b>Advice:</b> Tanzania is a major producer of this crop. Requires hot areas and well-drained soil. It can be harvested for many consecutive years."
+  },
+  "stevia": {
+    "image": "https://images.unsplash.com/photo-1550953331-502079087093?auto=format&fit=crop&w=800",
+    "description": "<b>Stevia:</b> A plant used as a sugar substitute for people with sugar-related health issues. <br><b>Advice:</b> Grows best in fertile loamy soil. Its leaves are ten times sweeter than regular sugar."
   }
-}
+}    
+  
+
+  
