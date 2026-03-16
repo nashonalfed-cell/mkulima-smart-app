@@ -1,12 +1,14 @@
 /**
- * MKULIMA SMART AI - FULL FINAL VERSION
+ * MKULIMA SMART AI - FULL SCRIPT
  * Developer: Nashon Alfred
  * Bwana Shamba: +255797818582
+ * Powered by Gemini AI
  */
 
 const nambaYaBwanaShamba = "255797818582";
+const GEMINI_API_KEY = "AIzaSyCny-1dpLIFhclCdffYPtd-UnoWdn4AAI8";
 
-// 1. BEI ZA MASOKO (Data halisi za mfano)
+// 1. BEI ZA MASOKO
 const marketData = [
     {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑", c: "text-success"},
     {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -", c: "text-secondary"},
@@ -27,13 +29,13 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. 📸 AI VISUAL SCANNER (TensorFlow & MobileNet)
+// 2. 📸 AI VISUAL SCANNER (TensorFlow)
 let net;
 async function startAI() { 
     try {
         if (!net) net = await mobilenet.load(); 
-        console.log("AI Model Loaded Successfully!");
-    } catch (e) { console.error("AI Model failed to load", e); }
+        console.log("AI Model Loaded!");
+    } catch (e) { console.error("AI failed to load", e); }
 }
 
 async function analyzeLeaf() {
@@ -42,18 +44,18 @@ async function analyzeLeaf() {
     const predictions = await net.classify(img);
     const topResult = predictions[0].className.toLowerCase();
 
-    const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop", "potted"];
+    const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop"];
     const diseaseKeys = ["spot", "rust", "mildew", "rot", "pest", "worm", "fungus", "blight", "damage", "wilt", "aphid", "bug", "yellow", "dry"];
 
     const isPlant = plantKeys.some(word => topResult.includes(word));
     const hasDisease = diseaseKeys.some(word => topResult.includes(word));
 
     if (!isPlant) {
-        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea. Tafadhali piga picha jani vizuri.</div>`;
+        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea. Piga picha jani vizuri.</div>`;
     } else if (!hasDisease) {
-        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Mmea unaonekana una afya bora!</div>`;
+        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Mmea unaonekana una afya!</div>`;
     } else {
-        resultDiv.innerHTML = `<div class="alert alert-warning mt-2 fw-bold">⚠️ Tatizo limegundulika: <span class="text-danger">${topResult}</span></div>`;
+        resultDiv.innerHTML = `<div class="alert alert-warning mt-2 fw-bold">⚠️ Tatizo: <span class="text-danger">${topResult}</span></div>`;
     }
 }
 
@@ -64,114 +66,87 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
         reader.onload = function(ev) {
             document.getElementById('previewImg').src = ev.target.result;
             document.getElementById('imagePreviewContainer').style.display = 'block';
-            if (net) {
-                document.getElementById('scanResult').innerHTML = "Inachambua...";
-                analyzeLeaf();
-            }
+            if (net) analyzeLeaf();
         };
         reader.readAsDataURL(file);
     }
 });
 
-// 3. 🧪 SOIL TEST (Ushauri wa Udongo)
+// 3. 🧪 SOIL TEST
 function testSoil() {
     const color = document.getElementById('soilColor').value;
     const res = document.getElementById('soilResult');
     res.style.display = "block";
-    
-    let advice = "";
-    if(color === "black") {
-        advice = "✅ <b>Udongo Mweusi:</b> Una rutuba sana. Unafaa kwa Mahindi, Nyanya, na Mboga za majani.";
-    } else if(color === "red") {
-        advice = "⚠️ <b>Udongo Mwekundu:</b> Unahitaji mbolea ya samadi kuongeza rutuba. Unafaa kwa Kahawa na Viazi.";
-    } else {
-        advice = "⚠️ <b>Udongo wa Mchanga:</b> Unapitisha maji haraka. Unafaa kwa Tikiti Maji, Muhogo, na Nazi.";
-    }
+    let advice = color === "black" ? "✅ Udongo Mweusi: Una rutuba sana. Unafaa kwa Mahindi na Nyanya." : 
+                 color === "red" ? "⚠️ Udongo Mwekundu: Unafaa kwa Kahawa na Viazi, ongeza samadi." : 
+                 "⚠️ Udongo wa Mchanga: Unafaa kwa Tikiti Maji na Muhogo.";
     res.innerHTML = `<strong>Ushauri:</strong> ${advice}`;
 }
 
-// 4. 🔍 SEARCH MAZAO (Habari Binafsi + Picha Halisi)
+// 4. 🔍 SEARCH MAZAO
 async function generateData() {
     const query = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!query) return alert("Tafadhali andika jina la zao!");
+    if (!query) return;
 
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
-    
-    // Picha halisi kulingana na zao (Inatafuta kwenye database ya picha)
-    document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${query},agriculture,farming`;
+    document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${query},agriculture`;
     document.getElementById("cropTitle").innerText = query.toUpperCase();
 
     let detailedGuide = "";
-
     try {
-        // Jaribu kutafuta Wikipedia ya Kiswahili kwanza
         const response = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
         const data = await response.json();
+        detailedGuide = data.extract ? `<p>${data.extract}</p>` : `<p>Maelezo ya ${query} yatatolewa na Bwana Shamba AI kwenye chat hapo chini.</p>`;
+    } catch (e) { detailedGuide = "<p>Shida ya mtandao imetokea.</p>"; }
 
-        if (data.extract) {
-            detailedGuide = `
-                <div class="mt-3">
-                    <h5 class="fw-bold text-success border-bottom pb-2">🌱 MWONGOZO WA KILIMO: ${query.toUpperCase()}</h5>
-                    <p class="mt-2" style="font-size: 0.95rem; line-height: 1.6;">${data.extract}</p>
-                </div>`;
-        } else {
-            detailedGuide = `
-                <div class="mt-3">
-                    <h5 class="fw-bold text-warning">Maelezo Yanatafutwa...</h5>
-                    <p>Hatujapata maelezo mahususi ya <b>${query}</b> kwa Kiswahili. Tafadhali bonyeza kitufe cha WhatsApp hapo chini kupata mwongozo kutoka kwa Bwana Shamba.</p>
-                </div>`;
-        }
-    } catch (e) {
-        detailedGuide = `<p class="text-danger">Hitilafu ya mtandao. Shindwa kupata data.</p>`;
-    }
-
-    // WhatsApp Button ya kipekee
-    const waMsg = encodeURIComponent(`Habari Bwana Shamba, nahitaji msaada zaidi kuhusu kilimo cha ${query.toUpperCase()}`);
-    detailedGuide += `<div class="mt-4"><a href="https://wa.me/${nambaYaBwanaShamba}?text=${waMsg}" target="_blank" class="btn btn-success w-100 fw-bold">💬 ONGEA NA BWANA SHAMBA (WHATSAPP)</a></div>`;
-
+    const waMsg = encodeURIComponent(`Habari Bwana Shamba, nahitaji msaada wa ${query.toUpperCase()}`);
+    detailedGuide += `<div class="mt-4"><a href="https://wa.me/${nambaYaBwanaShamba}?text=${waMsg}" target="_blank" class="btn btn-success w-100 fw-bold">💬 WHATSAPP BWANA SHAMBA</a></div>`;
+    
     document.getElementById("infoArea").innerHTML = detailedGuide;
-
-    // Sehemu ya Video ya YouTube
-    const ytUrl = `https://www.youtube.com/results?search_query=kilimo+cha+${query}+tanzania`;
-    document.getElementById("videoArea").innerHTML = `
-        <div class="mt-4">
-            <h6 class="fw-bold text-danger">📺 Jifunze kwa Video:</h6>
-            <a href="${ytUrl}" target="_blank" class="btn btn-outline-danger w-100 fw-bold shadow-sm">TAZAMA VIDEO ZA ${query.toUpperCase()}</a>
-        </div>`;
+    document.getElementById("videoArea").innerHTML = `<a href="https://www.youtube.com/results?search_query=kilimo+cha+${query}+tanzania" target="_blank" class="btn btn-outline-danger w-100">TAZAMA VIDEO ZA ${query.toUpperCase()}</a>`;
 
     document.getElementById("loadingSpinner").style.display = "none";
     document.getElementById("cropCard").style.display = "flex";
 }
 
-// Anzisha App
-window.onload = () => { 
-    loadMarket(); 
-    startAI(); 
-};
-// 6. MFUMO WA CHAT (AI CHATBOT)
-function askAI() {
-    const input = document.getElementById("chatInput");
-    const window = document.getElementById("chatWindow");
-    const message = input.value.trim();
-
-    if (!message) return;
-
-    // Ongeza ujumbe wa mtumiaji kwenye kioo
-    window.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block">${message}</span></div>`;
-    input.value = "";
-
-    // Jibu la AI (Simulation)
-    setTimeout(() => {
-        let response = "Samahani, naendelea kujifunza kuhusu hilo. Jaribu kuuliza kuhusu mbolea, mbegu, au wadudu.";
-        
-        if(message.toLowerCase().includes("mbolea")) {
-            response = "Mbolea za asili (samadi) ni bora kwa kurudisha rutuba ya udongo kwa muda mrefu.";
-        } else if(message.toLowerCase().includes("wadudu")) {
-            response = "Ili kudhibiti wadudu, hakikisha unakagua shamba kila asubuhi na kutumia dawa zilizoidhinishwa.";
-        }
-
-        window.innerHTML += `<div class="mb-2"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm"><b>AI:</b> ${response}</span></div>`;
-        window.scrollTop = window.scrollHeight; // Inashusha chat chini kabisa
-    }, 1000);
+// 5. 🎤 SAUTI
+function startVoice() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'sw-TZ';
+    recognition.onresult = (e) => {
+        document.getElementById("userCrop").value = e.results[0][0].transcript;
+        generateData();
+    };
+    recognition.start();
 }
+
+// 6. 💬 GEMINI AI CHAT
+async function askAI() {
+    const input = document.getElementById("chatInput");
+    const windowChat = document.getElementById("chatWindow");
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block">${msg}</span></div>`;
+    input.value = "";
+    const loadingId = "load-" + Date.now();
+    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm"><b>AI:</b> Inafikiria...</span></div>`;
+    windowChat.scrollTop = windowChat.scrollHeight;
+
+    try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }] }] })
+        });
+        const data = await res.json();
+        const responseText = data.candidates[0].content.parts[0].text;
+        document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm"><b>AI:</b> ${responseText}</span>`;
+    } catch (error) {
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger">Hitilafu imetokea.</span>`;
+    }
+    windowChat.scrollTop = windowChat.scrollHeight;
+}
+
+window.onload = () => { loadMarket(); startAI(); };
