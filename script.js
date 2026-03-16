@@ -79,6 +79,7 @@ async function askAI() {
     const msg = input.value.trim();
     if (!msg) return;
 
+    // Onyesha ujumbe wa mtumiaji
     windowChat.innerHTML += `<div class="user-msg">${msg}</div>`;
     input.value = "";
     
@@ -87,18 +88,41 @@ async function askAI() {
     windowChat.scrollTop = windowChat.scrollHeight;
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        // Toleo la v1/gemini-1.5-flash ni imara zaidi
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+        
+        const response = await fetch(url, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }] }] })
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }]
+                }]
+            })
         });
 
+        // Hapa ndipo tunapopata jibu halisi
         const data = await response.json();
-        const aiText = data.candidates[0].content.parts[0].text;
-        document.getElementById(loadingId).innerText = aiText;
+
+        if (data.candidates && data.candidates[0].content) {
+            const aiText = data.candidates[0].content.parts[0].text;
+            document.getElementById(loadingId).innerText = aiText;
+        } else if (data.error) {
+            // Kama kuna kosa la Key, litaonekana hapa
+            document.getElementById(loadingId).innerText = "Kosa: " + data.error.message;
+        } else {
+            document.getElementById(loadingId).innerText = "Samahani, jaribu tena.";
+        }
+
     } catch (err) {
-        document.getElementById(loadingId).innerText = "Hitilafu: Hakikisha una internet.";
+        // Hapa ndipo unapopata ule ujumbe wa Internet. 
+        // Nimeongeza err.message ili utuambie kosa la kiufundi ni nini hasa.
+        document.getElementById(loadingId).innerText = "Hitilafu ya Kiufundi: " + err.message;
+        console.error("DEBUG:", err);
     }
+    
     windowChat.scrollTop = windowChat.scrollHeight;
 }
 
