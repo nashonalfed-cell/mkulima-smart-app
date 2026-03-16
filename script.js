@@ -1,7 +1,7 @@
 /**
  * MKULIMA SMART AI - FINAL STABLE VERSION
  * Developer: Nashon Alfred
- * Features: WhatsApp Integration, AI Chat, Scanner, Soil Test, Market Prices
+ * Features: WhatsApp Integration, AI Chat (v1beta FIX), Scanner, Soil Test, Market Prices
  */
 
 const GEMINI_API_KEY = "AIzaSyB3R_geIR-seSQ0eQZ65DCVpGxeUHJkT5I";
@@ -70,7 +70,7 @@ async function generateData() {
     document.getElementById("cropCard").style.display = "flex";
 }
 
-// 5. 💬 AI CHAT NA WHATSAPP BUTTON (FIXED URL)
+// 5. 💬 AI CHAT NA WHATSAPP BUTTON (FIXED KWA KUTUMIA v1beta)
 async function askAI() {
     const input = document.getElementById("chatInput");
     const windowChat = document.getElementById("chatWindow");
@@ -81,11 +81,11 @@ async function askAI() {
     input.value = "";
     
     const loadingId = "load-" + Date.now();
-    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Inatafuta majibu...</span></div>`;
+    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Bwana Shamba anafikiria...</span></div>`;
     windowChat.scrollTop = windowChat.scrollHeight;
 
     try {
-        // MABADILIKO: Tumetumia v1beta kwa ajili ya gemini-1.5-flash
+        // HAPA NDIPO FIX ILIPO: Tumetumia v1beta badala ya v1
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -98,14 +98,14 @@ async function askAI() {
             const aiText = data.candidates[0].content.parts[0].text;
             
             // Button ya WhatsApp
-            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari Nashon, nina swali kuhusu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">Ongea na Bwana Shamba WhatsApp</a>`;
+            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari, nina swali kuhusu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">Ongea na Bwana Shamba WhatsApp</a>`;
             
             document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiText} ${waButton}</span>`;
         } else {
             document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Kosa: ${data.error ? data.error.message : "Jaribu tena."}</span>`;
         }
     } catch (err) {
-        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Hitilafu: Angalia kama internet imewaka.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Hitilafu: Hakikisha internet imewaka.</span>`;
     }
     windowChat.scrollTop = windowChat.scrollHeight;
 }
