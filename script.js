@@ -149,3 +149,29 @@ window.onload = () => {
     loadMarket(); 
     startAI(); 
 };
+// 6. MFUMO WA CHAT (AI CHATBOT)
+function askAI() {
+    const input = document.getElementById("chatInput");
+    const window = document.getElementById("chatWindow");
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    // Ongeza ujumbe wa mtumiaji kwenye kioo
+    window.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block">${message}</span></div>`;
+    input.value = "";
+
+    // Jibu la AI (Simulation)
+    setTimeout(() => {
+        let response = "Samahani, naendelea kujifunza kuhusu hilo. Jaribu kuuliza kuhusu mbolea, mbegu, au wadudu.";
+        
+        if(message.toLowerCase().includes("mbolea")) {
+            response = "Mbolea za asili (samadi) ni bora kwa kurudisha rutuba ya udongo kwa muda mrefu.";
+        } else if(message.toLowerCase().includes("wadudu")) {
+            response = "Ili kudhibiti wadudu, hakikisha unakagua shamba kila asubuhi na kutumia dawa zilizoidhinishwa.";
+        }
+
+        window.innerHTML += `<div class="mb-2"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm"><b>AI:</b> ${response}</span></div>`;
+        window.scrollTop = window.scrollHeight; // Inashusha chat chini kabisa
+    }, 1000);
+}
