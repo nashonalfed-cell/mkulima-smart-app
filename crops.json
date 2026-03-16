@@ -69,11 +69,11 @@
   },
   "maharage": {
     "picha": "https://images.unsplash.com/photo-1551462147-ff29053fad31?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Maharage:</b> Ni chanzo kizuri cha protini na hustawi vizuri kwenye udongo usiotuamisha maji. <br><b>Ushauri:</b> Panda kwa nafasi ya 50cm kwa 10cm au 50cm kwa 20cm kulingana na aina ya mbegu. Hakikisha unadhibiti wadudu kama 'aphids' na magonjwa ya ukungu wakati wa maua ili kupata mavuno mengi."
+    "maelezo": "<b>Maharage:</b> Ni chanzo kizuri cha protini na hustawi vizuri kwenye udongo usiotuamisha maji. <br><b>Ushauri:</b> Panda kwa nafasi ya 50cm kwa 10cm au 50cm kwa 20cm kulingana na aina ya mbegu. Hakikisha unadhibiti wadudu kama "aphids" na magonjwa ya ukungu wakati wa maua ili kupata mavuno mengi."
   },
   "dengu": {
     "picha": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Dengu:</b> Ni zao linalohimili ukame na hustawi vizuri kwenye unyevu wa akiba ardhini baada ya mvua kukata. <br><b>Ushauri:</b> Panda wakati udongo bado una unyevu (mwishoni mwa msimu wa mvua). Inahitaji udongo usiotuamisha maji na udhibiti wa wadudu waharibifu kama 'pod borers' wakati wa kutoa maua na matunda."
+    "maelezo": "<b>Dengu:</b> Ni zao linalohimili ukame na hustawi vizuri kwenye unyevu wa akiba ardhini baada ya mvua kukata. <br><b>Ushauri:</b> Panda wakati udongo bado una unyevu (mwishoni mwa msimu wa mvua). Inahitaji udongo usiotuamisha maji na udhibiti wa wadudu waharibifu kama "pod borers" wakati wa kutoa maua na matunda."
   },
   "choroko": {
     "picha": "https://images.unsplash.com/photo-1547496613-4e193f038141?auto=format&fit=crop&w=800",
@@ -125,7 +125,7 @@
   },
   "arrowroot": {
     "picha": "https://images.unsplash.com/photo-1621255562768-d3637255146c?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Arrowroot (Nduma):</b> Hustawi kando kando ya vyanzo vya maji au maeneo yenye unyevu wa kudumu. <br><b>Ushauri:</b> Ni zao bora kwa afya ya mfumo wa mmeng'enyo wa chakula. Hakikisha unatumia mbolea ya samadi kuboresha udongo."
+    "maelezo": "<b>Arrowroot (Nduma):</b> Hustawi kando kando ya vyanzo vya maji au maeneo yenye unyevu wa kudumu. <br><b>Ushauri:</b> Ni zao bora kwa afya ya mfumo wa mmeng"enyo wa chakula. Hakikisha unatumia mbolea ya samadi kuboresha udongo."
   },
   "kisamvu": {
     "picha": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
@@ -253,7 +253,7 @@
   },
   "tikiti maji": {
     "picha": "https://images.unsplash.com/photo-1587049633562-ad300263690d?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Tikiti Maji:</b> Hustawi kwenye udongo wa kichanga na joto la kutosha. <br><b>Ushauri:</b> Inahitaji maji mengi wakati wa ukuaji. Tumia mbolea ya 'Booster' wakati wa kutoa maua ili matunda yawe makubwa na matamu zaidi."
+    "maelezo": "<b>Tikiti Maji:</b> Hustawi kwenye udongo wa kichanga na joto la kutosha. <br><b>Ushauri:</b> Inahitaji maji mengi wakati wa ukuaji. Tumia mbolea ya "Booster" wakati wa kutoa maua ili matunda yawe makubwa na matamu zaidi."
   },
   "tikiti tamu": {
     "picha": "https://images.unsplash.com/photo-1595124253349-207047c24482?auto=format&fit=crop&w=800",
@@ -277,7 +277,7 @@
   },
   "durian": {
     "picha": "https://images.unsplash.com/photo-1605658639598-a62176461c3b?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Durian:</b> Inajulikana kama 'Mfalme wa Matunda' kutokana na harufu yake kali na ladha ya kipekee. <br><b>Ushauri:</b> Hustawi maeneo ya joto na yenye mvua nyingi. Inahitaji udongo wenye rutuba ya asili (samadi) kwa wingi."
+    "maelezo": "<b>Durian:</b> Inajulikana kama "Mfalme wa Matunda" kutokana na harufu yake kali na ladha ya kipekee. <br><b>Ushauri:</b> Hustawi maeneo ya joto na yenye mvua nyingi. Inahitaji udongo wenye rutuba ya asili (samadi) kwa wingi."
   },
   "lychee": {
     "picha": "https://images.unsplash.com/photo-1533220551065-83e9549f6a7d?auto=format&fit=crop&w=800",
@@ -297,11 +297,11 @@
   },
   "pamba": {
     "picha": "https://images.unsplash.com/photo-1594904351111-a072f80b1a71?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Pamba:</b> Ni 'dhahabu nyeupe' ya Tanzania, inayolimwa sana kanda ya ziwa. <br><b>Ushauri:</b> Panda mapema msimu wa mvua unapoanza. Dhibiti wadudu (bollworms) kwa kupiga dawa kwa wakati ili kulinda vitumba vya pamba."
+    "maelezo": "<b>Pamba:</b> Ni "dhahabu nyeupe" ya Tanzania, inayolimwa sana kanda ya ziwa. <br><b>Ushauri:</b> Panda mapema msimu wa mvua unapoanza. Dhibiti wadudu (bollworms) kwa kupiga dawa kwa wakati ili kulinda vitumba vya pamba."
   },
   "kahawa": {
     "picha": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Kahawa:</b> Zao kuu la biashara maeneo ya milimani. <br><b>Ushauri:</b> Hakikisha unapunguza kivuli kikizidi na fanya 'pruning' mara kwa mara. Inahitaji udongo wenye asidi kidogo na mbolea ya samadi kwa wingi."
+    "maelezo": "<b>Kahawa:</b> Zao kuu la biashara maeneo ya milimani. <br><b>Ushauri:</b> Hakikisha unapunguza kivuli kikizidi na fanya "pruning" mara kwa mara. Inahitaji udongo wenye asidi kidogo na mbolea ya samadi kwa wingi."
   },
   "chai": {
     "picha": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800",
@@ -357,7 +357,7 @@
   },
   "karanga": {
     "picha": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
-    "maelezo": "<b>Karanga:</b> Zao la mikunde linalozalisha mbegu za mafuta ardhini. <br><b>Ushauri:</b> Inahitaji udongo wa kichanga tifutifu ili kuruhusu 'pegs' kuingia ardhini kwa urahisi. Palilia mapema kabla ya mmea kuanza kutoa maua."
+    "maelezo": "<b>Karanga:</b> Zao la mikunde linalozalisha mbegu za mafuta ardhini. <br><b>Ushauri:</b> Inahitaji udongo wa kichanga tifutifu ili kuruhusu "pegs" kuingia ardhini kwa urahisi. Palilia mapema kabla ya mmea kuanza kutoa maua."
   },
   "vanila": {
     "picha": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
@@ -418,7 +418,7 @@
   },
   "rice": {
     "image": "https://images.unsplash.com/photo-1536331153400-02985479ec71?auto=format&fit=crop&w=800",
-    "description": "<b>Rice:</b> Thrives in lowland areas with sufficient water. <br><b>Advice:</b> Weed early to prevent weeds from absorbing the plant's nutrients."
+    "description": "<b>Rice:</b> Thrives in lowland areas with sufficient water. <br><b>Advice:</b> Weed early to prevent weeds from absorbing the plant"s nutrients."
   },
   "onion": {
     "image": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800",
@@ -454,7 +454,7 @@
   },
   "beans": {
     "image": "https://images.unsplash.com/photo-1551462147-ff29053fad31?auto=format&fit=crop&w=800",
-    "description": "<b>Beans:</b> A good source of protein; grows best in soil that doesn't hold stagnant water. <br><b>Advice:</b> Control aphids and fungal diseases during flowering for high yields."
+    "description": "<b>Beans:</b> A good source of protein; grows best in soil that doesn"t hold stagnant water. <br><b>Advice:</b> Control aphids and fungal diseases during flowering for high yields."
   },
   "cassava": {
     "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
@@ -506,7 +506,7 @@
   },
   "lupin": {
     "image": "https://images.unsplash.com/photo-1508610332882-720875953051?auto=format&fit=crop&w=800",
-    "description": "<b>Lupin:</b> A legume crop that tolerates cold weather and acidic soils. <br><b>Advice:</b> Widely used for livestock feed and soil fertility improvement. Ensure you use 'sweet lupins' for human consumption."
+    "description": "<b>Lupin:</b> A legume crop that tolerates cold weather and acidic soils. <br><b>Advice:</b> Widely used for livestock feed and soil fertility improvement. Ensure you use "sweet lupins" for human consumption."
   },
   "cassava": {
     "image": "https://images.unsplash.com/photo-1594315611252-7824174c83e2?auto=format&fit=crop&w=800",
@@ -578,7 +578,7 @@
   },
 "watermelon": {
     "image": "https://images.unsplash.com/photo-1587049633562-ad300263690d?auto=format&fit=crop&w=800",
-    "description": "<b>Watermelon:</b> Thrives in sandy soil and warm temperatures. <br><b>Advice:</b> Requires plenty of water during growth. Use 'Booster' fertilizer during flowering to ensure large and sweet fruits."
+    "description": "<b>Watermelon:</b> Thrives in sandy soil and warm temperatures. <br><b>Advice:</b> Requires plenty of water during growth. Use "Booster" fertilizer during flowering to ensure large and sweet fruits."
   },
   "sweet melon": {
     "image": "https://images.unsplash.com/photo-1595124253349-207047c24482?auto=format&fit=crop&w=800",
@@ -602,7 +602,7 @@
   },
   "durian": {
     "image": "https://images.unsplash.com/photo-1605658639598-a62176461c3b?auto=format&fit=crop&w=800",
-    "description": "<b>Durian:</b> Known as the 'King of Fruits' for its strong aroma and unique taste. <br><b>Advice:</b> Thrives in tropical areas with high rainfall. Requires plenty of organic manure."
+    "description": "<b>Durian:</b> Known as the "King of Fruits" for its strong aroma and unique taste. <br><b>Advice:</b> Thrives in tropical areas with high rainfall. Requires plenty of organic manure."
   },
   "lychee": {
     "image": "https://images.unsplash.com/photo-1533220551065-83e9549f6a7d?auto=format&fit=crop&w=800",
@@ -622,7 +622,7 @@
   },
   "cotton": {
     "image": "https://images.unsplash.com/photo-1594904351111-a072f80b1a71?auto=format&fit=crop&w=800",
-    "description": "<b>Cotton:</b> Known as 'White Gold' in Tanzania, widely grown in the Lake Zone. <br><b>Advice:</b> Plant early at the start of the rainy season. Control bollworms on time to protect the cotton bolls."
+    "description": "<b>Cotton:</b> Known as "White Gold" in Tanzania, widely grown in the Lake Zone. <br><b>Advice:</b> Plant early at the start of the rainy season. Control bollworms on time to protect the cotton bolls."
   },
   "coffee": {
     "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800",
@@ -630,7 +630,7 @@
   },
   "tea": {
     "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800",
-    "description": "<b>Tea:</b> Thrives in cool areas with high rainfall year-round. <br><b>Advice:</b> Requires acidic soil (pH 4.5 - 5.5). Harvest 'two leaves and a bud' for the best tea quality."
+    "description": "<b>Tea:</b> Thrives in cool areas with high rainfall year-round. <br><b>Advice:</b> Requires acidic soil (pH 4.5 - 5.5). Harvest "two leaves and a bud" for the best tea quality."
   },
   "cashew nuts": {
     "image": "https://images.unsplash.com/photo-1509919753148-39fe0df47405?auto=format&fit=crop&w=800",
@@ -682,7 +682,7 @@
   },
   "peanuts": {
     "image": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
-    "description": "<b>Peanuts (Groundnuts):</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Needs sandy-loam soil to allow 'pegs' to enter the ground easily. Weed before flowering begins."
+    "description": "<b>Peanuts (Groundnuts):</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Needs sandy-loam soil to allow "pegs" to enter the ground easily. Weed before flowering begins."
   },
   "vanilla": {
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
@@ -690,7 +690,7 @@
   },
   "peanuts": {
     "image": "https://images.unsplash.com/photo-1567333160914-1b0aee708b3a?auto=format&fit=crop&w=800",
-    "description": "<b>Peanuts:</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Requires sandy loam soil to allow 'pegs' to enter the ground easily. Weed early before the plant starts flowering."
+    "description": "<b>Peanuts:</b> A legume crop that produces oilseeds underground. <br><b>Advice:</b> Requires sandy loam soil to allow "pegs' to enter the ground easily. Weed early before the plant starts flowering."
   },
   "vanilla": {
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800",
