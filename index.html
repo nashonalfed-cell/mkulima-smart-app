@@ -36,24 +36,23 @@
             margin-bottom: 20px;
             border-left: 6px solid #198754; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            transition: 0.3s;
         }
 
-        .guide-card:hover { transform: translateY(-5px); }
-
-        .btn-success { background-color: #198754 !important; border: none !important; font-weight: 600; }
-
-        #previewImg { border: 3px solid #198754; max-width: 100%; border-radius: 10px; }
-
-        /* Mtindo wa Chat Uonekane vizuri */
         #chatWindow {
             background-color: #ffffff;
-            border: 1px solid #eee;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
+            height: 350px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
         }
+
+        .user-msg { background: #007bff; color: white; padding: 10px; border-radius: 15px 15px 0 15px; margin-bottom: 10px; align-self: flex-end; max-width: 80%; }
+        .ai-msg { background: #f1f1f1; color: #333; padding: 10px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; align-self: flex-start; max-width: 80%; border: 1px solid #ddd; }
         
-        .user-msg { background: #007bff; color: white; padding: 10px; border-radius: 15px 15px 0 15px; margin-bottom: 10px; display: inline-block; max-width: 80%; }
-        .ai-msg { background: #f1f1f1; color: #333; padding: 10px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; display: inline-block; max-width: 80%; border: 1px solid #ddd; }
+        #previewImg { border: 3px solid #198754; border-radius: 10px; max-width: 100%; }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -63,20 +62,16 @@
 
     <div class="hero-section text-center mb-4">
         <h1 class="fw-bold">🚜 MKULIMA SMART AI</h1>
-        <p class="lead">Scanner ya Magonjwa | Pima Udongo | Bwana Shamba AI</p>
+        <p class="lead">Ushauri wa Kilimo kwa Teknolojia ya AI</p>
     </div>
 
     <div class="container pb-5">
         
         <div class="card shadow-sm mb-4 border-0 rounded-4">
-            <div class="card-header bg-dark text-warning fw-bold py-3 rounded-top-4">
-                💰 BEI ZA MASOKO LEO
-            </div>
+            <div class="card-header bg-dark text-warning fw-bold py-3 rounded-top-4">💰 BEI ZA MASOKO LEO</div>
             <div class="table-responsive">
                 <table class="table mb-0 align-middle">
-                    <thead class="table-light">
-                        <tr><th>Zao</th><th>Soko</th><th>Bei</th><th>Hali</th></tr>
-                    </thead>
+                    <thead><tr><th>Zao</th><th>Soko</th><th>Bei</th><th>Hali</th></tr></thead>
                     <tbody id="marketTable"></tbody>
                 </table>
             </div>
@@ -115,22 +110,15 @@
                 <button onclick="startVoice()" class="btn btn-outline-secondary">🎤</button>
                 <button onclick="generateData()" class="btn btn-success px-4">TAFUTA</button>
             </div>
-            
-            <div id="loadingSpinner" class="text-center my-4" style="display:none;">
-                <div class="spinner-border text-success" role="status"></div>
-            </div>
-
+            <div id="loadingSpinner" class="text-center my-4" style="display:none;"><div class="spinner-border text-success"></div></div>
             <div id="cropCard" class="mt-4" style="display:none;">
                 <div class="card border-0 shadow-sm overflow-hidden rounded-4">
                     <div class="row g-0">
-                        <div class="col-md-5">
-                            <img id="cropImage" src="" class="img-fluid h-100" style="object-fit: cover; min-height: 250px;">
-                        </div>
-                        <div class="col-md-7 p-4 bg-white">
+                        <div class="col-md-5"><img id="cropImage" src="" class="img-fluid h-100" style="object-fit: cover;"></div>
+                        <div class="col-md-7 p-4">
                             <h2 id="cropTitle" class="text-success fw-bold"></h2>
-                            <div id="infoArea" class="info-content"></div>
-                            <hr>
-                            <div id="videoArea"></div>
+                            <div id="infoArea"></div>
+                            <hr><div id="videoArea"></div>
                         </div>
                     </div>
                 </div>
@@ -139,15 +127,17 @@
 
         <div class="guide-card mt-4" style="border-left-color: #ffc107;">
             <h5 class="fw-bold text-dark mb-3">💬 Chati na Bwana Shamba AI</h5>
-            <div id="chatWindow" class="p-3 rounded-4 mb-3" style="height: 350px; overflow-y: auto; border: 1px solid #ddd; display: flex; flex-direction: column;">
-                <p class="text-muted small">Karibu! Uliza swali lolote kuhusu kilimo hapa chini...</p>
+            <div id="chatWindow" class="rounded-4 mb-3">
+                <p class="text-muted small">Habari! Uliza chochote kuhusu kilimo hapa...</p>
             </div>
             <div class="input-group">
-                <input type="text" id="chatInput" class="form-control" placeholder="Andika swali lako hapa..." onkeypress="if(event.key === 'Enter') askAI()">
+                <input type="text" id="chatInput" class="form-control" placeholder="Andika hapa..." onkeypress="if(event.key === 'Enter') askAI()">
                 <button onclick="askAI()" class="btn btn-warning fw-bold">TUMA</button>
             </div>
         </div>
 
-    </div> <script src="script.js"></script>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
