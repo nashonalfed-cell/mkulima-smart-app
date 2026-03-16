@@ -1,11 +1,11 @@
 /**
- * MKULIMA SMART AI - FINAL STABLE VERSION
+ * MKULIMA SMART AI - FINAL STABLE
  * Developer: Nashon Alfred
- * API: Gemini 1.5 Flash
+ * API Key Status: Updated
  */
 
 const nambaYaBwanaShamba = "255797818582";
-const GEMINI_API_KEY = "AIzaSyB3R_geIR-seSQ0eQZ65DCVpGxeUHJkT5I"; // API Key yako mpya
+const GEMINI_API_KEY = "AIzaSyB3R_geIR-seSQ0eQZ65DCVpGxeUHJkT5I";
 
 // 1. BEI ZA MASOKO
 const marketData = [
@@ -23,18 +23,17 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. AI SCANNER
+// 2. AI SCANNER (TensorFlow)
 let net;
 async function startAI() { 
-    try { if (!net) net = await mobilenet.load(); } catch (e) { console.log("AI Load Error"); }
+    try { if (!net) net = await mobilenet.load(); } catch (e) { console.log("AI Model Load Fail"); }
 }
 
 async function analyzeLeaf() {
     const resultDiv = document.getElementById('scanResult');
     const img = document.getElementById('previewImg');
     const predictions = await net.classify(img);
-    const res = predictions[0].className.toLowerCase();
-    resultDiv.innerHTML = `<div class="alert alert-info mt-2">Matokeo: ${res}</div>`;
+    resultDiv.innerHTML = `<div class="alert alert-info mt-2">Nimeona: ${predictions[0].className}</div>`;
 }
 
 document.getElementById('imageUpload').addEventListener('change', function(e) {
@@ -52,7 +51,9 @@ function testSoil() {
     const color = document.getElementById('soilColor').value;
     const res = document.getElementById('soilResult');
     res.style.display = "block";
-    let advice = color === "black" ? "Udongo Mweusi: Rutuba nyingi sana." : color === "red" ? "Udongo Mwekundu: Ongeza samadi." : "Udongo wa Mchanga: Unafaa kwa tikiti.";
+    let advice = color === "black" ? "Udongo Mweusi: Rutuba nyingi. Lima Mahindi/Mbogamboga." : 
+                 color === "red" ? "Udongo Mwekundu: Lima Kahawa/Viazi. Ongeza samadi." : 
+                 "Udongo wa Mchanga: Unafaa kwa Tikiti na Muhogo.";
     res.innerHTML = `<strong>Ushauri:</strong> ${advice}`;
 }
 
@@ -68,10 +69,10 @@ async function generateData() {
     try {
         const response = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
         const data = await response.json();
-        document.getElementById("infoArea").innerHTML = data.extract ? `<p>${data.extract}</p>` : `<p>Uliza maelezo ya ${query} kwenye chat hapo chini.</p>`;
-    } catch (e) { document.getElementById("infoArea").innerHTML = "Hitilafu ya mtandao."; }
+        document.getElementById("infoArea").innerHTML = data.extract ? `<p>${data.extract}</p>` : `<p>Tumia Chat hapo chini kupata mwongozo wa ${query}.</p>`;
+    } catch (e) { document.getElementById("infoArea").innerHTML = "Internet iko chini."; }
     
-    document.getElementById("videoArea").innerHTML = `<a href="https://www.youtube.com/results?search_query=kilimo+cha+${query}" target="_blank" class="btn btn-outline-danger w-100">TAZAMA VIDEO</a>`;
+    document.getElementById("videoArea").innerHTML = `<a href="https://www.youtube.com/results?search_query=kilimo+cha+${query}" target="_blank" class="btn btn-outline-danger w-100">VIDEO ZA MAFUNZO</a>`;
     document.getElementById("loadingSpinner").style.display = "none";
     document.getElementById("cropCard").style.display = "flex";
 }
@@ -87,16 +88,17 @@ function startVoice() {
     recognition.start();
 }
 
-// 6. 💬 CHATI NA GEMINI AI (THE REAL DEAL)
+// 6. 💬 GEMINI CHAT (REFIZED & FIXED)
 async function askAI() {
     const input = document.getElementById("chatInput");
     const windowChat = document.getElementById("chatWindow");
     const msg = input.value.trim();
     if (!msg) return;
 
-    // Onyesha ujumbe wa mkulima
-    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block">${msg}</span></div>`;
+    // Onyesha ujumbe wa mtumiaji
+    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block shadow-sm" style="max-width: 80%;">${msg}</span></div>`;
     input.value = "";
+    
     const loadingId = "load-" + Date.now();
     windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Inafikiria...</span></div>`;
     windowChat.scrollTop = windowChat.scrollHeight;
@@ -106,14 +108,21 @@ async function askAI() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: `Wewe ni mtaalamu wa kilimo (Bwana Shamba) nchini Tanzania. Jibu swali hili kwa Kiswahili: ${msg}` }] }]
+                contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili fasaha swali hili: ${msg}` }] }]
             })
         });
+
         const data = await res.json();
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiResponse}</span>`;
+        
+        if (data.candidates && data.candidates[0].content) {
+            const aiText = data.candidates[0].content.parts[0].text;
+            document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiText}</span>`;
+        } else {
+            // Hapa itatusaidia kuona kama API Key imekataliwa
+            document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Kosa: ${data.error ? data.error.message : "API Key haijakubaliwa bado."}</span>`;
+        }
     } catch (err) {
-        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">AI imekwama. Hakikisha API Key iko sawa na una bando.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Hitilafu: Angalia bando lako la internet.</span>`;
     }
     windowChat.scrollTop = windowChat.scrollHeight;
 }
