@@ -1,18 +1,53 @@
 /**
- * MKULIMA SMART AI - FULL VERSION 4.0
+ * MKULIMA SMART AI - FULL VERSION (FIXED SEARCH)
  * Developer: Nashon Alfred
- * Features: AI Chat, Leaf Scanner, Soil Test, Market Prices
  */
 
 const GEMINI_API_KEY = "AIzaSyDnnwU81GTQpGxPECI5UEI7FrNL1MIaIPw"; 
 const nambaYaBwanaShamba = "255797818582";
 
-// 1. BEI ZA MASOKO
+// 1. DATA YA MAZAO (Kwa ajili ya Search Button)
+const cropData = {
+    "mahindi": {
+        picha: "https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=400",
+        maelezo: "Mahindi yanastawi vizuri kwenye udongo wenye rutuba na mahitaji ya maji ya wastani."
+    },
+    "mpunga": {
+        picha: "https://images.unsplash.com/photo-1536331153400-02985479ec71?auto=format&fit=crop&w=400",
+        maelezo: "Mpunga unahitaji maji mengi na udongo wa kichanga au mfinyanzi unaohifadhi unyevu."
+    },
+    "nyanya": {
+        picha: "https://images.unsplash.com/photo-1546473530-9a275ca7f15d?auto=format&fit=crop&w=400",
+        maelezo: "Nyanya zinahitaji uangalizi wa karibu dhidi ya wadudu na magonjwa ya ukungu."
+    }
+};
+
+// 🔍 TAFUTA ZAO (Crop Search Function)
+function searchCrop() {
+    const searchInput = document.querySelector('input[type="text"]').value.toLowerCase().trim();
+    const displayArea = document.getElementById('chatWindow'); // Unaweza kubadilisha iende sehemu unayotaka
+
+    if (cropData[searchInput]) {
+        const crop = cropData[searchInput];
+        displayArea.innerHTML = `
+            <div class="card mb-3 shadow-sm border-0 animate__animated animate__fadeIn">
+                <img src="${crop.picha}" class="card-img-top rounded" alt="${searchInput}">
+                <div class="card-body">
+                    <h5 class="card-title text-success text-uppercase">${searchInput}</h5>
+                    <p class="card-text">${crop.maelezo}</p>
+                </div>
+            </div>
+        ` + displayArea.innerHTML;
+    } else {
+        alert("Samahani, zao hilo halijapatikana. Jaribu: Mahindi, Mpunga, au Nyanya.");
+    }
+}
+
+// 2. BEI ZA MASOKO
 const marketData = [
     {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑", c: "text-success"},
     {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -", c: "text-secondary"},
-    {z: "Nyanya", s: "Kilombero", b: "25k/Sado", h: "Shuka ↓", c: "text-danger"},
-    {z: "Ufuta", s: "Lindi", b: "3,350/kg", h: "Panda ↑", c: "text-success"}
+    {z: "Nyanya", s: "Kilombero", b: "25k/Sado", h: "Shuka ↓", c: "text-danger"}
 ];
 
 function loadMarket() {
@@ -24,18 +59,18 @@ function loadMarket() {
     if (table) table.innerHTML = rows;
 }
 
-// 2. 💬 AI CHAT NA WHATSAPP BUTTON
+// 3. 💬 AI CHAT
 async function askAI() {
     const input = document.getElementById("chatInput");
     const windowChat = document.getElementById("chatWindow");
     const msg = input.value.trim();
     if (!msg) return;
 
-    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block shadow-sm" style="max-width: 80%;">${msg}</span></div>`;
+    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block shadow-sm">${msg}</span></div>`;
     input.value = "";
     
     const loadingId = "load-" + Date.now();
-    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Bwana Shamba anajibu...</span></div>`;
+    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Inatafuta majibu...</span></div>`;
     windowChat.scrollTop = windowChat.scrollHeight;
 
     try {
@@ -43,69 +78,29 @@ async function askAI() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili fasaha: ${msg}` }] }]
+                contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }] }]
             })
         });
 
         const data = await response.json();
-        if (data.candidates && data.candidates[0].content) {
+        if (data.candidates) {
             const aiText = data.candidates[0].content.parts[0].text;
-            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari, nina swali kuhusu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">WhatsApp Bwana Shamba</a>`;
+            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari, swali langu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">WhatsApp Bwana Shamba</a>`;
             document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiText} ${waButton}</span>`;
-        } else {
-            document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Kosa: Jaribu tena baadae.</span>`;
         }
     } catch (err) {
-        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Hitilafu ya mtandao.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Jaribu tena baadae.</span>`;
     }
     windowChat.scrollTop = windowChat.scrollHeight;
 }
 
-// 3. 🔍 AI LEAF SCANNER (TensorFlow)
-let net;
-async function startScanner() { 
-    try { 
-        if (typeof mobilenet !== 'undefined') {
-            net = await mobilenet.load(); 
-        }
-    } catch (e) { console.error("Scanner Load Error:", e); }
-}
-
-async function analyzeLeaf() {
-    if (!net) return;
-    const resultDiv = document.getElementById('scanResult');
-    const img = document.getElementById('previewImg');
-    const predictions = await net.classify(img);
-    resultDiv.innerHTML = `<div class="alert alert-info mt-2">Nimegundua: <span class="text-primary fw-bold">${predictions[0].className}</span></div>`;
-}
-
-// 4. 🌱 SOIL TEST (Ushauri wa Udongo)
-function testSoil() {
-    const color = document.getElementById('soilColor').value;
-    const res = document.getElementById('soilResult');
-    res.style.display = "block";
-    let advice = color === "black" ? "✅ Udongo Mweusi: Una rutuba sana. Lima Mahindi au Mbogamboga." : 
-                 color === "red" ? "⚠️ Udongo Mwekundu: Ongeza samadi au mbolea ya asili. Lima Viazi au Kahawa." : 
-                 "⚠️ Udongo wa Mchanga: Unafaa zaidi kwa Tikiti Maji na Karanga.";
-    res.innerHTML = `<strong>Ushauri:</strong> ${advice}`;
-}
-
-// 5. INITIALIZATION (Kuwasha kila kitu kianze kufanya kazi)
+// 4. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     loadMarket();
-    startScanner();
-
-    // Kuweka picha ya jani inapochaguliwa
-    const imageInput = document.getElementById('imageUpload');
-    if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                document.getElementById('previewImg').src = ev.target.result;
-                document.getElementById('imagePreviewContainer').style.display = 'block';
-                setTimeout(analyzeLeaf, 1500); // Inasubiri sekunde 1.5 kuchanganua
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        });
+    
+    // Unganisha kitufe cha TAFUTA na function ya searchCrop
+    const searchBtn = document.querySelector('.btn-success.ms-2'); // Inatafuta button ya kijani juu
+    if (searchBtn) {
+        searchBtn.onclick = searchCrop;
     }
 });
