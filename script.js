@@ -1,76 +1,69 @@
 /**
- * MKULIMA SMART AI - FULL VERSION (FIXED SEARCH)
- * Developer: Nashon Alfred
+ * MKULIMA SMART AI - SCRIPT YA UHUSIANO NA INDEX.HTML
+ * Dev: Nashon Alfred
  */
 
 const GEMINI_API_KEY = "AIzaSyDnnwU81GTQpGxPECI5UEI7FrNL1MIaIPw"; 
-const nambaYaBwanaShamba = "255797818582";
 
-// 1. DATA YA MAZAO (Kwa ajili ya Search Button)
-const cropData = {
+// 1. DATA YA MAZAO (Picha na Maelezo)
+const cropDatabase = {
     "mahindi": {
-        picha: "https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=400",
-        maelezo: "Mahindi yanastawi vizuri kwenye udongo wenye rutuba na mahitaji ya maji ya wastani."
+        picha: "https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=800",
+        maelezo: "Mahindi yanahitaji udongo wenye rutuba na mbolea ya DAP wakati wa kupanda."
     },
     "mpunga": {
-        picha: "https://images.unsplash.com/photo-1536331153400-02985479ec71?auto=format&fit=crop&w=400",
-        maelezo: "Mpunga unahitaji maji mengi na udongo wa kichanga au mfinyanzi unaohifadhi unyevu."
+        picha: "https://images.unsplash.com/photo-1536331153400-02985479ec71?auto=format&fit=crop&w=800",
+        maelezo: "Mpunga unastawi vizuri kwenye maeneo yenye maji mengi na udongo wa mfinyanzi."
     },
     "nyanya": {
-        picha: "https://images.unsplash.com/photo-1546473530-9a275ca7f15d?auto=format&fit=crop&w=400",
-        maelezo: "Nyanya zinahitaji uangalizi wa karibu dhidi ya wadudu na magonjwa ya ukungu."
+        picha: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800",
+        maelezo: "Nyanya zinahitaji mwanga wa jua wa kutosha na dawa za kuzuia ukungu (fungicides)."
     }
 };
 
-// 🔍 TAFUTA ZAO (Crop Search Function)
-function searchCrop() {
-    const searchInput = document.querySelector('input[type="text"]').value.toLowerCase().trim();
-    const displayArea = document.getElementById('chatWindow'); // Unaweza kubadilisha iende sehemu unayotaka
+// 🔍 FUNCTION YA KUTAFUTA ZAO (Hii ndiyo generateData)
+function generateData() {
+    const input = document.getElementById('userCrop').value.toLowerCase().trim();
+    const cropCard = document.getElementById('cropCard');
+    const cropTitle = document.getElementById('cropTitle');
+    const cropImage = document.getElementById('cropImage');
+    const infoArea = document.getElementById('infoArea');
+    const loading = document.getElementById('loadingSpinner');
 
-    if (cropData[searchInput]) {
-        const crop = cropData[searchInput];
-        displayArea.innerHTML = `
-            <div class="card mb-3 shadow-sm border-0 animate__animated animate__fadeIn">
-                <img src="${crop.picha}" class="card-img-top rounded" alt="${searchInput}">
-                <div class="card-body">
-                    <h5 class="card-title text-success text-uppercase">${searchInput}</h5>
-                    <p class="card-text">${crop.maelezo}</p>
-                </div>
-            </div>
-        ` + displayArea.innerHTML;
-    } else {
-        alert("Samahani, zao hilo halijapatikana. Jaribu: Mahindi, Mpunga, au Nyanya.");
+    if (!input) {
+        alert("Tafadhali andika jina la zao!");
+        return;
     }
+
+    loading.style.display = "block";
+    cropCard.style.display = "none";
+
+    setTimeout(() => {
+        loading.style.display = "none";
+        if (cropDatabase[input]) {
+            const data = cropDatabase[input];
+            cropTitle.innerText = input.toUpperCase();
+            cropImage.src = data.picha;
+            infoArea.innerHTML = `<p class="mt-3">${data.maelezo}</p>`;
+            cropCard.style.display = "block";
+        } else {
+            alert("Samahani, mwongozo wa zao hili bado haujaongezwa. Jaribu: mahindi, mpunga, au nyanya.");
+        }
+    }, 1000);
 }
 
-// 2. BEI ZA MASOKO
-const marketData = [
-    {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑", c: "text-success"},
-    {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -", c: "text-secondary"},
-    {z: "Nyanya", s: "Kilombero", b: "25k/Sado", h: "Shuka ↓", c: "text-danger"}
-];
-
-function loadMarket() {
-    let rows = "";
-    marketData.forEach(m => {
-        rows += `<tr><td>${m.z}</td><td>${m.s}</td><td class="fw-bold">${m.b}</td><td class="${m.c} fw-bold">${m.h}</td></tr>`;
-    });
-    const table = document.getElementById('marketTable');
-    if (table) table.innerHTML = rows;
-}
-
-// 3. 💬 AI CHAT
+// 2. 💬 AI CHAT FUNCTION
 async function askAI() {
     const input = document.getElementById("chatInput");
     const windowChat = document.getElementById("chatWindow");
     const msg = input.value.trim();
     if (!msg) return;
 
-    windowChat.innerHTML += `<div class="mb-2 text-end"><span class="bg-primary text-white p-2 rounded-3 d-inline-block shadow-sm">${msg}</span></div>`;
+    windowChat.innerHTML += `<div class="user-msg">${msg}</div>`;
     input.value = "";
     
     const loadingId = "load-" + Date.now();
-    windowChat.innerHTML += `<div class="mb-2" id="${loadingId}"><span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> Inatafuta majibu...</span></div>`;
+    windowChat.innerHTML += `<div class="ai-msg" id="${loadingId}">Bwana Shamba anafikiria...</div>`;
     windowChat.scrollTop = windowChat.scrollHeight;
 
     try {
@@ -78,29 +71,40 @@ async function askAI() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu Tanzania. Jibu kwa Kiswahili: ${msg}` }] }]
+                contents: [{ parts: [{ text: `Wewe ni Bwana Shamba mtaalamu wa Tanzania. Jibu kwa Kiswahili fasaha na kutoa ushauri wa kitaalamu: ${msg}` }] }]
             })
         });
 
         const data = await response.json();
-        if (data.candidates) {
-            const aiText = data.candidates[0].content.parts[0].text;
-            const waButton = `<br><br><a href="https://wa.me/${nambaYaBwanaShamba}?text=Habari, swali langu: ${msg}" target="_blank" class="btn btn-sm btn-success fw-bold">WhatsApp Bwana Shamba</a>`;
-            document.getElementById(loadingId).innerHTML = `<span class="bg-white p-2 rounded-3 d-inline-block shadow-sm border"><b>AI:</b> ${aiText} ${waButton}</span>`;
-        }
+        const aiText = data.candidates[0].content.parts[0].text;
+        document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiText}`;
     } catch (err) {
-        document.getElementById(loadingId).innerHTML = `<span class="text-danger small">Jaribu tena baadae.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span class="text-danger">Samahani, kuna tatizo la mtandao.</span>`;
     }
     windowChat.scrollTop = windowChat.scrollHeight;
 }
 
-// 4. INITIALIZATION
+// 3. 🧪 SOIL TEST FUNCTION
+function testSoil() {
+    const color = document.getElementById('soilColor').value;
+    const res = document.getElementById('soilResult');
+    res.style.display = "block";
+    let advice = color === "black" ? "✅ Udongo Mweusi: Lima Mahindi au Mbogamboga." : 
+                 color === "red" ? "⚠️ Udongo Mwekundu: Lima Viazi au Kahawa." : 
+                 "⚠️ Udongo wa Mchanga: Unafaa kwa Karanga au Tikiti.";
+    res.innerHTML = `<strong>Ushauri:</strong> ${advice}`;
+}
+
+// 4. BEI ZA MASOKO (Initial Data)
 document.addEventListener('DOMContentLoaded', () => {
-    loadMarket();
-    
-    // Unganisha kitufe cha TAFUTA na function ya searchCrop
-    const searchBtn = document.querySelector('.btn-success.ms-2'); // Inatafuta button ya kijani juu
-    if (searchBtn) {
-        searchBtn.onclick = searchCrop;
-    }
+    const marketTable = document.getElementById('marketTable');
+    const prices = [
+        {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑"},
+        {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -"}
+    ];
+    let rows = "";
+    prices.forEach(p => {
+        rows += `<tr><td>${p.z}</td><td>${p.s}</td><td>${p.b}</td><td>${p.h}</td></tr>`;
+    });
+    marketTable.innerHTML = rows;
 });
