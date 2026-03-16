@@ -1,41 +1,45 @@
 import streamlit as st
 import json
 
-# Kazi ya kusoma database ya JSON
-def load_crops():
+# Muundo wa App
+st.set_page_config(page_title="Nashon Crop App", layout="wide")
+
+# Kazi ya kusoma JSON database
+@st.cache_data
+def load_db():
     try:
+        # Hakikisha jina hili linafanana na faili lako la .json
         with open('crops.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
-        st.error("Database file 'crops.json' not found!")
-        return {}
+        return "file_not_found"
+    except json.JSONDecodeError:
+        return "json_error"
 
-crops_db = load_crops()
+data = load_db()
 
-# Muonekano wa App
-st.set_page_config(page_title="Crop App", page_icon="🌱")
-st.title("🌱 Smart Crop Farming Advisor")
+st.title("🌱 Smart Crop Advisor")
 
-# Sehemu ya Search
-search_input = st.text_input("Search for a crop (e.g., Peanuts, Avocado, Maize):").lower().strip()
-
-if search_input:
-    # Tunatafuta zao ambalo jina lake linafanana na alichoandika mtumiaji
-    if search_input in crops_db:
-        crop_data = crops_db[search_input]
-        
-        # Kuonyesha Matokeo
-        st.subheader(f"Results for: {search_input.capitalize()}")
-        
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            st.image(crop_data['image'], use_container_width=True)
-        with col2:
-            st.markdown(crop_data['description'], unsafe_allow_html=True)
-    else:
-        st.warning("Sorry, that crop is not in our database yet. Try another one!")
+if data == "file_not_found":
+    st.error("Hitilafu: Faili la 'crops.json' halijaonekana GitHub.")
+elif data == "json_error":
+    st.error("Hitilafu: Kuna kosa la uandishi ndani ya 'crops.json' (angalia koma au mabano).")
 else:
-    st.info("Type the name of a crop above to get expert advice.")
+    # Sehemu ya Search
+    st.write("Karibu! Tafuta zao upate ushauri wa kitaalamu.")
+    search_query = st.text_input("Andika jina la zao (mfano: peanuts, avocado, mango):").lower().strip()
 
-# Footer fupi ya kitaalamu
-st.sidebar.info("This app helps farmers get quick advice on crops and modern farming techniques.")
+    if search_query:
+        if search_query in data:
+            crop = data[search_query]
+            col1, col2 = st.columns([1, 2])
+            
+            with col1:
+                st.image(crop['image'], use_container_width=True)
+            with col2:
+                st.markdown(f"### {search_query.capitalize()}")
+                st.markdown(crop['description'], unsafe_allow_html=True)
+        else:
+            st.warning("Samahani, zao hilo bado halipo kwenye database yetu.")
+    else:
+        st.info("Andika kitu kwenye sanduku la utafutaji hapo juu.")
