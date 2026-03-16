@@ -1,11 +1,12 @@
 /**
- * MKULIMA SMART AI - IMPROVED VERSION
+ * MKULIMA SMART AI - FULL FINAL VERSION
+ * Developer: Nashon Alfred
  * Bwana Shamba: +255797818582
  */
 
 const nambaYaBwanaShamba = "255797818582";
 
-// 1. BEI ZA MASOKO (Dynamic UI)
+// 1. BEI ZA MASOKO (Data halisi za mfano)
 const marketData = [
     {z: "Mahindi", s: "Kibaigwa", b: "850/kg", h: "Panda ↑", c: "text-success"},
     {z: "Mpunga", s: "Mbeya", b: "1,550/kg", h: "Sawa -", c: "text-secondary"},
@@ -26,13 +27,13 @@ function loadMarket() {
     document.getElementById('marketTable').innerHTML = rows;
 }
 
-// 2. 📸 AI VISUAL SCANNER (Enhanced Detection)
+// 2. 📸 AI VISUAL SCANNER (TensorFlow & MobileNet)
 let net;
 async function startAI() { 
     try {
         if (!net) net = await mobilenet.load(); 
-        console.log("AI Model Loaded!");
-    } catch (e) { console.error("AI failed to load", e); }
+        console.log("AI Model Loaded Successfully!");
+    } catch (e) { console.error("AI Model failed to load", e); }
 }
 
 async function analyzeLeaf() {
@@ -41,19 +42,18 @@ async function analyzeLeaf() {
     const predictions = await net.classify(img);
     const topResult = predictions[0].className.toLowerCase();
 
-    // Maneno mapana zaidi ya utambuzi
-    const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop", "potted", "soil", "garden"];
+    const plantKeys = ["leaf", "plant", "tree", "flower", "fruit", "vegetable", "corn", "maize", "grass", "branch", "nature", "crop", "potted"];
     const diseaseKeys = ["spot", "rust", "mildew", "rot", "pest", "worm", "fungus", "blight", "damage", "wilt", "aphid", "bug", "yellow", "dry"];
 
     const isPlant = plantKeys.some(word => topResult.includes(word));
     const hasDisease = diseaseKeys.some(word => topResult.includes(word));
 
     if (!isPlant) {
-        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea. Jaribu kupiga picha jani vizuri.</div>`;
+        resultDiv.innerHTML = `<div class="alert alert-danger mt-2 fw-bold">🛑 Huu sio mmea. Tafadhali piga picha jani vizuri.</div>`;
     } else if (!hasDisease) {
-        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Mmea unaonekana una afya! (Detected: ${topResult})</div>`;
+        resultDiv.innerHTML = `<div class="alert alert-success mt-2 fw-bold">✅ Mmea unaonekana una afya bora!</div>`;
     } else {
-        resultDiv.innerHTML = `<div class="alert alert-warning mt-2 fw-bold">⚠️ Inaonekana kuna changamoto: <span class="text-danger">${topResult}</span><br><small>Wasiliana na Bwana Shamba hapa chini kwa msaada zaidi.</small></div>`;
+        resultDiv.innerHTML = `<div class="alert alert-warning mt-2 fw-bold">⚠️ Tatizo limegundulika: <span class="text-danger">${topResult}</span></div>`;
     }
 }
 
@@ -73,7 +73,7 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
     }
 });
 
-// 3. 🧪 SOIL TEST (Advanced Advice)
+// 3. 🧪 SOIL TEST (Ushauri wa Udongo)
 function testSoil() {
     const color = document.getElementById('soilColor').value;
     const res = document.getElementById('soilResult');
@@ -81,65 +81,70 @@ function testSoil() {
     
     let advice = "";
     if(color === "black") {
-        advice = "✅ <b>Udongo Mweusi:</b> Una rutuba nyingi sana. Unafaa kwa Mahindi, Nyanya, na Mboga za majani.";
+        advice = "✅ <b>Udongo Mweusi:</b> Una rutuba sana. Unafaa kwa Mahindi, Nyanya, na Mboga za majani.";
     } else if(color === "red") {
-        advice = "⚠️ <b>Udongo Mwekundu:</b> Unashika maji vizuri. Unafaa kwa Kahawa na Viazi, lakini ongeza samadi kidogo.";
+        advice = "⚠️ <b>Udongo Mwekundu:</b> Unahitaji mbolea ya samadi kuongeza rutuba. Unafaa kwa Kahawa na Viazi.";
     } else {
-        advice = "⚠️ <b>Udongo wa Mchanga:</b> Unapitisha maji haraka. Unafaa zaidi kwa Tikiti Maji na Muhogo.";
+        advice = "⚠️ <b>Udongo wa Mchanga:</b> Unapitisha maji haraka. Unafaa kwa Tikiti Maji, Muhogo, na Nazi.";
     }
     res.innerHTML = `<strong>Ushauri:</strong> ${advice}`;
 }
 
-// 4. 🔍 SEARCH MAZAO (With Error Handling)
+// 4. 🔍 SEARCH MAZAO (Habari Binafsi + Picha Halisi)
 async function generateData() {
     const query = document.getElementById("userCrop").value.trim().toLowerCase();
-    if (!query) return;
+    if (!query) return alert("Tafadhali andika jina la zao!");
 
     document.getElementById("loadingSpinner").style.display = "block";
     document.getElementById("cropCard").style.display = "none";
     
-    // Picha ya uhakika zaidi
-    document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${query},agriculture`;
+    // Picha halisi kulingana na zao (Inatafuta kwenye database ya picha)
+    document.getElementById("cropImage").src = `https://loremflickr.com/800/600/${query},agriculture,farming`;
     document.getElementById("cropTitle").innerText = query.toUpperCase();
 
-    let detailedGuide = `
-        <div class="mt-3">
-            <h5 class="fw-bold text-success border-bottom pb-2">🌱 MWONGOZO WA KILIMO: ${query.toUpperCase()}</h5>
-            <p>Ufuatao ni mwongozo wa jumla wa kilimo cha ${query}:</p>
-            <ul>
-                <li><b>Maandalizi:</b> Hakikisha shamba lina mtelemko kidogo kuzuia maji kutuama.</li>
-                <li><b>Mbolea:</b> Tumia mbolea za asili (samadi) kuongeza uhai wa udongo.</li>
-                <li><b>Muda:</b> Zingatia kalenda ya mvua za Vuli au Masika kulingana na mkoa wako.</li>
-            </ul>
-        </div>`;
+    let detailedGuide = "";
 
     try {
+        // Jaribu kutafuta Wikipedia ya Kiswahili kwanza
         const response = await fetch(`https://sw.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
-        if (response.ok) {
-            const data = await response.json();
-            if (data.extract) {
-                detailedGuide += `<div class="p-3 border-start border-4 border-primary mt-3 bg-light rounded italic">
-                    <h6 class="fw-bold text-primary">📖 Maelezo kutoka Wikipedia:</h6><p class="small text-muted">${data.extract}</p></div>`;
-            }
-        }
-    } catch (e) { console.log("Wikipedia search failed"); }
+        const data = await response.json();
 
-    const waMsg = encodeURIComponent(`Habari Bwana Shamba, nahitaji msaada wa ziada kuhusu kilimo cha ${query.toUpperCase()}`);
-    detailedGuide += `<div class="mt-4"><a href="https://wa.me/${nambaYaBwanaShamba}?text=${waMsg}" target="_blank" class="btn btn-success w-100 fw-bold shadow">💬 CHAT NA BWANA SHAMBA (WHATSAPP)</a></div>`;
+        if (data.extract) {
+            detailedGuide = `
+                <div class="mt-3">
+                    <h5 class="fw-bold text-success border-bottom pb-2">🌱 MWONGOZO WA KILIMO: ${query.toUpperCase()}</h5>
+                    <p class="mt-2" style="font-size: 0.95rem; line-height: 1.6;">${data.extract}</p>
+                </div>`;
+        } else {
+            detailedGuide = `
+                <div class="mt-3">
+                    <h5 class="fw-bold text-warning">Maelezo Yanatafutwa...</h5>
+                    <p>Hatujapata maelezo mahususi ya <b>${query}</b> kwa Kiswahili. Tafadhali bonyeza kitufe cha WhatsApp hapo chini kupata mwongozo kutoka kwa Bwana Shamba.</p>
+                </div>`;
+        }
+    } catch (e) {
+        detailedGuide = `<p class="text-danger">Hitilafu ya mtandao. Shindwa kupata data.</p>`;
+    }
+
+    // WhatsApp Button ya kipekee
+    const waMsg = encodeURIComponent(`Habari Bwana Shamba, nahitaji msaada zaidi kuhusu kilimo cha ${query.toUpperCase()}`);
+    detailedGuide += `<div class="mt-4"><a href="https://wa.me/${nambaYaBwanaShamba}?text=${waMsg}" target="_blank" class="btn btn-success w-100 fw-bold">💬 ONGEA NA BWANA SHAMBA (WHATSAPP)</a></div>`;
 
     document.getElementById("infoArea").innerHTML = detailedGuide;
 
-    const ytUrl = `https://www.youtube.com/results?search_query=jinsi+ya+kulima+${query}+tanzania`;
+    // Sehemu ya Video ya YouTube
+    const ytUrl = `https://www.youtube.com/results?search_query=kilimo+cha+${query}+tanzania`;
     document.getElementById("videoArea").innerHTML = `
         <div class="mt-4">
             <h6 class="fw-bold text-danger">📺 Jifunze kwa Video:</h6>
-            <a href="${ytUrl}" target="_blank" class="btn btn-danger w-100 fw-bold shadow-sm">FUNGUA YOUTUBE: ${query.toUpperCase()}</a>
+            <a href="${ytUrl}" target="_blank" class="btn btn-outline-danger w-100 fw-bold shadow-sm">TAZAMA VIDEO ZA ${query.toUpperCase()}</a>
         </div>`;
 
     document.getElementById("loadingSpinner").style.display = "none";
     document.getElementById("cropCard").style.display = "flex";
 }
 
+// Anzisha App
 window.onload = () => { 
     loadMarket(); 
     startAI(); 
