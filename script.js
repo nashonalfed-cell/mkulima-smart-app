@@ -3,7 +3,7 @@
  * Developer: Nashon Alfred
  */
 
-const GEMINI_API_KEY = "AIzaSyBxxxxxxxxxxx"; // WEKA API KEY YAKO MPYA HAPA
+const GEMINI_API_KEY = "AIzaSyA7qlc7I0IqfHFLA88wmsrxqNW5eMu_Vuc"; // Au key yako mpya 
 
 // 🔍 TAFUTA ZAO LOLOTE (SASA INATUMIA JSON KWANZA)
 async function generateData() {
